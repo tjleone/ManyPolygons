@@ -14,7 +14,7 @@ public class CanvasModel extends GDimension {
 	// the global logger defined in Main into the parent logger
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasModel.class.getName());
 	
-	private CanvasComponent _component;
+	private CanvasComponent _component = new CanvasComponent();
 	private GridModel _grid;
 	
 	public CanvasModel() {
@@ -48,6 +48,7 @@ public class CanvasModel extends GDimension {
 	public void resize(double width, double height) {
 		setSize(width, height);
 		setGrid();
+		_component.update(this);
 	}
 	
 	public void resize(GDimension size) {

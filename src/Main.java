@@ -23,30 +23,19 @@ public class Main extends GraphicsProgram {
 	public Main() {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
-			LOGGER.setLevel(Level.ALL);
+//			LOGGER.setLevel(Level.ALL);
+			LOGGER.setLevel(Level.SEVERE);
 			LOGGER.addHandler(_fileHandler);
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
 		_model = new CanvasModel();
 	}
-
-	private void initModel() {
-		_model.resize(getWidth(), getHeight());
-//		_model.setSize(getWidth(), getHeight());
-//		_model.setGrid();
-	}
 	
-	private void drawRectangle(GRectangle bounds) {
-		TURTLE.penUp();
-		TURTLE.setLocation(bounds.getLocation());
-		for(int i=0; i < 2; i++) {
-			TURTLE.penDown();
-			TURTLE.forward(bounds.getWidth());
-			TURTLE.left(90);
-			TURTLE.forward(bounds.getHeight());
-			TURTLE.left(90);
-		}
+	private void initializeTurtle() {
+		TURTLE.hideTurtle();
+		TURTLE.setSpeed(1);
+		add(TURTLE);
 	}
 
 	// _model.resize(width, height) should be enough to fix size
@@ -55,27 +44,12 @@ public class Main extends GraphicsProgram {
 	public void run() {
 		LOGGER.log(Level.FINEST, "Width: {0}", getWidth());
 		LOGGER.log(Level.FINEST, "Height: {0}", getHeight());
-		TURTLE.hideTurtle();
-		add(TURTLE);
+		initializeTurtle();
 		_model.resize(getWidth(), getHeight());
-		GRectangle gridBounds = _model.getGrid();
-		LOGGER.log(Level.FINEST, "Grid X: {0}", gridBounds.getX());
-		LOGGER.log(Level.FINEST, "Grid Y: {0}", gridBounds.getY());
-		LOGGER.log(Level.FINEST, "Grid Width: {0}", gridBounds.getWidth());
-		LOGGER.log(Level.FINEST, "Grid Height: {0}", gridBounds.getHeight());
-		drawRectangle(_model.getGridBounds());
-		// addComponent is inherited from Component
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				TURTLE.erasePath();
 				_model.resize(getWidth(), getHeight());
-				GRectangle gridBounds = _model.getGrid();
-				LOGGER.log(Level.FINEST, "Grid X: {0}", gridBounds.getX());
-				LOGGER.log(Level.FINEST, "Grid Y: {0}", gridBounds.getY());
-				LOGGER.log(Level.FINEST, "Grid Width: {0}", gridBounds.getWidth());
-				LOGGER.log(Level.FINEST, "Grid Height: {0}", gridBounds.getHeight());
-				drawRectangle(_model.getGridBounds());
 			}
 		});
 		try {

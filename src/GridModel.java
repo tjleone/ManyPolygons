@@ -30,7 +30,6 @@ public class GridModel extends GRectangle {
 
 	public GridModel(double x, double y, double width, double height) {
 		super(x, y, width, height);
-		LOGGER.setLevel(Level.ALL);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
 		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
