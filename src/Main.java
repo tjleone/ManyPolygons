@@ -14,11 +14,11 @@ import java.util.logging.Logger;
 @SuppressWarnings("serial")
 public class Main extends GraphicsProgram {
 
+	public final static GTurtle TURTLE = new GTurtle();
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private static FileHandler _fileHandler;
 
-	CanvasModel _model;
-	GTurtle _turtle;
+	private CanvasModel _model;
 
 	public Main() {
 		try {
@@ -29,33 +29,35 @@ public class Main extends GraphicsProgram {
 			e.printStackTrace();
 		};
 		_model = new CanvasModel();
-		_turtle = new GTurtle();
 	}
 
 	private void initModel() {
-		_model.setSize(getWidth(), getHeight());
-		_model.setGrid();
-		_turtle.hideTurtle();
+		_model.resize(getWidth(), getHeight());
+//		_model.setSize(getWidth(), getHeight());
+//		_model.setGrid();
 	}
 	
 	private void drawRectangle(GRectangle bounds) {
-		_turtle.penUp();
-		_turtle.setLocation(bounds.getLocation());
+		TURTLE.penUp();
+		TURTLE.setLocation(bounds.getLocation());
 		for(int i=0; i < 2; i++) {
-			_turtle.penDown();
-			_turtle.forward(bounds.getWidth());
-			_turtle.left(90);
-			_turtle.forward(bounds.getHeight());
-			_turtle.left(90);
+			TURTLE.penDown();
+			TURTLE.forward(bounds.getWidth());
+			TURTLE.left(90);
+			TURTLE.forward(bounds.getHeight());
+			TURTLE.left(90);
 		}
 	}
 
+	// _model.resize(width, height) should be enough to fix size
+	// and trigger a redraw
 	@Override
 	public void run() {
 		LOGGER.log(Level.FINEST, "Width: {0}", getWidth());
 		LOGGER.log(Level.FINEST, "Height: {0}", getHeight());
-		initModel();
-		add(_turtle);
+		TURTLE.hideTurtle();
+		add(TURTLE);
+		_model.resize(getWidth(), getHeight());
 		GRectangle gridBounds = _model.getGrid();
 		LOGGER.log(Level.FINEST, "Grid X: {0}", gridBounds.getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", gridBounds.getY());
@@ -66,8 +68,8 @@ public class Main extends GraphicsProgram {
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				_turtle.erasePath();
-				initModel();
+				TURTLE.erasePath();
+				_model.resize(getWidth(), getHeight());
 				GRectangle gridBounds = _model.getGrid();
 				LOGGER.log(Level.FINEST, "Grid X: {0}", gridBounds.getX());
 				LOGGER.log(Level.FINEST, "Grid Y: {0}", gridBounds.getY());
