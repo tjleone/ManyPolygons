@@ -12,15 +12,15 @@ import java.util.logging.Logger;
  * @author TJ Leone
  */
 @SuppressWarnings("serial")
-public class ManyPolygonsProgram extends GraphicsProgram {
+public class Main extends GraphicsProgram {
 
-	private final static Logger LOGGER = Logger.getLogger(ManyPolygonsProgram.class.getName());
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private static FileHandler _fileHandler;
 
 	CanvasModel _model;
 	GTurtle _turtle;
 
-	public ManyPolygonsProgram() {
+	public Main() {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
 			LOGGER.setLevel(Level.ALL);
@@ -35,6 +35,7 @@ public class ManyPolygonsProgram extends GraphicsProgram {
 	private void initModel() {
 		_model.setSize(getWidth(), getHeight());
 		_model.setGrid();
+		_turtle.hideTurtle();
 	}
 	
 	private void drawRectangle(GRectangle bounds) {
@@ -85,7 +86,7 @@ public class ManyPolygonsProgram extends GraphicsProgram {
 	/* Standard Java entry point */
 	/* This method can be eliminated in most Java environments */
 	public static void main(String[] args) {
-		new ManyPolygonsProgram().start(args);
+		new Main().start(args);
 		/*
 		try {
 			new ManyPolygonsProgram().start(args);

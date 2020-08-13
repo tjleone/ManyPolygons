@@ -1,6 +1,4 @@
 import java.awt.Dimension;
-import java.io.IOException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,8 +9,10 @@ import acm.graphics.GRectangle;
 public class CanvasModel extends GDimension {
 
 	public final static double GRID_SCALE_FACTOR = 0.9;
-//	private final static Logger LOGGER = Logger.getLogger(CanvasModel.class.getName());
-//	private static FileHandler _fileHandler;
+	
+	// using Logger.Logger.GLOBAL_LOGGER_NAME + "." before the class name makes
+	// the global logger defined in Main into the parent logger
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasModel.class.getName());
 	
 	private GridModel _grid;
 	
@@ -26,13 +26,12 @@ public class CanvasModel extends GDimension {
 
 	public CanvasModel(double width, double height) {
 		super(width, height);
-//		try {
-//			_fileHandler = Util.createFileHandler(LOGGER.getName());
-//			LOGGER.setLevel(Level.ALL);
-//			LOGGER.addHandler(_fileHandler);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		};
+		// if log level is not set, LOGGER.getLevel() is null, 
+		// which means that this LOGGER's effective level is the 
+		// level of its parent
+		// LOGGER.log(Level.FINEST, "Canvas Level: {0}", LOGGER.getLevel());
+		LOGGER.log(Level.FINEST, "Canvas Width: {0}", getWidth());
+		LOGGER.log(Level.FINEST, "Canvas Height: {0}", getHeight());
 		
 		_grid = new GridModel();
 	}

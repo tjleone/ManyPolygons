@@ -1,5 +1,3 @@
-import java.io.IOException;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,8 +22,7 @@ public class GridModel extends GRectangle {
 	// the aspect ratio of the cells and the number of
 	// rows and columns
 	public final static double DEFAULT_ASPECT_RATIO = 4.0 / 3.0;
-//	private final static Logger LOGGER = Logger.getLogger(GridModel.class.getName());
-//	private static FileHandler _fileHandler;
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + GridModel.class.getName());
     
     public GridModel() {
 		this(0, 0, 0, 0);
@@ -33,14 +30,11 @@ public class GridModel extends GRectangle {
 
 	public GridModel(double x, double y, double width, double height) {
 		super(x, y, width, height);
-//		try {
-//			_fileHandler = Util.createFileHandler(LOGGER.getName());
-//			LOGGER.setLevel(Level.ALL);
-//			LOGGER.addHandler(_fileHandler);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		};
-//		setSize(width, height);
+		LOGGER.setLevel(Level.ALL);
+		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
+		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
+		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
+		LOGGER.log(Level.FINEST, "Grid Height: {0}", getHeight());
 	}
 
 	public GridModel(double width, double height) {
