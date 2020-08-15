@@ -31,7 +31,7 @@ public class Main extends GraphicsProgram {
 			e.printStackTrace();
 		};
 		_model = new CanvasModel();
-		_component = new CanvasComponent(_turtle);
+		_component = new CanvasComponent(_model);
 	}
 	
 	private GPoint getCenter() {
@@ -70,7 +70,7 @@ public class Main extends GraphicsProgram {
 //		_model.resize(getWidth(), getHeight());
 		// for now, pass a max size and max height that will work best for tracing/logging
 		_model.resize(getWidth(), getHeight());
-		_component.update(_model);
+		_component.update(_turtle);
 	}
 
 	/* Standard Java entry point */

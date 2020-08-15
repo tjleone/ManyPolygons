@@ -103,7 +103,7 @@ public class CanvasModel extends GDimension {
 		_grid.setLocation(leftMargin, getHeight() - bottomMargin);
 	}
 	
-	public GRectangle getGrid() {
+	public GridModel getGrid() {
 		return _grid;
 	}
 

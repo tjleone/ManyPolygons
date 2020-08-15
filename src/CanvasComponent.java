@@ -6,19 +6,21 @@ import acm.graphics.GTurtle;
 
 public class CanvasComponent {
 	
-	GTurtle _turtle;
+	CanvasModel _model;
+	GridComponent _gridComponent;
 	
 	// using Logger.Logger.GLOBAL_LOGGER_NAME + "." before the class name makes
 	// the global logger defined in Main into the parent logger
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasComponent.class.getName());
 	
-	public CanvasComponent(GTurtle _turtle) {
-		this._turtle = _turtle;
+	public CanvasComponent(CanvasModel model) {
+		_model = model;
+		_gridComponent = new GridComponent(_model.getGrid());
 	}
 
-	public void update(CanvasModel model) {
-		_turtle.erasePath();
-		drawRectangle(_turtle, model.getGrid());
+	public void update(GTurtle t) {
+		t.erasePath();
+		_gridComponent.drawBounds(t);
 	}
 	
 	private void drawRectangle(GTurtle t, GRectangle bounds) {
