@@ -1,27 +1,30 @@
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class GridModelTests {
 
-	private GridModel _model = new GridModel(800, 600);
+	private double _width = 400;
+	private double _height = 300;
+	private GridModel _model = new GridModel(_width, _height);
+//	private CanvasModel _canvas = new CanvasModel(754, 469);
 	
-	@BeforeEach
-	void setUp() throws Exception {
+	@BeforeAll
+	public static void setup() {
 	}
 
-	@AfterEach
-	void tearDown() throws Exception {
+	@AfterAll
+	public static void tearDown() {
 	}
 
 	@Test
 	void test() {
-		assertEquals(800, _model.getWidth());
-		assertEquals(600, _model.getHeight());
-		assertEquals(800.0 / 600.0, _model.getAspectRatio(), 0.01, 
-				"Expected: " + 800.0 / 600.0 + ", Got: " + _model.getAspectRatio());
+		assertEquals(_width, _model.getWidth());
+		assertEquals(_height, _model.getHeight());
+		assertEquals(_width / _height, _model.getAspectRatio(), 0.01, 
+				"Expected: " + _width / _height + ", Got: " + _model.getAspectRatio());
 	}
 
 }

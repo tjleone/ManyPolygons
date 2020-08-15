@@ -66,6 +66,9 @@ public class GridModel extends GRectangle {
 	// The aspect ratio will eventually be determined by
 	// the aspect ratio of the cells and the number of
 	// rows and columns
+	//
+	// This should be checked after every resize to make sure
+	// it hasn't changed
 	public double getAspectRatio() {
 //		if (getWidth() * getHeight() != 0) {
 //			return getWidth() / getHeight();

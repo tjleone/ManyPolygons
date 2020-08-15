@@ -1,8 +1,5 @@
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 class CanvasModelTests {
 	
@@ -17,11 +14,13 @@ class CanvasModelTests {
 	void tearDown() throws Exception {
 	}
 
+	/*
 	@Test
 	void testSetGridAspectRatio() {
 		_canvas.setGridSize();
 		assertEquals(625.33 * CanvasModel.GRID_SCALE_FACTOR, _canvas.getGrid().getWidth(), EPSILON);
 		assertEquals(469 * CanvasModel.GRID_SCALE_FACTOR, _canvas.getGrid().getHeight(), EPSILON);
 	}
+	*/
 
 }

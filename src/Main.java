@@ -14,42 +14,49 @@ import java.util.logging.Logger;
 @SuppressWarnings("serial")
 public class Main extends GraphicsProgram {
 
-	public final static GTurtle TURTLE = new GTurtle();
+	public GTurtle _turtle = new GTurtle();
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private static FileHandler _fileHandler;
 
 	private CanvasModel _model;
+	private CanvasComponent _component;
 
 	public Main() {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
-//			LOGGER.setLevel(Level.ALL);
-			LOGGER.setLevel(Level.SEVERE);
+			LOGGER.setLevel(Level.ALL);
+//			LOGGER.setLevel(Level.SEVERE);
 			LOGGER.addHandler(_fileHandler);
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
 		_model = new CanvasModel();
+		_component = new CanvasComponent(_turtle);
+	}
+	
+	private GPoint getCenter() {
+		return new GPoint(getWidth()/2, getHeight()/2);
 	}
 	
 	private void initializeTurtle() {
-		TURTLE.hideTurtle();
-		TURTLE.setSpeed(1);
-		add(TURTLE);
+		_turtle.hideTurtle();
+		_turtle.setSpeed(1);
+		add(_turtle);
 	}
 
 	// _model.resize(width, height) should be enough to fix size
 	// and trigger a redraw
 	@Override
 	public void run() {
-		LOGGER.log(Level.FINEST, "Width: {0}", getWidth());
-		LOGGER.log(Level.FINEST, "Height: {0}", getHeight());
+		LOGGER.log(Level.FINEST, "// run: screen size {0}", getSize());
+		LOGGER.log(Level.FINEST, "// run: center ({0},{1})", 
+				new Object[] { getWidth()/2, getHeight()/2 });
 		initializeTurtle();
-		_model.resize(getWidth(), getHeight());
+		update();
 		addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				_model.resize(getWidth(), getHeight());
+				update();
 			}
 		});
 		try {
@@ -57,6 +64,13 @@ public class Main extends GraphicsProgram {
 		} catch (SecurityException e1) {
 			e1.printStackTrace();
 		}
+	}
+
+	private void update() {
+//		_model.resize(getWidth(), getHeight());
+		// for now, pass a max size and max height that will work best for tracing/logging
+		_model.resize(getWidth(), getHeight());
+		_component.update(_model);
 	}
 
 	/* Standard Java entry point */

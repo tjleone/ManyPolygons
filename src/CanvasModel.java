@@ -3,6 +3,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import acm.graphics.GDimension;
+import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
 @SuppressWarnings("serial")
@@ -13,8 +14,8 @@ public class CanvasModel extends GDimension {
 	// using Logger.Logger.GLOBAL_LOGGER_NAME + "." before the class name makes
 	// the global logger defined in Main into the parent logger
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasModel.class.getName());
+	private static Displacement _displacement = new Displacement();
 	
-	private CanvasComponent _component = new CanvasComponent();
 	private GridModel _grid;
 	
 	public CanvasModel() {
@@ -31,8 +32,8 @@ public class CanvasModel extends GDimension {
 		// which means that this LOGGER's effective level is the 
 		// level of its parent
 		// LOGGER.log(Level.FINEST, "Canvas Level: {0}", LOGGER.getLevel());
-		LOGGER.log(Level.FINEST, "Canvas Width: {0}", getWidth());
-		LOGGER.log(Level.FINEST, "Canvas Height: {0}", getHeight());
+		LOGGER.log(Level.FINEST, "CanvasModel dimensions: {0}", getSize());
+		LOGGER.log(Level.FINEST, "CanvasModel center: {0}", getCenter());
 		
 		_grid = new GridModel();
 	}
@@ -41,25 +42,48 @@ public class CanvasModel extends GDimension {
 		this(size.getWidth(), size.getHeight());
 	}
 	
+	private GPoint getCenter() {
+		return new GPoint(getWidth()/2, getHeight()/2);
+	}
+	
+	// Offset of given location from center
+	private Displacement getOffsetFromCenter(double x, double y) {
+		_displacement.setDelta(getCenter(), x, y);
+		return _displacement;
+	}
+	
 	public GRectangle getGridBounds() {
 		return _grid.getBounds();
 	}
 
 	public void resize(double width, double height) {
-		setSize(width, height);
-		setGrid();
-		_component.update(this);
+		setSize(width, height); // set width and height of CanvasModel
+//		setGridBounds();				// size and location of GridModel
+		setGridBounds(400,300); // set grid size with maxWidth, maxHeight for testing
+		LOGGER.log(Level.FINEST, "CanvasModel dimensions: {0}", getSize());
+		LOGGER.log(Level.FINEST, "CanvasModel center: {0}", getCenter());
+		LOGGER.log(Level.FINEST, "CanvasModel grid dimensions: {0}", getGridSize());
 	}
 	
 	public void resize(GDimension size) {
 		resize(size.getWidth(), size.getHeight());
 	}
 	
-	public void setGrid() {
+	public void setGridBounds() {
 		setGridSize();
 		setGridLocation();
 	}
+	
+	public void setGridBounds(double maxWidth, double maxHeight) {
+		setGridSize(maxWidth, maxHeight);
+		setGridLocation();
+	}
 
+	private GDimension getGridSize()
+	{
+		return _grid.getSize();
+	}
+	
 	public void setGridSize() {
 		double aspectRatio = _grid.getAspectRatio();
 		if (getWidth() / getHeight() > aspectRatio) {
@@ -67,6 +91,10 @@ public class CanvasModel extends GDimension {
 		} else  {
 			_grid.setSize(getWidth() * GRID_SCALE_FACTOR, getWidth() / aspectRatio * GRID_SCALE_FACTOR);
 		}
+	}
+	
+	public void setGridSize(double width, double height) {
+		_grid.setSize(width, height);
 	}
 	
 	public void setGridLocation() {
