@@ -16,6 +16,7 @@ public class Main extends GraphicsProgram {
 
 	public GTurtle _turtle = new GTurtle();
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	
 	private static FileHandler _fileHandler;
 
 	private CanvasModel _model;

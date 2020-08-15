@@ -20,20 +20,7 @@ public class CanvasComponent {
 
 	public void update(GTurtle t) {
 		t.erasePath();
-		_gridComponent.drawBounds(t);
-	}
-	
-	private void drawRectangle(GTurtle t, GRectangle bounds) {
-		LOGGER.log(Level.FINEST, "// drawRectangle: turtle starts at {0}", bounds.getLocation());
-		t.penUp();
-		t.setLocation(bounds.getLocation());
-		for(int i=0; i < 2; i++) {
-			t.penDown();
-			t.forward(bounds.getWidth());
-			t.left(90);
-			t.forward(bounds.getHeight());
-			t.left(90);
-		}
+		_gridComponent.draw(t);
 	}
 
 }
