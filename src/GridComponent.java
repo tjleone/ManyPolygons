@@ -17,10 +17,13 @@ public class GridComponent {
 	
 	public void draw(GTurtle t) {
 		LOGGER.log(Level.FINEST, "// draw: turtle starts at {0}", t.getLocation());
+		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 		drawBounds(t);
 		LOGGER.log(Level.FINEST, "// draw: turtle after drawBounds: {0}", t.getLocation());
+		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 		drawCells(t);
 		LOGGER.log(Level.FINEST, "// draw: turtle after drawCells: {0}", t.getLocation());
+		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 	}
 
 	public void drawBounds(GTurtle t) {

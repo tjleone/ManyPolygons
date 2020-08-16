@@ -27,5 +27,21 @@ public class CellModel extends GDimension {
 	public CellModel(GDimension size) {
 		this(size.getWidth(), size.getHeight());
 	}
+	
+	public int getNumSides() {
+		return 7;
+	}
+	
+	public double getStartX() {
+		return 42.69224358691905;
+	}
+	
+	public double getStartSideLength() {
+		return 68.47304231704497;
+	}
+	
+	public double getExternalAngle() {
+		return 360.0 / 7.0;
+	}
 
 }
