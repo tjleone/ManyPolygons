@@ -13,8 +13,8 @@ public class CanvasModel extends GDimension {
 	private final static int DEFAULT_ROWS = 2;
 	private final static int DEFAULT_COLUMNS = 2;
 	private final static int DEFAULT_NUMBER_OF_POLY_SIDES = 7;
-	private final static int DEFAULT_POLYGONS_IN_SPIRAL = 10;
-	private final static double DEFAULT_DISPLACEMENT_PORTION = 0.2;
+	public final static int DEFAULT_SPIRAL_DEPTH = 10;
+	public final static double DEFAULT_SPIRAL_DISPLACEMENT = 0.2;
 	
 	// using Logger.Logger.GLOBAL_LOGGER_NAME + "." before the class name makes
 	// the global logger defined in Main into the parent logger
@@ -33,7 +33,7 @@ public class CanvasModel extends GDimension {
 	}
 
 	public CanvasModel(double width, double height) {
-		this(width, height, DEFAULT_ROWS, DEFAULT_COLUMNS, DEFAULT_NUMBER_OF_POLY_SIDES, DEFAULT_POLYGONS_IN_SPIRAL, DEFAULT_DISPLACEMENT_PORTION);
+		this(width, height, DEFAULT_ROWS, DEFAULT_COLUMNS, DEFAULT_NUMBER_OF_POLY_SIDES, DEFAULT_SPIRAL_DEPTH, DEFAULT_SPIRAL_DISPLACEMENT);
 
 		// if log level is not set, LOGGER.getLevel() is null, 
 		// which means that this LOGGER's effective level is the 

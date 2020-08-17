@@ -1,10 +1,9 @@
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import acm.graphics.GRectangle;
+import acm.graphics.GDimension;
 import acm.graphics.GTurtle;
 
-public class CanvasComponent {
+public class CanvasComponent extends AbstractComponent {
 	
 	CanvasModel _model;
 	GridComponent _gridComponent;
@@ -21,6 +20,11 @@ public class CanvasComponent {
 	public void update(GTurtle t) {
 		t.erasePath();
 		_gridComponent.draw(t);
+	}
+
+	@Override
+	public GDimension getSize() {
+		return _model.getSize();
 	}
 
 }

@@ -43,5 +43,25 @@ public class CellModel extends GDimension {
 	public double getExternalAngle() {
 		return 360.0 / 7.0;
 	}
+	
+	public double calculateSpiralDisplacement(double sideLength) {
+		return CanvasModel.DEFAULT_SPIRAL_DISPLACEMENT * sideLength;
+	}
+	
+	public double calculateNextSideLength(double sideLength) {
+		return sideLength * getSpiralSideLengthFactor();
+	}
+	
+	public int getSpiralDepth() {
+		return CanvasModel.DEFAULT_SPIRAL_DEPTH;
+	}
+	
+	public double getSpiralAngle() {
+		return 9.597912330850274;
+	}
+	
+	public double getSpiralSideLengthFactor() {
+		return 0.9378255363311423;
+	}
 
 }
