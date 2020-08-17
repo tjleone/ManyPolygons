@@ -1,10 +1,11 @@
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import acm.graphics.GDimension;
 import acm.graphics.GRectangle;
 import acm.graphics.GTurtle;
 
-public class GridComponent {
+public class GridComponent extends AbstractComponent {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + GridComponent.class.getName());
 	private GridModel _model;
@@ -66,6 +67,11 @@ public class GridComponent {
 			displaceTurtle(t, _model.getCellModel().getWidth(), -_model.getHeight());
 		}
 		displaceTurtle(t,-_model.getWidth(), 0.0);
+	}
+
+	@Override
+	public GDimension getSize() {
+		return _model.getSize();
 	}
 
 }

@@ -5,7 +5,7 @@ import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GTurtle;
 
-public class CellComponent {
+public class CellComponent extends AbstractComponent {
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CellComponent.class.getName());
 	private CellModel _model;
@@ -64,19 +64,9 @@ public class CellComponent {
 		}
 	}
 
-	public void drawBounds(GTurtle t) {
-		drawRectangle(t, _model);
-	}
-	
-	private void drawRectangle(GTurtle t, GDimension size) {
-		LOGGER.log(Level.FINEST, "// drawRectangle: size {0}", size);
-		for(int i=0; i < 2; i++) {
-			t.penDown();
-			t.forward(size.getWidth());
-			t.left(90);
-			t.forward(size.getHeight());
-			t.left(90);
-		}
+	@Override
+	public GDimension getSize() {
+		return _model.getSize();
 	}
 
 }
