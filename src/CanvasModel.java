@@ -7,7 +7,7 @@ import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
 @SuppressWarnings("serial")
-public class CanvasModel extends GDimension {
+public class CanvasModel extends AbstractModel {
 
 	public final static double GRID_SCALE_FACTOR = 0.9;
 	private final static int DEFAULT_ROWS = 2;
@@ -20,47 +20,40 @@ public class CanvasModel extends GDimension {
 	// the global logger defined in Main into the parent logger
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasModel.class.getName());
 	private static Displacement _displacement = new Displacement();
-
 	
 	private GridModel _grid;
-	
+	private ModelParameters _parameters;
+
 	public CanvasModel() {
-		this(0, 0);
+		this(0,0,0,0,null);
 	}
 
-	public CanvasModel(Dimension size) {
-		this(size.getWidth(), size.getHeight());
+	public CanvasModel(double x, double y, double width, double height, ModelParameters parameters) {
+		super(x, y, width, height, parameters);
+		_parameters = parameters;
+		_grid = new GridModel(0,0, width, height, parameters);
 	}
 
-	public CanvasModel(double width, double height) {
-		this(width, height, DEFAULT_ROWS, DEFAULT_COLUMNS, DEFAULT_NUMBER_OF_POLY_SIDES, DEFAULT_SPIRAL_DEPTH, DEFAULT_SPIRAL_DISPLACEMENT);
-
-		// if log level is not set, LOGGER.getLevel() is null, 
-		// which means that this LOGGER's effective level is the 
-		// level of its parent
-		// LOGGER.log(Level.FINEST, "Canvas Level: {0}", LOGGER.getLevel());
-		LOGGER.log(Level.FINEST, "CanvasModel dimensions: {0}", getSize());
-		LOGGER.log(Level.FINEST, "CanvasModel center: {0}", getCenter());
+	public CanvasModel(double width, double height, ModelParameters parameters) {
+		this(0,0, width, height, parameters);
 	}
 
-	public CanvasModel(double width, double height, int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion) {
-		super(width, height);
-		
-		// if log level is not set, LOGGER.getLevel() is null, 
-		// which means that this LOGGER's effective level is the 
-		// level of its parent
-		// LOGGER.log(Level.FINEST, "Canvas Level: {0}", LOGGER.getLevel());
-		LOGGER.log(Level.FINEST, "CanvasModel dimensions: {0}", getSize());
-		LOGGER.log(Level.FINEST, "CanvasModel center: {0}", getCenter());
-		LOGGER.log(Level.FINEST, "rows: {0}", rows);
-		LOGGER.log(Level.FINEST, "columns: {0}", columns);
-		
-		_grid = new GridModel(0,0, width, height, rows, columns, numPolySides, polysInSpiral, displacementPortion);
+	public CanvasModel(GDimension size, ModelParameters parameters) {
+		this(0, 0, size.getWidth(), size.getHeight(), parameters);
 	}
 
-	public CanvasModel(GDimension size) {
-		this(size.getWidth(), size.getHeight());
+	public CanvasModel(GPoint pt, GDimension size, ModelParameters parameters) {
+		this(pt.getX(), pt.getY(), size.getWidth(), size.getHeight(), parameters);
 	}
+
+	public CanvasModel(GPoint pt, ModelParameters parameters) {
+		this(pt.getX(), pt.getY(), 0, 0, parameters);
+	}
+
+	public CanvasModel(GRectangle r, ModelParameters parameters) {
+		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
+	}
+
 	
 	private GPoint getCenter() {
 		return new GPoint(getWidth()/2, getHeight()/2);
@@ -125,6 +118,12 @@ public class CanvasModel extends GDimension {
 	
 	public GridModel getGrid() {
 		return _grid;
+	}
+
+	@Override
+	public void resize(GRectangle maxBounds, ModelParameters parameters) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

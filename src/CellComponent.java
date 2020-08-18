@@ -58,7 +58,7 @@ public class CellComponent extends AbstractComponent {
 	}
 
 	private void drawPolygon(GTurtle t, double sideLength) {
-		for(int i=0; i < _model.getNumSides(); i++) {
+		for(int i=0; i < _model.getNumPolySides(); i++) {
 			t.forward(sideLength);
 			t.left(_model.getExternalAngle());
 		}

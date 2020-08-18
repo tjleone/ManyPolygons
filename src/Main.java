@@ -21,8 +21,9 @@ public class Main extends GraphicsProgram {
 
 	private CanvasModel _model;
 	private CanvasComponent _component;
+	private ModelParameters _parameters;
 
-	public Main() {
+	public Main() throws CloneNotSupportedException {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
 			LOGGER.setLevel(Level.ALL);
@@ -31,8 +32,14 @@ public class Main extends GraphicsProgram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
-		_model = new CanvasModel();
+		initParameters();
+		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
 		_component = new CanvasComponent(_model);
+	}
+	
+	private void initParameters() {
+		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
+		_parameters = new ModelParameters(2, 2, 7, 10, 0.2);
 	}
 	
 	private GPoint getCenter() {
@@ -68,16 +75,23 @@ public class Main extends GraphicsProgram {
 	}
 
 	private void update() {
-//		_model.resize(getWidth(), getHeight());
-		// for now, pass a max size and max height that will work best for tracing/logging
 		_model.resize(getWidth(), getHeight());
+		// for now, pass a max size and max height that will work best for tracing/logging
+		
+		// TODO: make each model a subclass of AbstractModel and do this:
+//		_model.resize(getBounds(), _parameters);
 		_component.update(_turtle);
 	}
 
 	/* Standard Java entry point */
 	/* This method can be eliminated in most Java environments */
 	public static void main(String[] args) {
-		new Main().start(args);
+		try {
+			new Main().start(args);
+		} catch (CloneNotSupportedException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
+			e.printStackTrace();
+		}
 		/*
 		try {
 			new ManyPolygonsProgram().start(args);

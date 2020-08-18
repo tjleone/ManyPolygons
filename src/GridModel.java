@@ -16,7 +16,7 @@ import acm.graphics.GRectangle;
  * @author tj
  */
 @SuppressWarnings("serial")
-public class GridModel extends GRectangle {
+public class GridModel extends AbstractModel {
 
 	// The aspect ratio will eventually be determined by
 	// the aspect ratio of the cells and the number of
@@ -36,58 +36,42 @@ public class GridModel extends GRectangle {
 	private CellModel _cellModel;
 
 	public GridModel() {
-		this(0, 0, 0, 0);
+		this(0,0,0,0,null);
 	}
 
-	public GridModel(double x, double y, double width, double height) {
-		super(x, y, width, height);
+	public GridModel(double x, double y, double width, double height, ModelParameters parameters) {
+		super(x, y, width, height, parameters);
+		assert parameters != null;
+		_rows = parameters.getRows();
+		_columns = parameters.getColumns();
+		_numPolySides = parameters.getNumPolySides();
+		_polysInSpiral = parameters.getPolysInSpiral();
+		_displacementPortion = parameters.getDisplacementPortion();
+		_cellModel = new CellModel(DEFAULT_CELL_WIDTH, DEFAULT_CELL_HEIGHT, parameters);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
 		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
 		LOGGER.log(Level.FINEST, "Grid Height: {0}", getHeight());
 	}
 
-	public GridModel(double x, double y, double width, double height, int rows, int columns, int numPolySides,
-			int polysInSpiral, double displacementPortion) {
-		super(x, y, width, height);
-		_rows = rows;
-		_columns = columns;
-		_numPolySides = numPolySides;
-		_polysInSpiral = polysInSpiral;
-		_displacementPortion = displacementPortion;
-		_cellModel = new CellModel(DEFAULT_CELL_WIDTH, DEFAULT_CELL_HEIGHT);
-		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
-		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
-		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
-		LOGGER.log(Level.FINEST, "Grid Height: {0}", getHeight());
+	public GridModel(double width, double height, ModelParameters parameters) {
+		this(0,0, width, height, parameters);
 	}
 
-	public GridModel(double width, double height) {
-		this(0, 0, width, height);
+	public GridModel(GDimension size, ModelParameters parameters) {
+		this(0, 0, size.getWidth(), size.getHeight(), parameters);
 	}
 
-	public GridModel(GDimension size) {
-		this(0, 0, size.getWidth(), size.getHeight());
+	public GridModel(GPoint pt, GDimension size, ModelParameters parameters) {
+		this(pt.getX(), pt.getY(), size.getWidth(), size.getHeight(), parameters);
 	}
 
-	public GridModel(GPoint pt, GDimension size) {
-		this(pt.getX(), pt.getY(), size.getWidth(), size.getHeight());
+	public GridModel(GPoint pt, ModelParameters parameters) {
+		this(pt.getX(), pt.getY(), 0, 0, parameters);
 	}
 
-	public GridModel(GPoint pt) {
-		this(pt.getX(), pt.getY(), 0, 0);
-	}
-
-	public GridModel(GRectangle r) {
-		this(r.getX(), r.getY(), r.getWidth(), r.getHeight());
-	}
-
-	public void setSize(GDimension size) {
-		setSize(size.getWidth(), size.getHeight());
-	}
-
-	public void setSize(double width, double height) {
-		super.setSize(width, height);
+	public GridModel(GRectangle r, ModelParameters parameters) {
+		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
 	}
 
 	// The aspect ratio will eventually be determined by
@@ -149,5 +133,11 @@ public class GridModel extends GRectangle {
 
 	public void setCellModel(CellModel cellModel) {
 		this._cellModel = cellModel;
+	}
+
+	@Override
+	public void resize(GRectangle maxBounds, ModelParameters parameters) {
+		// TODO Auto-generated method stub
+		
 	}
 }

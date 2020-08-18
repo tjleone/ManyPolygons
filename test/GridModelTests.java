@@ -8,7 +8,7 @@ class GridModelTests {
 
 	private double _width = 400;
 	private double _height = 300;
-	private GridModel _model = new GridModel(_width, _height);
+	private GridModel _model = new GridModel(_width, _height, null);
 //	private CanvasModel _canvas = new CanvasModel(754, 469);
 	
 	@BeforeAll

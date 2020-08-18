@@ -13,6 +13,7 @@ public class GridComponent extends AbstractComponent {
 	
 	public GridComponent(GridModel model) {
 		_model = model;
+		assert _model != null;
 		_cellComponent = new CellComponent(_model.getCellModel());
 	}
 	
