@@ -23,7 +23,7 @@ public class Main extends GraphicsProgram {
 	private CanvasComponent _component;
 	private ModelParameters _parameters;
 
-	public Main() throws CloneNotSupportedException {
+	public Main() {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
 			LOGGER.setLevel(Level.ALL);
@@ -86,12 +86,15 @@ public class Main extends GraphicsProgram {
 	/* Standard Java entry point */
 	/* This method can be eliminated in most Java environments */
 	public static void main(String[] args) {
+		new Main().start(args);
+		/*
 		try {
 			new Main().start(args);
 		} catch (CloneNotSupportedException e) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
 			e.printStackTrace();
 		}
+		*/
 		/*
 		try {
 			new ManyPolygonsProgram().start(args);

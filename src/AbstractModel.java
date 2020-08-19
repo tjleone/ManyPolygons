@@ -2,7 +2,9 @@ import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
-public abstract class AbstractModel extends GRectangle implements Cloneable {
+public abstract class AbstractModel extends GRectangle {
+	
+	private GRectangle _maxBounds;
 
 	public AbstractModel() {
 		this(0, 0, 0, 0, null);
@@ -30,18 +32,14 @@ public abstract class AbstractModel extends GRectangle implements Cloneable {
 
 	public AbstractModel(double x, double y, double width, double height, ModelParameters parameters)  {
 		super(x, y, width, height);
-	}
-	
-	public AbstractModel clone() throws CloneNotSupportedException {
-		AbstractModel clonedObj = (AbstractModel) super.clone();
-		return clonedObj;
+		_maxBounds = new GRectangle(x, y, width, height);
 	}
 	 
 	// For now, I'm cloning the current model to keep from messing things up
 	// when resizing. I can revisit this later when things are working to
 	// see if I can avoid the cloning.
-	public void resize(ModelParameters parameters) throws CloneNotSupportedException {
-		resize(this.clone(), parameters);
+	public void resize(ModelParameters parameters) {
+		resize(_maxBounds, parameters);
 	}
 	
 	public abstract void resize(GRectangle maxBounds, ModelParameters parameters);
