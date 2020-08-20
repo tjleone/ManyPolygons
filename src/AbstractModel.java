@@ -5,6 +5,7 @@ import acm.graphics.GRectangle;
 public abstract class AbstractModel extends GRectangle {
 	
 	private GRectangle _maxBounds;
+	private GPoint _center;
 
 	public AbstractModel() {
 		this(0, 0, 0, 0, null);
@@ -33,6 +34,41 @@ public abstract class AbstractModel extends GRectangle {
 	public AbstractModel(double x, double y, double width, double height, ModelParameters parameters)  {
 		super(x, y, width, height);
 		_maxBounds = new GRectangle(x, y, width, height);
+		_center = center(new GPoint());
+	}
+	
+	public double top() {
+		return getY();
+	}
+	
+	public double left() {
+		return getX();
+	}
+	
+	public double bottom() {
+		return getY() + getHeight();
+	}
+	
+	public double right() {
+		return getX() + getWidth();
+	}
+	
+	public double centerX() {
+		return left() + getWidth() / 2;
+	}
+	
+	public double centerY() {
+		return top() + getHeight() / 2;
+	}
+	
+	public GPoint center(GPoint pt) {
+		pt.setLocation(centerX(), centerY());
+		return pt;
+	}
+	
+	public GPoint center() {
+		assert _center != null;
+		return _center;
 	}
 	
 	// Resize the model based on the parameters
