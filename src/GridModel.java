@@ -137,7 +137,7 @@ public class GridModel extends AbstractModel {
 
 	@Override
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
-		// TODO Auto-generated method stub
+		setBounds(maxBounds);
 		
 	}
 }

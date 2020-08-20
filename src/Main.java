@@ -75,11 +75,11 @@ public class Main extends GraphicsProgram {
 	}
 
 	private void update() {
-		_model.resize(getWidth(), getHeight());
+//		_model.resize(getWidth(), getHeight());
 		// for now, pass a max size and max height that will work best for tracing/logging
 		
 		// TODO: make each model a subclass of AbstractModel and do this:
-//		_model.resize(getBounds(), _parameters);
+		_model.resize(getBounds(), _parameters);
 		_component.update(_turtle);
 	}
 

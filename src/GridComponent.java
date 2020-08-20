@@ -17,7 +17,15 @@ public class GridComponent extends AbstractComponent {
 		_cellComponent = new CellComponent(_model.getCellModel());
 	}
 	
+	public void setStartLocation(GTurtle t) {
+		t.penUp();
+		LOGGER.log(Level.FINEST, "// setStartLocation: turtle starts at {0}", t.getLocation());
+		t.setLocation(_model.getX(), _model.getY() + _model.getHeight());
+		LOGGER.log(Level.FINEST, "// setStartLocation: turtle moved to {0}", t.getLocation());
+	}
+	
 	public void draw(GTurtle t) {
+		setStartLocation(t);
 		LOGGER.log(Level.FINEST, "// draw: turtle starts at {0}", t.getLocation());
 		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 		drawBounds(t);
@@ -29,15 +37,14 @@ public class GridComponent extends AbstractComponent {
 	}
 
 	public void drawBounds(GTurtle t) {
+		setStartLocation(t);
 		drawRectangle(t, _model);
 	}
 	
 	private void drawRectangle(GTurtle t, GRectangle bounds) {
 		LOGGER.log(Level.FINEST, "// drawRectangle: turtle starts at {0}", bounds.getLocation());
-		t.penUp();
-		t.setLocation(bounds.getLocation());
+		t.penDown();
 		for(int i=0; i < 2; i++) {
-			t.penDown();
 			t.forward(bounds.getWidth());
 			t.left(90);
 			t.forward(bounds.getHeight());
@@ -65,7 +72,7 @@ public class GridComponent extends AbstractComponent {
 				_cellComponent.draw(t);
 				displaceTurtle(t, 0.0, _model.getCellModel().getHeight());
 			}
-			displaceTurtle(t, _model.getCellModel().getWidth(), -_model.getHeight());
+			displaceTurtle(t, _model.getCellModel().getWidth(), -_model.getCellModel().getHeight()*_model.getRows());
 		}
 		displaceTurtle(t,-_model.getWidth(), 0.0);
 	}
