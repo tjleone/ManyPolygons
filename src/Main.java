@@ -42,10 +42,6 @@ public class Main extends GraphicsProgram {
 		_parameters = new ModelParameters(2, 2, 7, 10, 0.2);
 	}
 	
-	private GPoint getCenter() {
-		return new GPoint(getWidth()/2, getHeight()/2);
-	}
-	
 	private void initializeTurtle() {
 		_turtle.hideTurtle();
 		_turtle.setSpeed(1);

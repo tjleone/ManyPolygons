@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -11,8 +10,7 @@ public class CellModel extends AbstractModel {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CellModel.class.getName());
 	private int _numPolySides;
-	private double _startX;
-
+	
 	public CellModel()  {
 		this(0,0,0,0, null);
 	}
@@ -49,7 +47,6 @@ public class CellModel extends AbstractModel {
 		assert parameters != null : "null parameters";
 		assert parameters.getNumPolySides() >= 3 : "number of sides < 3";
 		_numPolySides = parameters.getNumPolySides();
-		_startX = 42.69224358691905;
 		LOGGER.log(Level.FINEST, "_numPolySides = {0}", _numPolySides);
 	}
 

@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,19 +11,13 @@ public class CanvasModel extends AbstractModel {
 
 	public final  static double SCALE_FACTOR = 0.9;
 	public final static double GRID_SCALE_FACTOR = 0.9;
-	private final static int DEFAULT_ROWS = 2;
-	private final static int DEFAULT_COLUMNS = 2;
-	private final static int DEFAULT_NUMBER_OF_POLY_SIDES = 7;
 	public final static int DEFAULT_SPIRAL_DEPTH = 10;
 	public final static double DEFAULT_SPIRAL_DISPLACEMENT = 0.2;
 	
 	// using Logger.Logger.GLOBAL_LOGGER_NAME + "." before the class name makes
 	// the global logger defined in Main into the parent logger
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasModel.class.getName());
-	private static Displacement _displacement = new Displacement();
-	
 	private GridModel _grid;
-	private ModelParameters _parameters;
 
 	public CanvasModel() {
 		this(0,0,0,0,null);
@@ -32,7 +25,6 @@ public class CanvasModel extends AbstractModel {
 
 	public CanvasModel(double x, double y, double width, double height, ModelParameters parameters) {
 		super(x, y, width, height, parameters);
-		_parameters = parameters;
 		_grid = new GridModel(0,0, width, height, parameters);
 	}
 
@@ -55,17 +47,6 @@ public class CanvasModel extends AbstractModel {
 	public CanvasModel(GRectangle r, ModelParameters parameters) {
 		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
 	}
-
-	
-	private GPoint getCenter() {
-		return new GPoint(getWidth()/2, getHeight()/2);
-	}
-	
-	// Offset of given location from center
-	private Displacement getOffsetFromCenter(double x, double y) {
-		_displacement.setDelta(getCenter(), x, y);
-		return _displacement;
-	}
 	
 	public GRectangle getGridBounds() {
 		return _grid.getBounds();
@@ -85,6 +66,9 @@ public class CanvasModel extends AbstractModel {
 	}
 	
 	public void resize(double x, double y, double width, double height, ModelParameters parameters) {
+		LOGGER.log(Level.FINEST, "// resize (entering): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (entering): (centerX,centerY) = {0},{1})", 
+				new Object[] { centerX(), centerY() });
 		setSize(width*SCALE_FACTOR, height*SCALE_FACTOR);
 		double deltaX = (width - getWidth()) / 2;
 		double deltaY = (height - getHeight())/2;
@@ -99,7 +83,13 @@ public class CanvasModel extends AbstractModel {
 				new Object[] { getX(), getY() });
 		LOGGER.log(Level.FINEST, "// resize (after translate): (getWidth(), getHeight()) = {0},{1})", 
 				new Object[] { getX(), getY() });
+		LOGGER.log(Level.FINEST, "// resize (calling _grid.resize): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (calling _grid.resize): (centerX,centerY) = {0},{1})", 
+				new Object[] { centerX(), centerY() });
 		_grid.resize(getBounds(), parameters);
+		LOGGER.log(Level.FINEST, "// resize (leaving): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (leaving): (centerX,centerY) = {0},{1})", 
+				new Object[] { centerX(), centerY() });
 	}
 
 //	public void resize(double width, double height) {

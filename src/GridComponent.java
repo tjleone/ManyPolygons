@@ -19,10 +19,11 @@ public class GridComponent extends AbstractComponent {
 	
 	public void setStartLocation(GTurtle t) {
 		t.penUp();
-		t.setLocation(_model.bottom(), _model.left());
 		LOGGER.log(Level.FINEST, "// setStartLocation: turtle starts at {0}", t.getLocation());
-		t.setLocation(_model.getX(), _model.getY() + _model.getHeight());
+		t.setLocation(_model.left(), _model.bottom());
 		LOGGER.log(Level.FINEST, "// setStartLocation: turtle moved to {0}", t.getLocation());
+		t.setLocation(_model.getX(), _model.getY() + _model.getHeight());
+		LOGGER.log(Level.FINEST, "// setStartLocation: turtle moved again to {0}", t.getLocation());
 	}
 	
 	public void draw(GTurtle t) {

@@ -2,6 +2,7 @@ import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
+@SuppressWarnings("serial")
 public abstract class AbstractModel extends GRectangle {
 	
 	private GRectangle _maxBounds;

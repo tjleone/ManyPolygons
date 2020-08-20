@@ -29,9 +29,6 @@ public class GridModel extends AbstractModel {
 
 	private int _rows; 
 	private int _columns;
-	private int _numPolySides; 
-	private int _polysInSpiral;
-	private double _displacementPortion;
 
 	private CellModel _cellModel;
 
@@ -44,9 +41,6 @@ public class GridModel extends AbstractModel {
 		assert parameters != null;
 		_rows = parameters.getRows();
 		_columns = parameters.getColumns();
-		_numPolySides = parameters.getNumPolySides();
-		_polysInSpiral = parameters.getPolysInSpiral();
-		_displacementPortion = parameters.getDisplacementPortion();
 		_cellModel = new CellModel(DEFAULT_CELL_WIDTH, DEFAULT_CELL_HEIGHT, parameters);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
@@ -101,30 +95,6 @@ public class GridModel extends AbstractModel {
 
 	public void setColumns(int _columns) {
 		this._columns = _columns;
-	}
-
-	public int getNumPolySides() {
-		return _numPolySides;
-	}
-
-	public void setNumPolySides(int _numPolySides) {
-		this._numPolySides = _numPolySides;
-	}
-
-	public int getPolysInSpiral() {
-		return _polysInSpiral;
-	}
-
-	public void setPolysInSpiral(int _polysInSpiral) {
-		this._polysInSpiral = _polysInSpiral;
-	}
-
-	public double getDisplacementPortion() {
-		return _displacementPortion;
-	}
-
-	public void setDisplacementPortion(double _displacementPortion) {
-		this._displacementPortion = _displacementPortion;
 	}
 	
 	public CellModel getCellModel() {
