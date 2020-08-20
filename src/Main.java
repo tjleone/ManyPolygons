@@ -18,6 +18,7 @@ public class Main extends GraphicsProgram {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	private static FileHandler _fileHandler;
+	static GPoint CENTER = new GPoint();
 
 	private CanvasModel _model;
 	private CanvasComponent _component;
@@ -71,10 +72,7 @@ public class Main extends GraphicsProgram {
 	}
 
 	private void update() {
-//		_model.resize(getWidth(), getHeight());
-		// for now, pass a max size and max height that will work best for tracing/logging
-		
-		// TODO: make each model a subclass of AbstractModel and do this:
+		CENTER.setLocation(getWidth()/2, getHeight()/2);
 		_model.resize(getBounds(), _parameters);
 		_component.update(_turtle);
 	}
@@ -83,21 +81,6 @@ public class Main extends GraphicsProgram {
 	/* This method can be eliminated in most Java environments */
 	public static void main(String[] args) {
 		new Main().start(args);
-		/*
-		try {
-			new Main().start(args);
-		} catch (CloneNotSupportedException e) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
-			e.printStackTrace();
-		}
-		*/
-		/*
-		try {
-			new ManyPolygonsProgram().start(args);
-		} catch (IOException e) {
-            Logger.getLogger(ManyPolygonsProgram.class.getName()).log(Level.SEVERE, null, e);
-		}
-		*/
 	}
 
 }

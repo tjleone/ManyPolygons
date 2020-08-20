@@ -33,7 +33,6 @@ public class CellModel extends AbstractModel {
 
 	public CellModel(GRectangle r, ModelParameters parameters)  {
 		super(r, parameters);
-		// TODO Auto-generated constructor stub
 	}
 
 	public CellModel(double width, double height, ModelParameters parameters)  {
@@ -86,6 +85,10 @@ public class CellModel extends AbstractModel {
 	
 	public double getSpiralSideLengthFactor() {
 		return 0.9378255363311423;
+	}
+
+	public void adjustBoundsToFitPolygon(double maxCellWidth, double maxCellHeight, ModelParameters parameters) {
+		setSize(153.85752949088308, 150);
 	}
 
 }

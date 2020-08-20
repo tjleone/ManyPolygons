@@ -107,7 +107,17 @@ public class GridModel extends AbstractModel {
 
 	@Override
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
+//		setBounds(maxBounds);
 		setBounds(maxBounds);
-		
+		double maxCellWidth = maxBounds.getWidth() / parameters.getRows();
+		double maxCellHeight = maxBounds.getHeight() / parameters.getColumns();
+		_cellModel.adjustBoundsToFitPolygon(maxCellWidth, maxCellHeight, parameters);
+		double width = _cellModel.getWidth()*parameters.getRows();
+		double height = _cellModel.getHeight()*parameters.getColumns();
+		setSize(width, height);
+		LOGGER.log(Level.FINEST, "// resize: size = {0}", getSize());
+		LOGGER.log(Level.FINEST, "// resize: centerX() = {0}", centerX());
+		LOGGER.log(Level.FINEST, "// resize: centerY() = {0}", centerY());
+		setLocation(centerX() - width/2, centerY() - height/2);
 	}
 }

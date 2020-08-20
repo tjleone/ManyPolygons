@@ -26,6 +26,7 @@ public class CanvasModel extends AbstractModel {
 	public CanvasModel(double x, double y, double width, double height, ModelParameters parameters) {
 		super(x, y, width, height, parameters);
 		_grid = new GridModel(0,0, width, height, parameters);
+		
 	}
 
 	public CanvasModel(double width, double height, ModelParameters parameters) {
@@ -66,7 +67,7 @@ public class CanvasModel extends AbstractModel {
 	}
 	
 	public void resize(double x, double y, double width, double height, ModelParameters parameters) {
-		LOGGER.log(Level.FINEST, "// resize (entering): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (entering): center = {0}", Main.CENTER);
 		LOGGER.log(Level.FINEST, "// resize (entering): (centerX,centerY) = {0},{1})", 
 				new Object[] { centerX(), centerY() });
 		setSize(width*SCALE_FACTOR, height*SCALE_FACTOR);
@@ -83,60 +84,13 @@ public class CanvasModel extends AbstractModel {
 				new Object[] { getX(), getY() });
 		LOGGER.log(Level.FINEST, "// resize (after translate): (getWidth(), getHeight()) = {0},{1})", 
 				new Object[] { getX(), getY() });
-		LOGGER.log(Level.FINEST, "// resize (calling _grid.resize): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (calling _grid.resize): center = {0}", Main.CENTER);
 		LOGGER.log(Level.FINEST, "// resize (calling _grid.resize): (centerX,centerY) = {0},{1})", 
 				new Object[] { centerX(), centerY() });
 		_grid.resize(getBounds(), parameters);
-		LOGGER.log(Level.FINEST, "// resize (leaving): center = {0}", center());
+		LOGGER.log(Level.FINEST, "// resize (leaving): center = {0}", Main.CENTER);
 		LOGGER.log(Level.FINEST, "// resize (leaving): (centerX,centerY) = {0},{1})", 
 				new Object[] { centerX(), centerY() });
 	}
-
-//	public void resize(double width, double height) {
-//		setSize(width, height); // set width and height of CanvasModel
-////		setGridBounds();				// size and location of GridModel
-//		setGridBounds(307.71505898176616, 300); // set grid size with maxWidth, maxHeight for testing
-//		LOGGER.log(Level.FINEST, "CanvasModel dimensions: {0}", getSize());
-//		LOGGER.log(Level.FINEST, "CanvasModel center: {0}", getCenter());
-//		LOGGER.log(Level.FINEST, "CanvasModel grid dimensions: {0}", getGridSize());
-//	}
-//	
-//	public void resize(GDimension size) {
-//		resize(size.getWidth(), size.getHeight());
-//	}
-//	
-//	public void setGridBounds() {
-//		setGridSize();
-//		setGridLocation();
-//	}
-//	
-//	public void setGridBounds(double maxWidth, double maxHeight) {
-//		setGridSize(maxWidth, maxHeight);
-//		setGridLocation();
-//	}
-//
-//	private GDimension getGridSize()
-//	{
-//		return _grid.getSize();
-//	}
-//	
-//	public void setGridSize() {
-//		double aspectRatio = _grid.getAspectRatio();
-//		if (getWidth() / getHeight() > aspectRatio) {
-//			_grid.setSize(getHeight() * aspectRatio * GRID_SCALE_FACTOR, getHeight() * GRID_SCALE_FACTOR);
-//		} else  {
-//			_grid.setSize(getWidth() * GRID_SCALE_FACTOR, getWidth() / aspectRatio * GRID_SCALE_FACTOR);
-//		}
-//	}
-//	
-//	public void setGridSize(double width, double height) {
-//		_grid.setSize(width, height);
-//	}
-//	
-//	public void setGridLocation() {
-//		double leftMargin = (getWidth() - _grid.getWidth()) / 2;
-//		double bottomMargin = (getHeight() - _grid.getHeight()) / 2;
-//		_grid.setLocation(leftMargin, getHeight() - bottomMargin);
-//	}
 
 }

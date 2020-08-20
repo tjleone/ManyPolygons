@@ -35,41 +35,31 @@ public abstract class AbstractModel extends GRectangle {
 	public AbstractModel(double x, double y, double width, double height, ModelParameters parameters)  {
 		super(x, y, width, height);
 		_maxBounds = new GRectangle(x, y, width, height);
-		_center = center(new GPoint());
+		_center = new GPoint(x + width/2, y + height/2);
 	}
 	
 	public double top() {
-		return getY();
+		return Main.CENTER.getY() - getHeight() / 2;
 	}
 	
 	public double left() {
-		return getX();
+		return Main.CENTER.getX() - getWidth() / 2;
 	}
 	
 	public double bottom() {
-		return getY() + getHeight();
+		return Main.CENTER.getY() + getHeight() / 2;
 	}
 	
 	public double right() {
-		return getX() + getWidth();
+		return Main.CENTER.getX() - getWidth() / 2;
 	}
 	
 	public double centerX() {
-		return left() + getWidth() / 2;
+		return Main.CENTER.getX();
 	}
 	
 	public double centerY() {
-		return top() + getHeight() / 2;
-	}
-	
-	public GPoint center(GPoint pt) {
-		pt.setLocation(centerX(), centerY());
-		return pt;
-	}
-	
-	public GPoint center() {
-		assert _center != null;
-		return _center;
+		return Main.CENTER.getY();
 	}
 	
 	// Resize the model based on the parameters
