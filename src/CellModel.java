@@ -2,6 +2,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import acm.graphics.GDimension;
+import acm.graphics.GMath;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
@@ -65,6 +66,10 @@ public class CellModel extends AbstractModel {
 		return 68.47304231704497;
 	}
 	
+	public double radiusFromSideLength(double sideLength) {
+		return sideLength / (2 * GMath.sinDegrees(180/getParameters().getNumPolySides()));
+	}
+	
 	public double getExternalAngle() {
 		return 360.0 / 7.0;
 	}
@@ -89,7 +94,15 @@ public class CellModel extends AbstractModel {
 		return 0.9378255363311423;
 	}
 
-	public void adjustBoundsToFitPolygon(double maxCellWidth, double maxCellHeight, ModelParameters parameters) {
+	public void adjustBoundsToFitPolygon(double maxCellWidth, double maxCellHeight) {
+		int n = getParameters().getNumPolySides();
+		double innerAngle = 360.0 / n;
+		int spanningAngles = n / 2;
+		double w = 2*GMath.sinDegrees(innerAngle*spanningAngles/2.0);
+		double h = 1 + GMath.cosDegrees(180.0 / n);
+		System.out.println("calculated aspect ratio: " + w/h);
+		System.out.println("actual aspect ratio: " + 153.85752949088308 / 150.0);
+		
 		setSize(153.85752949088308, 150);
 	}
 

@@ -33,9 +33,6 @@ public class Main extends GraphicsProgram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
-//		initParameters();
-//		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
-//		_component = new CanvasComponent(_model);
 	}
 	
 	private void initParameters() {

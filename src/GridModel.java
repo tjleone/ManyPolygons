@@ -94,7 +94,7 @@ public class GridModel extends AbstractModel {
 		setBounds(maxBounds);
 		double maxCellWidth = maxBounds.getWidth() / parameters.getRows();
 		double maxCellHeight = maxBounds.getHeight() / parameters.getColumns();
-		_cellModel.adjustBoundsToFitPolygon(maxCellWidth, maxCellHeight, parameters);
+		_cellModel.adjustBoundsToFitPolygon(maxCellWidth, maxCellHeight);
 		double width = _cellModel.getWidth()*parameters.getRows();
 		double height = _cellModel.getHeight()*parameters.getColumns();
 		setSize(width, height);
