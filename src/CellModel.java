@@ -14,6 +14,10 @@ public class CellModel extends AbstractModel {
 	public CellModel()  {
 		this(0,0,0,0, null);
 	}
+	
+	public CellModel(ModelParameters parameters)  {
+		this(0,0,0,0, parameters);
+	}
 
 	public CellModel(double x, double y, double width, double height, ModelParameters parameters) {
 		super(x, y, width, height, parameters);
@@ -37,6 +41,7 @@ public class CellModel extends AbstractModel {
 
 	public CellModel(double width, double height, ModelParameters parameters)  {
 		this(0, 0, width, height, parameters);
+		_numPolySides = parameters.getNumPolySides();
 		LOGGER.setLevel(Level.ALL);
 		LOGGER.log(Level.FINEST, "Cell Width: {0}", getWidth());
 		LOGGER.log(Level.FINEST, "Cell Height: {0}", getHeight());
@@ -45,13 +50,10 @@ public class CellModel extends AbstractModel {
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
 		assert parameters != null : "null parameters";
 		assert parameters.getNumPolySides() >= 3 : "number of sides < 3";
-		_numPolySides = parameters.getNumPolySides();
-		LOGGER.log(Level.FINEST, "_numPolySides = {0}", _numPolySides);
 	}
 
 	public int getNumPolySides() {
-//		return _numPolySides;
-		return 7;
+		return getParameters().getNumPolySides();
 	}
 	
 	public double getStartX() {

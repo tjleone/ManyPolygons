@@ -33,9 +33,9 @@ public class Main extends GraphicsProgram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
-		initParameters();
-		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
-		_component = new CanvasComponent(_model);
+//		initParameters();
+//		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
+//		_component = new CanvasComponent(_model);
 	}
 	
 	private void initParameters() {
@@ -56,6 +56,9 @@ public class Main extends GraphicsProgram {
 		LOGGER.log(Level.FINEST, "// run: screen size {0}", getSize());
 		LOGGER.log(Level.FINEST, "// run: center ({0},{1})", 
 				new Object[] { getWidth()/2, getHeight()/2 });
+		initParameters();
+		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
+		_component = new CanvasComponent(_model);
 		initializeTurtle();
 		update();
 		addComponentListener(new ComponentAdapter() {

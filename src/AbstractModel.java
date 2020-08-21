@@ -7,6 +7,7 @@ public abstract class AbstractModel extends GRectangle {
 	
 	private GRectangle _maxBounds;
 	private GPoint _center;
+	private ModelParameters _parameters;
 
 	public AbstractModel() {
 		this(0, 0, 0, 0, null);
@@ -36,6 +37,7 @@ public abstract class AbstractModel extends GRectangle {
 		super(x, y, width, height);
 		_maxBounds = new GRectangle(x, y, width, height);
 		_center = new GPoint(x + width/2, y + height/2);
+		_parameters = parameters;
 	}
 	
 	public double top() {
@@ -73,6 +75,10 @@ public abstract class AbstractModel extends GRectangle {
 
 	public void set_maxBounds(GRectangle _maxBounds) {
 		this._maxBounds = _maxBounds;
+	}
+	
+	public ModelParameters getParameters() {
+		return _parameters;
 	}
 
 	public abstract void resize(GRectangle maxBounds, ModelParameters parameters);

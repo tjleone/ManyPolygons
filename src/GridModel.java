@@ -23,10 +23,6 @@ public class GridModel extends AbstractModel {
 	// rows and columns
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + GridModel.class.getName());
 
-	public final static double DEFAULT_ASPECT_RATIO = 4.0 / 3.0;
-	private final static double DEFAULT_CELL_WIDTH = 153.85752949088308;
-	private final static double DEFAULT_CELL_HEIGHT = 150;
-
 	private int _rows; 
 	private int _columns;
 
@@ -41,7 +37,8 @@ public class GridModel extends AbstractModel {
 		assert parameters != null;
 		_rows = parameters.getRows();
 		_columns = parameters.getColumns();
-		_cellModel = new CellModel(DEFAULT_CELL_WIDTH, DEFAULT_CELL_HEIGHT, parameters);
+		System.out.println(parameters.getNumPolySides());
+		_cellModel = new CellModel(parameters);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
 		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
@@ -66,19 +63,6 @@ public class GridModel extends AbstractModel {
 
 	public GridModel(GRectangle r, ModelParameters parameters) {
 		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
-	}
-
-	// The aspect ratio will eventually be determined by
-	// the aspect ratio of the cells and the number of
-	// rows and columns
-	//
-	// This should be checked after every resize to make sure
-	// it hasn't changed
-	public double getAspectRatio() {
-//		if (getWidth() * getHeight() != 0) {
-//			return getWidth() / getHeight();
-//		}
-		return DEFAULT_ASPECT_RATIO;
 	}
 
 	public int getRows() {
@@ -107,7 +91,6 @@ public class GridModel extends AbstractModel {
 
 	@Override
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
-//		setBounds(maxBounds);
 		setBounds(maxBounds);
 		double maxCellWidth = maxBounds.getWidth() / parameters.getRows();
 		double maxCellHeight = maxBounds.getHeight() / parameters.getColumns();
