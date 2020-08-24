@@ -10,6 +10,7 @@ import acm.graphics.GRectangle;
 public class CellModel extends AbstractModel {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CellModel.class.getName());
+	private Polygon _polygon;
 	
 	public CellModel() {
 		this(0, 0, 0, 0, null);
@@ -21,34 +22,37 @@ public class CellModel extends AbstractModel {
 
 	public CellModel(double x, double y, double width, double height, ModelParameters parameters) {
 		super(x, y, width, height, parameters);
+		LOGGER.setLevel(Level.ALL);
+		LOGGER.log(Level.FINEST, "Cell Width: {0}", getWidth());
+		LOGGER.log(Level.FINEST, "Cell Height: {0}", getHeight());
+		_polygon = PolygonBuilder.polygon(parameters.getNumPolySides(), width, height);
 	}
 
 	public CellModel(GDimension size, ModelParameters parameters) {
-		super(size, parameters);
+		this(0, 0, size.getWidth(), size.getHeight(), parameters);
 	}
 
 	public CellModel(GPoint pt, GDimension size, ModelParameters parameters) {
-		super(pt, size, parameters);
+		this(pt.getX(), pt.getY(), size.getWidth(), size.getHeight(), parameters);
 	}
 
 	public CellModel(GPoint pt, ModelParameters parameters) {
-		super(pt, parameters);
+		this(pt.getX(), pt.getY(), 0, 0, parameters);
 	}
 
 	public CellModel(GRectangle r, ModelParameters parameters) {
-		super(r, parameters);
+		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
 	}
 
 	public CellModel(double width, double height, ModelParameters parameters) {
 		this(0, 0, width, height, parameters);
-		LOGGER.setLevel(Level.ALL);
-		LOGGER.log(Level.FINEST, "Cell Width: {0}", getWidth());
-		LOGGER.log(Level.FINEST, "Cell Height: {0}", getHeight());
 	}
 
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
 		assert parameters != null : "null parameters";
 		assert parameters.getNumPolySides() >= 3 : "number of sides < 3";
+		_polygon.resizeBounds(parameters.getNumPolySides(), maxBounds.getWidth(),
+				maxBounds.getHeight());
 	}
 
 	// Must be called after every resize and before getting other
@@ -58,25 +62,11 @@ public class CellModel extends AbstractModel {
 	// bounding box to position to start drawing polygon
 	// and reset fields accordingly
 	public void resizePolygonBounds(double maxCellWidth, double maxCellHeight) {
-//		maxCellWidth = 153.88;
-		maxCellHeight = 150.0;
-		
-		double ar = aspectRatio();
-		int height = 1;
-
-		while(height*ar < maxCellWidth && height < maxCellHeight) {
-			height++;
-		}
-		
-		if (height*ar > maxCellWidth) {
-			height--;
-		}
-		
-		double width = height*ar;
-		System.out.println("calculated width=" + width);
-		System.out.println("calculated height=" + height);
-
-		setSize(width, height);
+		assert getNumPolySides() == _polygon.getNumSides();
+		_polygon.resizeBounds(_polygon.getNumSides(), maxCellWidth, maxCellHeight);
+		System.out.print("CellModel.resizePolygonBounds: setting size to ");
+		System.out.println("(" + _polygon.getWidth() + ", " + _polygon.getHeight());
+		setSize(_polygon.getWidth(), _polygon.getHeight());
 	}
 
 	public int getNumPolySides() {
@@ -84,21 +74,22 @@ public class CellModel extends AbstractModel {
 	}
 
 	public double getStartX() {
-//		return _startX;
-		return 42.69224358691905;
+		return _polygon.getDeltaX();
+//		return 42.69224358691905;
 	}
 
 	public double getStartSideLength() {
-		return 68.47304231704497;
+		return _polygon.getSide();
+//		return 68.47304231704497;
 	}
-	
-	public double sideLengthFromRadius(double radius) {
-		return 68.47304231704497;
-	}
-
-	public double radiusFromSideLength(double sideLength) {
-		return sideLength / (2 * GMath.sinDegrees(180 / getParameters().getNumPolySides()));
-	}
+//	
+//	public double sideLengthFromRadius(double radius) {
+//		return 68.47304231704497;
+//	}
+//
+//	public double radiusFromSideLength(double sideLength) {
+//		return sideLength / (2 * GMath.sinDegrees(180 / getParameters().getNumPolySides()));
+//	}
 
 	public double getExternalAngle() {
 		return 360.0 / 7.0;
@@ -124,28 +115,8 @@ public class CellModel extends AbstractModel {
 		return 0.9378255363311423;
 	}
 	
-	/*
-to widthOfOdd :numSides :height
-	op 2 * sin(360/n * int :numSides / 4)
-end
-	 */
-	private double aspectRatio() {
-		int n = getParameters().getNumPolySides();
-		double innerAngle = 360.0 / n;
-		int spanningAngles = n / 2;
-		double aspectRatio = 0; 
-		if (n % 4 == 0) {
-			aspectRatio = 1; // h = w = 2a
-		} else if (n % 2 == 0) { // n % 2 == 0 -> h = 2a, w = 2r -> w/h = r/a
-			aspectRatio = 1.0 / GMath.cosDegrees(180/n);
-		} else  if (n % 2 == 1) { // h = a + r
-			double w = 2 * GMath.sinDegrees(innerAngle * spanningAngles / 2.0);
-			double h = 1 + GMath.cosDegrees(180.0 / n);
-			aspectRatio = w / h;
-		}
-		System.out.println("calculated aspect ratio: " + aspectRatio);
-		System.out.println("actual aspect ratio: " + 153.85752949088308 / 150.0);
-		return aspectRatio;
-	}
-
+//	private double aspectRatio() {
+//		return _polygon.aspectRatio(getParameters().getNumPolySides());
+//	}
+//
 }

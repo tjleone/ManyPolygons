@@ -40,6 +40,10 @@ public abstract class Polygon {
 		this.numSides = numSides;
 	}
 
+	public double getExternalAngle() {
+		assert getNumSides() != 0;
+		return 360.0 / getNumSides();
+	}
 
 	public double getAspectRatio() {
 		assert aspectRatio != Double.MIN_VALUE;
@@ -131,6 +135,10 @@ public abstract class Polygon {
 		
 		setWidth(h*ar);
 		setHeight(h);
+	}
+	
+	public double getDeltaX() {
+		return getWidth() / 2 - getSide() / 2;
 	}
 	
 	public abstract double radius(int n, double width, double height);

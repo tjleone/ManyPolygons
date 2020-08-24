@@ -38,7 +38,7 @@ public class GridModel extends AbstractModel {
 		_rows = parameters.getRows();
 		_columns = parameters.getColumns();
 		System.out.println(parameters.getNumPolySides());
-		_cellModel = new CellModel(parameters);
+		_cellModel = new CellModel(width/parameters.getColumns(), height/parameters.getRows(), parameters);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
 		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());

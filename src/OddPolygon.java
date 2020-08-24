@@ -80,6 +80,9 @@ public class OddPolygon extends Polygon {
 	 */
 	@Override
 	public double radius(int n, double width, double height) {
+		System.out.println("OddPolygon.radius: n=" + n + ", width=" + width + ", height=" + height);
+		System.out.println("OddPolygon.radius: aspectRatio(n)=" + aspectRatio(n));
+		System.out.println("OddPolygon.radius: width/height=" + width/height);
 		assert width / height == aspectRatio(n);
 		return width / (2 * GMath.sinDegrees(halfWidthAngle(n)));
 	}
