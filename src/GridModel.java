@@ -23,8 +23,15 @@ public class GridModel extends AbstractModel {
 	// rows and columns
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + GridModel.class.getName());
 
+	public final static double DEFAULT_ASPECT_RATIO = 4.0 / 3.0;
+	private final static double DEFAULT_CELL_WIDTH = 153.85752949088308;
+	private final static double DEFAULT_CELL_HEIGHT = 150;
+
 	private int _rows; 
 	private int _columns;
+	private int _numPolySides; 
+	private int _polysInSpiral;
+	private double _displacementPortion;
 
 	private CellModel _cellModel;
 
@@ -37,8 +44,10 @@ public class GridModel extends AbstractModel {
 		assert parameters != null;
 		_rows = parameters.getRows();
 		_columns = parameters.getColumns();
-		System.out.println(parameters.getNumPolySides());
-		_cellModel = new CellModel(width/parameters.getColumns(), height/parameters.getRows(), parameters);
+		_numPolySides = parameters.getNumPolySides();
+		_polysInSpiral = parameters.getPolysInSpiral();
+		_displacementPortion = parameters.getDisplacementPortion();
+		_cellModel = new CellModel(DEFAULT_CELL_WIDTH, DEFAULT_CELL_HEIGHT, parameters);
 		LOGGER.log(Level.FINEST, "Grid X: {0}", getX());
 		LOGGER.log(Level.FINEST, "Grid Y: {0}", getY());
 		LOGGER.log(Level.FINEST, "Grid Width: {0}", getWidth());
@@ -65,6 +74,19 @@ public class GridModel extends AbstractModel {
 		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), parameters);
 	}
 
+	// The aspect ratio will eventually be determined by
+	// the aspect ratio of the cells and the number of
+	// rows and columns
+	//
+	// This should be checked after every resize to make sure
+	// it hasn't changed
+	public double getAspectRatio() {
+//		if (getWidth() * getHeight() != 0) {
+//			return getWidth() / getHeight();
+//		}
+		return DEFAULT_ASPECT_RATIO;
+	}
+
 	public int getRows() {
 		return _rows;
 	}
@@ -80,6 +102,30 @@ public class GridModel extends AbstractModel {
 	public void setColumns(int _columns) {
 		this._columns = _columns;
 	}
+
+	public int getNumPolySides() {
+		return _numPolySides;
+	}
+
+	public void setNumPolySides(int _numPolySides) {
+		this._numPolySides = _numPolySides;
+	}
+
+	public int getPolysInSpiral() {
+		return _polysInSpiral;
+	}
+
+	public void setPolysInSpiral(int _polysInSpiral) {
+		this._polysInSpiral = _polysInSpiral;
+	}
+
+	public double getDisplacementPortion() {
+		return _displacementPortion;
+	}
+
+	public void setDisplacementPortion(double _displacementPortion) {
+		this._displacementPortion = _displacementPortion;
+	}
 	
 	public CellModel getCellModel() {
 		return _cellModel;
@@ -91,16 +137,7 @@ public class GridModel extends AbstractModel {
 
 	@Override
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
-		setBounds(maxBounds);
-		double maxCellWidth = maxBounds.getWidth() / parameters.getRows();
-		double maxCellHeight = maxBounds.getHeight() / parameters.getColumns();
-		_cellModel.resizePolygonBounds(maxCellWidth, maxCellHeight);
-		double width = _cellModel.getWidth()*parameters.getRows();
-		double height = _cellModel.getHeight()*parameters.getColumns();
-		setSize(width, height);
-		LOGGER.log(Level.FINEST, "// resize: size = {0}", getSize());
-		LOGGER.log(Level.FINEST, "// resize: centerX() = {0}", centerX());
-		LOGGER.log(Level.FINEST, "// resize: centerY() = {0}", centerY());
-		setLocation(centerX() - width/2, centerY() - height/2);
+		// TODO Auto-generated method stub
+		
 	}
 }

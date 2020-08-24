@@ -1,4 +1,3 @@
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import acm.graphics.GDimension;
@@ -20,7 +19,6 @@ public class CanvasComponent extends AbstractComponent {
 
 	public void update(GTurtle t) {
 		t.erasePath();
-		LOGGER.log(Level.FINEST, "// update: turtle starts at {0}", t.getLocation());
 		_gridComponent.draw(t);
 	}
 

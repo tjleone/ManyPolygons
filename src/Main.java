@@ -18,13 +18,12 @@ public class Main extends GraphicsProgram {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	
 	private static FileHandler _fileHandler;
-	static GPoint CENTER = new GPoint();
 
 	private CanvasModel _model;
 	private CanvasComponent _component;
 	private ModelParameters _parameters;
 
-	public Main() {
+	public Main() throws CloneNotSupportedException {
 		try {
 			_fileHandler = Util.createFileHandler(LOGGER.getName());
 			LOGGER.setLevel(Level.ALL);
@@ -33,11 +32,18 @@ public class Main extends GraphicsProgram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
+		initParameters();
+		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
+		_component = new CanvasComponent(_model);
 	}
 	
 	private void initParameters() {
 		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
 		_parameters = new ModelParameters(2, 2, 7, 10, 0.2);
+	}
+	
+	private GPoint getCenter() {
+		return new GPoint(getWidth()/2, getHeight()/2);
 	}
 	
 	private void initializeTurtle() {
@@ -53,9 +59,6 @@ public class Main extends GraphicsProgram {
 		LOGGER.log(Level.FINEST, "// run: screen size {0}", getSize());
 		LOGGER.log(Level.FINEST, "// run: center ({0},{1})", 
 				new Object[] { getWidth()/2, getHeight()/2 });
-		initParameters();
-		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
-		_component = new CanvasComponent(_model);
 		initializeTurtle();
 		update();
 		addComponentListener(new ComponentAdapter() {
@@ -72,15 +75,30 @@ public class Main extends GraphicsProgram {
 	}
 
 	private void update() {
-		CENTER.setLocation(getWidth()/2, getHeight()/2);
-		_model.resize(getBounds(), _parameters);
+		_model.resize(getWidth(), getHeight());
+		// for now, pass a max size and max height that will work best for tracing/logging
+		
+		// TODO: make each model a subclass of AbstractModel and do this:
+//		_model.resize(getBounds(), _parameters);
 		_component.update(_turtle);
 	}
 
 	/* Standard Java entry point */
 	/* This method can be eliminated in most Java environments */
 	public static void main(String[] args) {
-		new Main().start(args);
+		try {
+			new Main().start(args);
+		} catch (CloneNotSupportedException e) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, e);
+			e.printStackTrace();
+		}
+		/*
+		try {
+			new ManyPolygonsProgram().start(args);
+		} catch (IOException e) {
+            Logger.getLogger(ManyPolygonsProgram.class.getName()).log(Level.SEVERE, null, e);
+		}
+		*/
 	}
 
 }

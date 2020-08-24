@@ -12,7 +12,6 @@ public class ModelParameters {
 		this.numPolySides = numPolySides;
 		this.polysInSpiral = polysInSpiral;
 		this.displacementPortion = displacementPortion;
-		System.out.println("ModelParameters: numPolySides=" + numPolySides);
 	}
 
 	public int getRows() {

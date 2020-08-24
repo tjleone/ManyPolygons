@@ -14,9 +14,5 @@ public class Util {
 		fileHandler.setFormatter(new SimpleFormatter());
 		return fileHandler;
 	}
-	
-	public static double tanDegrees(double d) {
-		return Math.tan(Math.toRadians(d));
-	}
 
 }

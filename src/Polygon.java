@@ -1,3 +1,4 @@
+import acm.graphics.GDimension;
 import acm.graphics.GMath;
 
 public abstract class Polygon {
@@ -9,6 +10,7 @@ public abstract class Polygon {
 	private double apothem = Double.MIN_VALUE;
 	private double radius = Double.MIN_VALUE;
 	private double side = Double.MIN_VALUE;
+	private GDimension size = new GDimension(0,0);
 	
 	/**
 	 * For all calculations, we assume we are creating or working with
@@ -75,6 +77,11 @@ public abstract class Polygon {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+	
+	public GDimension getSize() {
+		this.size.setSize(getWidth(), getHeight());
+		return size;
 	}
 
 
