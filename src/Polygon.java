@@ -23,17 +23,10 @@ public abstract class Polygon {
 		assert n > 2;
 		setNumSides(n);
 		setAspectRatio(aspectRatio(n));
-		/*
-		 *         self._numSides = n
-        self._aspectRatio = self.aspectRatio(n)
-        w, h = self.resizePolygonBounds(n, maxWidth, maxHeight)
-        self._width, self._height = w, h
-        self._apothem = self.apothem(n, w, h)
-        self._radius = self.radius(n, w, h)
-        self._side = self.side(n, w, h)
-
-		 */
-		
+		resizeBounds(n, maxWidth, maxHeight);
+		setRadius(radius(n, getWidth(), getHeight()));
+		setApothem(apothem(n, getWidth(), getHeight()));
+		setSide(side(n, getWidth(), getHeight()));
 	}
 	
 	
