@@ -10,8 +10,7 @@ import acm.graphics.GRectangle;
 public class CellModel extends AbstractModel {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CellModel.class.getName());
-	private int _numPolySides;
-
+	
 	public CellModel() {
 		this(0, 0, 0, 0, null);
 	}
@@ -42,7 +41,6 @@ public class CellModel extends AbstractModel {
 
 	public CellModel(double width, double height, ModelParameters parameters) {
 		this(0, 0, width, height, parameters);
-		_numPolySides = parameters.getNumPolySides();
 		LOGGER.setLevel(Level.ALL);
 		LOGGER.log(Level.FINEST, "Cell Width: {0}", getWidth());
 		LOGGER.log(Level.FINEST, "Cell Height: {0}", getHeight());
@@ -51,6 +49,34 @@ public class CellModel extends AbstractModel {
 	public void resize(GRectangle maxBounds, ModelParameters parameters) {
 		assert parameters != null : "null parameters";
 		assert parameters.getNumPolySides() >= 3 : "number of sides < 3";
+	}
+
+	// Must be called after every resize and before getting other
+	// values owned by CellModel.
+	// Calculate aspect ratio, width and height of bounding box,
+	// radius, apothem, side length and deltaX along bottom of
+	// bounding box to position to start drawing polygon
+	// and reset fields accordingly
+	public void resizePolygonBounds(double maxCellWidth, double maxCellHeight) {
+//		maxCellWidth = 153.88;
+		maxCellHeight = 150.0;
+		
+		double ar = aspectRatio();
+		int height = 1;
+
+		while(height*ar < maxCellWidth && height < maxCellHeight) {
+			height++;
+		}
+		
+		if (height*ar > maxCellWidth) {
+			height--;
+		}
+		
+		double width = height*ar;
+		System.out.println("calculated width=" + width);
+		System.out.println("calculated height=" + height);
+
+		setSize(width, height);
 	}
 
 	public int getNumPolySides() {
@@ -63,6 +89,10 @@ public class CellModel extends AbstractModel {
 	}
 
 	public double getStartSideLength() {
+		return 68.47304231704497;
+	}
+	
+	public double sideLengthFromRadius(double radius) {
 		return 68.47304231704497;
 	}
 
@@ -93,32 +123,29 @@ public class CellModel extends AbstractModel {
 	public double getSpiralSideLengthFactor() {
 		return 0.9378255363311423;
 	}
-
-	public void adjustBoundsToFitPolygon(double maxCellWidth, double maxCellHeight) {
+	
+	/*
+to widthOfOdd :numSides :height
+	op 2 * sin(360/n * int :numSides / 4)
+end
+	 */
+	private double aspectRatio() {
 		int n = getParameters().getNumPolySides();
 		double innerAngle = 360.0 / n;
 		int spanningAngles = n / 2;
-		double aspectRatio = GMath.sinDegrees(innerAngle * spanningAngles / 2.0);
-		if (n % 2 == 1) {
+		double aspectRatio = 0; 
+		if (n % 4 == 0) {
+			aspectRatio = 1; // h = w = 2a
+		} else if (n % 2 == 0) { // n % 2 == 0 -> h = 2a, w = 2r -> w/h = r/a
+			aspectRatio = 1.0 / GMath.cosDegrees(180/n);
+		} else  if (n % 2 == 1) { // h = a + r
 			double w = 2 * GMath.sinDegrees(innerAngle * spanningAngles / 2.0);
 			double h = 1 + GMath.cosDegrees(180.0 / n);
 			aspectRatio = w / h;
 		}
 		System.out.println("calculated aspect ratio: " + aspectRatio);
 		System.out.println("actual aspect ratio: " + 153.85752949088308 / 150.0);
-		
-		maxCellWidth = 153.88;
-		int height = 1;
-		while(height*aspectRatio < maxCellWidth) {
-			height++;
-		}
-		height--;
-		
-		double width = height*aspectRatio;
-		System.out.println("calculated width=" + width);
-		System.out.println("calculated height=" + height);
-
-		setSize(width, height);
+		return aspectRatio;
 	}
 
 }
