@@ -39,7 +39,7 @@ public class PolygonComponent extends AbstractComponent {
 		t.forward(_polygon.getDeltaX());
 
 //		drawSpiral(t, _polygon.getStartSideLength(), _polygon.getSpiralDepth());
-		
+		drawPolygon(t, _polygon.getSide());		
 		t.penUp();
 
 		t.setLocation(pt);
