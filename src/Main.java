@@ -1,5 +1,7 @@
 import acm.graphics.*;
 import acm.program.*;
+
+import java.awt.Color;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.io.IOException;
@@ -16,11 +18,14 @@ public class Main extends GraphicsProgram {
 
 	public GTurtle _turtle = new GTurtle();
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	public static GPoint CENTER;
 	
 	private static FileHandler _fileHandler;
 
 	private CanvasModel _model;
+	private NewCanvasModel _newModel;
 	private CanvasComponent _component;
+	private NewCanvasComponent _newComponent;
 	private ModelParameters _parameters;
 
 	public Main() throws CloneNotSupportedException {
@@ -32,9 +37,6 @@ public class Main extends GraphicsProgram {
 		} catch (IOException e) {
 			e.printStackTrace();
 		};
-		initParameters();
-		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
-		_component = new CanvasComponent(_model);
 	}
 	
 	private void initParameters() {
@@ -56,6 +58,13 @@ public class Main extends GraphicsProgram {
 	// and trigger a redraw
 	@Override
 	public void run() {
+		CENTER = new GPoint();
+		CENTER.setLocation(getWidth()/2, getHeight()/2);
+		initParameters();
+		_model = new CanvasModel(0, 0, getWidth(), getHeight(), _parameters);
+		_newModel = new NewCanvasModel(0, 0, getWidth(), getHeight(), _parameters);
+		_component = new CanvasComponent(_model);
+		_newComponent = new NewCanvasComponent(_newModel, _parameters);
 		LOGGER.log(Level.FINEST, "// run: screen size {0}", getSize());
 		LOGGER.log(Level.FINEST, "// run: center ({0},{1})", 
 				new Object[] { getWidth()/2, getHeight()/2 });
@@ -75,12 +84,22 @@ public class Main extends GraphicsProgram {
 	}
 
 	private void update() {
+		CENTER.setLocation(getWidth()/2, getHeight()/2);
 		_model.resize(getWidth(), getHeight());
+		_newModel.resize(getWidth(), getHeight());
+		assert _model.getSize().getWidth() == _newModel.getSize().getWidth();
+		assert _model.getSize().getHeight() == _newModel.getSize().getHeight();
 		// for now, pass a max size and max height that will work best for tracing/logging
 		
 		// TODO: make each model a subclass of AbstractModel and do this:
 //		_model.resize(getBounds(), _parameters);
-		_component.update(_turtle);
+		
+//		_turtle.setColor(Color.BLACK);
+//		_component.update(_turtle);
+		
+		_turtle.setColor(Color.RED);
+		_newComponent.update(_turtle);
+		_turtle.setColor(Color.BLACK);
 	}
 
 	/* Standard Java entry point */

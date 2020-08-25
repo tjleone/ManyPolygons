@@ -18,6 +18,7 @@ public class GridComponent extends AbstractComponent {
 	}
 	
 	public void draw(GTurtle t) {
+		LOGGER.log(Level.FINEST, "// draw: _model.getSize()={0}", _model.getSize());
 		LOGGER.log(Level.FINEST, "// draw: turtle starts at {0}", t.getLocation());
 		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 		drawBounds(t);

@@ -3,14 +3,14 @@ public class ModelParameters {
 	private int rows;
 	private int columns;
 	private int numPolySides;
-	private int polysInSpiral;
+	private int spiralDepth;
 	private double displacementPortion;
 
-	public ModelParameters(int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion) {
+	public ModelParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion) {
 		this.rows = rows;
 		this.columns = columns;
 		this.numPolySides = numPolySides;
-		this.polysInSpiral = polysInSpiral;
+		this.spiralDepth = spiralDepth;
 		this.displacementPortion = displacementPortion;
 	}
 
@@ -38,12 +38,12 @@ public class ModelParameters {
 		this.numPolySides = numPolySides;
 	}
 
-	public int getPolysInSpiral() {
-		return polysInSpiral;
+	public int getSpiralDepth() {
+		return spiralDepth;
 	}
 
-	public void setPolysInSpiral(int polysInSpiral) {
-		this.polysInSpiral = polysInSpiral;
+	public void setSpiralDepth(int spiralDepth) {
+		this.spiralDepth = spiralDepth;
 	}
 
 	public double getDisplacementPortion() {

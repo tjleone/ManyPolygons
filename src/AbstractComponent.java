@@ -10,11 +10,15 @@ public abstract class AbstractComponent {
 	}
 	
 	void drawRectangle(GTurtle t, GDimension size) {
+		drawRectangle(t, size.getWidth(), size.getHeight());
+	}
+	
+	void drawRectangle(GTurtle t, double width, double height) {
 		for(int i=0; i < 2; i++) {
 			t.penDown();
-			t.forward(size.getWidth());
+			t.forward(width);
 			t.left(90);
-			t.forward(size.getHeight());
+			t.forward(height);
 			t.left(90);
 		}
 	}

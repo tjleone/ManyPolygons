@@ -13,6 +13,10 @@ public class CanvasComponent extends AbstractComponent {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + CanvasComponent.class.getName());
 	
 	public CanvasComponent(CanvasModel model) {
+		this(model, null);
+	}
+	
+	public CanvasComponent(CanvasModel model, ModelParameters parameters) {
 		_model = model;
 		_gridComponent = new GridComponent(_model.getGrid());
 	}
@@ -25,6 +29,10 @@ public class CanvasComponent extends AbstractComponent {
 	@Override
 	public GDimension getSize() {
 		return _model.getSize();
+	}
+	
+	public CanvasModel getModel() {
+		return _model;
 	}
 
 }

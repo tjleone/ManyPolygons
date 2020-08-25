@@ -2,7 +2,12 @@ import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
-public abstract class AbstractModel extends GRectangle implements Cloneable {
+@SuppressWarnings("serial")
+public abstract class AbstractModel extends GRectangle {
+	
+	private GRectangle _maxBounds;
+	private GPoint _center;
+	private ModelParameters _parameters;
 
 	public AbstractModel() {
 		this(0, 0, 0, 0, null);
@@ -30,20 +35,66 @@ public abstract class AbstractModel extends GRectangle implements Cloneable {
 
 	public AbstractModel(double x, double y, double width, double height, ModelParameters parameters)  {
 		super(x, y, width, height);
+		_maxBounds = new GRectangle(x, y, width, height);
+		_center = center(new GPoint());
+		_parameters = parameters;
+	}
+
+	public ModelParameters getParameters() {
+		return _parameters;
+	}
+
+	public void setParameters(ModelParameters _parameters) {
+		this._parameters = _parameters;
 	}
 	
-	public AbstractModel clone() throws CloneNotSupportedException {
-		AbstractModel clonedObj = (AbstractModel) super.clone();
-		return clonedObj;
-	}
-	 
-	// For now, I'm cloning the current model to keep from messing things up
-	// when resizing. I can revisit this later when things are working to
-	// see if I can avoid the cloning.
-	public void resize(ModelParameters parameters) throws CloneNotSupportedException {
-		resize(this.clone(), parameters);
+	public double top() {
+		return getY();
 	}
 	
+	public double left() {
+		return getX();
+	}
+	
+	public double bottom() {
+		return getY() + getHeight();
+	}
+	
+	public double right() {
+		return getX() + getWidth();
+	}
+	
+	public double centerX() {
+		return left() + getWidth() / 2;
+	}
+	
+	public double centerY() {
+		return top() + getHeight() / 2;
+	}
+	
+	public GPoint center(GPoint pt) {
+		pt.setLocation(centerX(), centerY());
+		return pt;
+	}
+	
+	public GPoint center() {
+		assert _center != null;
+		return _center;
+	}
+	
+	// Resize the model based on the parameters
+	public void resize(ModelParameters parameters) {
+		resize(_maxBounds, parameters);
+	}
+	
+	public GRectangle get_maxBounds() {
+		return _maxBounds;
+	}
+
+	public void set_maxBounds(GRectangle _maxBounds) {
+		this._maxBounds = _maxBounds;
+	}
+
 	public abstract void resize(GRectangle maxBounds, ModelParameters parameters);
 
 }
