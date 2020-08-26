@@ -48,7 +48,7 @@ public class OddAspectCalculator extends AspectCalculator {
 	 * @param n number of sides in the polygon
 	 * @return half of width angle (central angle that spans width of polygon)
 	 */
-	private double halfWidthAngle() {
+	public double halfWidthAngle() {
 		return (int)(getNumPolygonSides() / 2) * 180.0 / getNumPolygonSides();
 	}
 

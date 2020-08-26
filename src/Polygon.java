@@ -11,6 +11,7 @@ public abstract class Polygon {
 	private double radius = Double.MIN_VALUE;
 	private double side = Double.MIN_VALUE;
 	private GDimension size = new GDimension(0,0);
+	private AspectCalculator aspectCalculator;
 	
 	/**
 	 * For all calculations, we assume we are creating or working with
@@ -21,14 +22,38 @@ public abstract class Polygon {
 	 * @param maxWidth max width allowed for bounding box
 	 * @param maxHeight max height allowed for bounding box
 	 */
-	public Polygon(int n, double maxWidth, double maxHeight) {
+	public Polygon(int n) {
 		assert n > 2;
+	}
+		
+		/**
+		 * For all calculations, we assume we are creating or working with
+		 * a bounding box that is the width and height of a polygon that is
+		 * resting on one of its sides.
+		 * 
+		 * @param n number of sides in polygon
+		 * @param maxWidth max width allowed for bounding box
+		 * @param maxHeight max height allowed for bounding box
+		 */
+		public Polygon(int n, double maxWidth, double maxHeight) {
+			assert n > 2;
 		setNumSides(n);
 		setAspectRatio(aspectRatio(n));
 		resizeBounds(n, maxWidth, maxHeight);
 		setRadius(radius(n, getWidth(), getHeight()));
 		setApothem(apothem(n, getWidth(), getHeight()));
 		setSide(side(n, getWidth(), getHeight()));
+	}
+
+
+	public abstract double aspectRatio(int n);
+
+	public AspectCalculator getAspectCalculator() {
+		return aspectCalculator;
+	}
+
+	public void setAspectCalculator(AspectCalculator aspectCalculator) {
+		this.aspectCalculator = aspectCalculator;
 	}
 	
 	
@@ -116,9 +141,6 @@ public abstract class Polygon {
 	public void setSide(double side) {
 		this.side = side;
 	}
-
-
-	public abstract double aspectRatio(int n);
 	
 	public double apothemRadiusRatio(int n) {
 		return GMath.cosDegrees(180/n);

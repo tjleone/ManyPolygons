@@ -22,6 +22,7 @@ public class QuadPolygon extends EvenPolygon {
 	public QuadPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 4 == 0;
+		setAspectCalculator(new QuadAspectCalculator(n));
 	}
 	
 	/**

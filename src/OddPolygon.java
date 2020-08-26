@@ -18,6 +18,7 @@ public class OddPolygon extends Polygon {
 	public OddPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 2 == 1;
+		setAspectCalculator(new OddAspectCalculator(n));
 	}
 	
 	

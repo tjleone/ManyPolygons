@@ -29,9 +29,9 @@ public class NewCanvasComponent extends CanvasComponent {
 	}
 	
 	private void draw(GTurtle t, double width, double height) {
-		System.out.println("Main.CENTER=" + Main.CENTER);
+		System.out.println("Main.CENTER=" + OldMain.CENTER);
 		t.penUp();
-		t.setLocation(Main.CENTER);
+		t.setLocation(OldMain.CENTER);
 		t.setDirection(0);
 		t.forward(-width/2);
 		t.right(90);

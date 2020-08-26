@@ -22,6 +22,7 @@ public class EvenPolygon extends Polygon {
 	public EvenPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 2 == 0;
+		setAspectCalculator(new EvenAspectCalculator(n));
 	}
 
 	/**
