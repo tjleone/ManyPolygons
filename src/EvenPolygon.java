@@ -16,13 +16,29 @@ public class EvenPolygon extends Polygon {
 	 * resting on one of its sides.
 	 * 
 	 * @param n number of sides in polygon
+	 */
+	public EvenPolygon(int n) {
+		super(n);
+		assert n % 2 == 0;
+	}
+
+	/**
+	 * For all calculations, we assume we are creating or working with
+	 * a bounding box that is the width and height of a polygon that is
+	 * resting on one of its sides.
+	 * 
+	 * @param n number of sides in polygon
 	 * @param maxWidth max width allowed for bounding box
 	 * @param maxHeight max height allowed for bounding box
 	 */
 	public EvenPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 2 == 0;
-		setAspectCalculator(new EvenAspectCalculator(n));
+	}
+
+	@Override
+	public AspectCalculator createAspectCalculator() {
+		return new EvenAspectCalculator(getNumSides());
 	}
 
 	/**

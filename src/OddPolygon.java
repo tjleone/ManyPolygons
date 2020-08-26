@@ -12,15 +12,30 @@ public class OddPolygon extends Polygon {
 	 * resting on one of its sides.
 	 * 
 	 * @param n number of sides in polygon
+	 */
+	public OddPolygon(int n) {
+		super(n);
+		assert n % 2 == 1;
+	}
+
+	/**
+	 * For all calculations, we assume we are creating or working with
+	 * a bounding box that is the width and height of a polygon that is
+	 * resting on one of its sides.
+	 * 
+	 * @param n number of sides in polygon
 	 * @param maxWidth max width allowed for bounding box
 	 * @param maxHeight max height allowed for bounding box
 	 */
 	public OddPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 2 == 1;
-		setAspectCalculator(new OddAspectCalculator(n));
 	}
-	
+
+	@Override
+	public AspectCalculator createAspectCalculator() {
+		return new OddAspectCalculator(getNumSides());
+	}
 	
 	/**
 	 * For any polygon, we can connect two radii that touch the sides
@@ -40,7 +55,8 @@ public class OddPolygon extends Polygon {
 	 * @return half of width angle (central angle that spans width of polygon)
 	 */
 	private double halfWidthAngle(int n) {
-		return (int)(n / 2) * 180.0 / n;
+		return ((OddAspectCalculator)getAspectCalculator()).halfWidthAngle();
+//		return (int)(n / 2) * 180.0 / n;
 	}
 
 	/**
@@ -95,6 +111,12 @@ public class OddPolygon extends Polygon {
 
 	@Override
 	public double side(int n, double width, double height) {
+		System.out.println("OddPolygon.side: n=" + n + ", width=" + width + ", height=" + height);
+		System.out.println("OddPolygon.side: aspectRatio(n)=" + aspectRatio(n));
+		System.out.println("OddPolygon.side: width/height=" + width/height);
+		double sideLength = sideFromRadius(n, radius(n,width,height));
+		System.out.println("OddPolygon.side:sideLength=" + sideLength);
+		System.out.println();
 		return sideFromRadius(n, radius(n,width,height));
 	}
 

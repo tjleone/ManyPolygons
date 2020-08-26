@@ -8,6 +8,18 @@
  */
 public class PolygonBuilder {
 
+	public static Polygon polygon(int n) {
+		if (n % 4 == 0) {
+			return new QuadPolygon(n);
+		}
+		if (n % 2 == 0) {
+			return new EvenPolygon(n);
+		}
+		
+		return new OddPolygon(n);
+		
+	}
+
 	public static Polygon polygon(int n, double maxWidth, double maxHeight) {
 		if (n % 4 == 0) {
 			return new QuadPolygon(n, maxWidth, maxHeight);

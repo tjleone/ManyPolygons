@@ -20,6 +20,14 @@ public class PolygonComponent extends AbstractComponent {
 		_polygon = polygon;
 	}
 
+	public Polygon getPolygon() {
+		return _polygon;
+	}
+
+	public void setPolygon(Polygon _polygon) {
+		this._polygon = _polygon;
+	}
+
 	@Override
 	public GDimension getSize() {
 		return _polygon.getSize();
@@ -66,6 +74,9 @@ public class PolygonComponent extends AbstractComponent {
 	}
 
 	private void drawPolygon(GTurtle t, double sideLength) {
+		System.out.println("_polygon.getNumSides()=" + _polygon.getNumSides());
+		System.out.println("_polygon.getExternalAngle()=" + _polygon.getExternalAngle());
+		System.out.println("sideLength=" + sideLength);
 		for(int i=0; i < _polygon.getNumSides(); i++) {
 			t.forward(sideLength);
 			t.left(_polygon.getExternalAngle());

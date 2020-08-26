@@ -19,6 +19,8 @@ public class Main extends GraphicsProgram {
 	private ModelParameters _parameters;
 	private GRectangle frameRectangle = new GRectangle();
 	private IsotropicRectangle canvas = null;
+	private Polygon polygon = null;
+	private PolygonComponent component = null;
 	private GTurtle turtle = new GTurtle();
 
 	public Main() {
@@ -36,11 +38,9 @@ public class Main extends GraphicsProgram {
 		super.init();
 		initParameters();
 		initializeTurtle();
-		System.out.println("getRectangle()=" + getRectangle());
-		GCanvas gcanvas = getGCanvas();
-		System.out.print("gcanvas=[" + gcanvas.getX() + ", " + gcanvas.getY());
-		System.out.println(", " + gcanvas.getWidth() + ", " + gcanvas.getHeight() + "]");
-		canvas = new IsotropicRectangle(getRectangle(), 0.9, 1.025716863272554);
+		polygon = PolygonBuilder.polygon(_parameters.getNumPolySides());
+		component = new PolygonComponent(polygon);
+		canvas = new IsotropicRectangle(getRectangle(), 0.9, polygon.getAspectRatio());
 		update();
 	}
 	
@@ -76,8 +76,8 @@ public class Main extends GraphicsProgram {
 	}
 	
 	private void update() {
-		System.out.print("canvas location = [" + canvas.getX() + ", " + canvas.getY() + "]");
 		canvas.fitFrame(getWidth(), getHeight());
+		polygon.updateSize(canvas.getWidth(), canvas.getHeight());
 		drawCanvas();
 	}
 	
@@ -88,6 +88,8 @@ public class Main extends GraphicsProgram {
 		System.out.println("canvas.getBottomLeft()=" + canvas.getBottomLeft());
 		turtle.penDown();
 		drawRectangle(canvas.getWidth(), canvas.getHeight());
+		component.draw(turtle);
+		System.out.print("canvas location = [" + canvas.getX() + ", " + canvas.getY() + "]");
 	}
 
 	private void drawRectangle(double width, double height) {

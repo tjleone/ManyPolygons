@@ -16,13 +16,29 @@ public class QuadPolygon extends EvenPolygon {
 	 * resting on one of its sides.
 	 * 
 	 * @param n number of sides in polygon
+	 */
+	public QuadPolygon(int n) {
+		super(n);
+		assert n % 4 == 0;
+	}
+
+	/**
+	 * For all calculations, we assume we are creating or working with
+	 * a bounding box that is the width and height of a polygon that is
+	 * resting on one of its sides.
+	 * 
+	 * @param n number of sides in polygon
 	 * @param maxWidth max width allowed for bounding box
 	 * @param maxHeight max height allowed for bounding box
 	 */
 	public QuadPolygon(int n, double maxWidth, double maxHeight) {
 		super(n, maxWidth, maxHeight);
 		assert n % 4 == 0;
-		setAspectCalculator(new QuadAspectCalculator(n));
+	}
+
+	@Override
+	public AspectCalculator createAspectCalculator() {
+		return new QuadAspectCalculator(getNumSides());
 	}
 	
 	/**
