@@ -16,6 +16,7 @@ public class PProgram extends GraphicsProgram {
 	private GRectangle programRectangle = null;
 	private PAspectCalculator aspectCalculator = null;
 	private PIsotropicRectangle renderingBounds = null;
+	private PPolygon polygon = null;
 	private PRenderer renderer = null;
 
 	public void init() {
@@ -42,7 +43,8 @@ public class PProgram extends GraphicsProgram {
 		aspectCalculator = PAspectCalculatorFactory.calculator(parameters.getNumPolySides());
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
 		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio());
-		renderer = new PRenderer(turtle, renderingBounds);
+		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), renderingBounds.getWidth(), renderingBounds.getHeight());
+		renderer = new PPolygonRenderer(turtle, renderingBounds, polygon);
 	}
 	
 	private void initTurtle() {
