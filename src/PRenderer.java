@@ -15,10 +15,15 @@ public class PRenderer {
 		turtle.penUp();
 		turtle.setLocation(bounds.getBottomLeft());
 		turtle.penDown();
+		drawPicture();
+		turtle.penUp();
+	}
+	
+	public void drawPicture() {
 		drawBounds();
 	}
 	
-	private void drawBounds() {
+	public void drawBounds() {
 		for(int i=0; i < 2; i++) {
 			turtle.forward(bounds.getWidth());
 			turtle.left(90);

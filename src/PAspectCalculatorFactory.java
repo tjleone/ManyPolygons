@@ -12,5 +12,9 @@ public class PAspectCalculatorFactory {
 		return new POddAspectCalculator(n);
 		
 	}
+	
+	private PAspectCalculatorFactory() {
+		
+	}
 
 }
