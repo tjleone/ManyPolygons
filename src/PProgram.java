@@ -1,3 +1,5 @@
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,12 +15,14 @@ public class PProgram extends GraphicsProgram {
 	private GTurtle turtle;
 	private GRectangle programRectangle = null;
 	private PIsotropicRectangle renderingBounds = null;
+	private PRenderer renderer = null;
 
 	public void init() {
 		initLogging();
 		LOGGER.log(Level.FINEST, "Logging initialized in Main");
 		initParameters();
-		initTurtle();
+		initRenderingInfo();
+		initListeners();
 	}
 	
 	private void initLogging() {
@@ -30,6 +34,13 @@ public class PProgram extends GraphicsProgram {
 		parameters = new PParameters(2, 2, 7, 10, 0.2);
 	}
 	
+	private void initRenderingInfo() {
+		initTurtle();
+		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
+		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, 1.0);
+		renderer = new PRenderer(turtle, renderingBounds);
+	}
+	
 	private void initTurtle() {
 		turtle = new GTurtle();
 		turtle.hideTurtle();
@@ -37,16 +48,24 @@ public class PProgram extends GraphicsProgram {
 		add(turtle);
 	}
 	
-	private void initRenderingInfo() {
-		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, 1.0);
-		
+	private void initListeners() {
+		addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				update();
+			}
+		});
 	}
 	
 	private GRectangle getProgramRectangle() {
 		programRectangle.setLocation(0, 0);
 		programRectangle.setSize(getWidth(), getHeight());
 		return programRectangle;
+	}
+	
+	private void update() {
+		renderingBounds.fitFrame(getWidth(), getHeight());
+		renderer.render();
 	}
 
 	public void run() {
