@@ -7,16 +7,22 @@ import acm.graphics.GMath;
 public class POddPolygon extends PPolygon {
 
 	/**
-	 * For all calculations, we assume we are creating or working with
-	 * a bounding box that is the width and height of a polygon that is
-	 * resting on one of its sides.
+	 * For all calculations, we assume we are creating or working with a bounding
+	 * box that is the width and height of a polygon that is resting on one of its
+	 * sides.
 	 * 
-	 * @param n number of sides in polygon
-	 * @param maxWidth max width allowed for bounding box
-	 * @param maxHeight max height allowed for bounding box
+	 * It should always be the case that width/height is the proper aspect ratio
+	 * for the given number of sides. An aspect ratio calculator checks this in
+	 * the constructor.
+	 * 
+	 * This constructor should only be called for odd values of n
+	 * 
+	 * @param n         number of sides in polygon
+	 * @param width		width of bounding box
+	 * @param height	height of bounding box
 	 */
-	public POddPolygon(int n, double maxWidth, double maxHeight) {
-		super(n, maxWidth, maxHeight);
+	public POddPolygon(int n, double width, double height) {
+		super(n, width, height);
 		assert n % 2 == 1;
 	}
 	

@@ -1,5 +1,5 @@
 
-public class PEvenPolygon extends PPolygon {
+public class PQuadPolygon extends PEvenPolygon {
 
 	/**
 	 * For all calculations, we assume we are creating or working with a bounding
@@ -11,32 +11,26 @@ public class PEvenPolygon extends PPolygon {
 	 * the constructor.
 	 * 
 	 * This constructor should only be called directly for even values of n that 
-	 * are not multiples of 4. The case where n % 4 == 0 is handles by the 
-	 * PQuadPolygon subclass.
+	 * are multiples of 4.
 	 * 
 	 * @param n         number of sides in polygon
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
-	public PEvenPolygon(int n, double width, double height) {
+	public PQuadPolygon(int n, double width, double height) {
 		super(n, width, height);
-		assert n % 2 == 0;
+		assert n % 4 == 0;
 	}
 
+	/**
+	 * For polygons with n % 4 == 0, the width and height of 
+	 * the bounding box are both twice the apothem.
+	 * 
+	 * So we use the apothem method inherited from EvenPolygon
+	 * and apply radiusFromApothem to that value to get the radius.
+	 */
 	@Override
 	public double radius() {
-		assert getNumSides() % 4 != 0;
-		return getWidth() / 2.0;
+		return radiusFromApothem(getNumSides(), apothem());
 	}
-
-	@Override
-	public double apothem() {
-		return getHeight() / 2.0;
-	}
-
-	@Override
-	public double side() {
-		return sideFromRadius(getNumSides(), radius());
-	}
-
 }
