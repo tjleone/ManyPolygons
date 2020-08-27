@@ -3,45 +3,45 @@ import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
 @SuppressWarnings("serial")
-public class IsotropicRectangle extends GRectangle {
+public class PIsotropicRectangle extends GRectangle {
 	
 	private double scaleFactor;
 	private double aspectRatio;
 	private GPoint bottomLeft = new GPoint();
 
-	public IsotropicRectangle() {
+	public PIsotropicRectangle() {
 		this(0,0,0,0,1,1);
 	}
 
-	public IsotropicRectangle(GPoint pt) {
+	public PIsotropicRectangle(GPoint pt) {
 		this(pt.getX(), pt.getY(), 0, 0, 1, 1);
 	}
 
-	public IsotropicRectangle(GDimension size) {
+	public PIsotropicRectangle(GDimension size) {
 		this(0, 0, size.getWidth(), size.getHeight(), 1, 1);
 	}
 
-	public IsotropicRectangle(GRectangle r) {
+	public PIsotropicRectangle(GRectangle r) {
 		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), 1, 1);
 	}
 
-	public IsotropicRectangle(double width, double height) {
+	public PIsotropicRectangle(double width, double height) {
 		this(0, 0, width, height, 1, 1);
 	}
 
-	public IsotropicRectangle(GPoint pt, GDimension size) {
+	public PIsotropicRectangle(GPoint pt, GDimension size) {
 		this(pt.getX(), pt.getY(), size.getWidth(), size.getHeight(), 1, 1);
 	}
 
-	public IsotropicRectangle(double x, double y, double width, double height) {
+	public PIsotropicRectangle(double x, double y, double width, double height) {
 		this(x, y, width, height, 1, 1);
 	}
 
-	public IsotropicRectangle(GRectangle r, double scaleFactor, double aspectRatio) {
+	public PIsotropicRectangle(GRectangle r, double scaleFactor, double aspectRatio) {
 		this(r.getX(), r.getY(), r.getWidth(), r.getHeight(), scaleFactor, aspectRatio);
 	}
 	
-	public IsotropicRectangle(double x, double y, 
+	public PIsotropicRectangle(double x, double y, 
 			double width, double height, double scaleFactor, double aspectRatio) {
 		super(x, y, width, height);
 		assert x == 0 && y == 0;

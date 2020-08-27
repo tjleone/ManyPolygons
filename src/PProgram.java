@@ -12,7 +12,7 @@ public class PProgram extends GraphicsProgram {
 	private PParameters parameters;
 	private GTurtle turtle;
 	private GRectangle programRectangle = null;
-	private IsotropicRectangle renderingBounds = null;
+	private PIsotropicRectangle renderingBounds = null;
 
 	public void init() {
 		initLogging();
@@ -39,7 +39,7 @@ public class PProgram extends GraphicsProgram {
 	
 	private void initRenderingInfo() {
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new IsotropicRectangle(getProgramRectangle(), 0.9, 1.0);
+		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, 1.0);
 		
 	}
 	
