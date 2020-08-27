@@ -55,6 +55,11 @@ public abstract class PPolygon {
 		return getWidth() / 2 - side() / 2;
 	}
 
+	public double getExternalAngle() {
+		assert getNumSides() != 0;
+		return 360.0 / getNumSides();
+	}
+
 	public abstract double radius();
 
 	public double radiusFromSide(int n, double side) {

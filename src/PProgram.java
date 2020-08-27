@@ -71,6 +71,7 @@ public class PProgram extends GraphicsProgram {
 	
 	private void update() {
 		renderingBounds.fitFrame(getWidth(), getHeight());
+		polygon.setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
 		renderer.render();
 	}
 

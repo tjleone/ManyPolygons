@@ -32,4 +32,20 @@ public class PRenderer {
 		}
 	}
 
+	public GTurtle getTurtle() {
+		return turtle;
+	}
+
+	public void setTurtle(GTurtle turtle) {
+		this.turtle = turtle;
+	}
+
+	public PIsotropicRectangle getBounds() {
+		return bounds;
+	}
+
+	public void setBounds(PIsotropicRectangle bounds) {
+		this.bounds = bounds;
+	}
+
 }
