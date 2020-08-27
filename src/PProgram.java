@@ -14,6 +14,7 @@ public class PProgram extends GraphicsProgram {
 	private PParameters parameters;
 	private GTurtle turtle;
 	private GRectangle programRectangle = null;
+	private PAspectCalculator aspectCalculator = null;
 	private PIsotropicRectangle renderingBounds = null;
 	private PRenderer renderer = null;
 
@@ -21,6 +22,7 @@ public class PProgram extends GraphicsProgram {
 		initLogging();
 		LOGGER.log(Level.FINEST, "Logging initialized in Main");
 		initParameters();
+		initTurtle();
 		initRenderingInfo();
 		initListeners();
 	}
@@ -35,9 +37,11 @@ public class PProgram extends GraphicsProgram {
 	}
 	
 	private void initRenderingInfo() {
-		initTurtle();
+		assert turtle != null;
+		assert parameters != null;
+		aspectCalculator = PAspectCalculatorFactory.calculator(parameters.getNumPolySides());
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, 1.0);
+		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio());
 		renderer = new PRenderer(turtle, renderingBounds);
 	}
 	
