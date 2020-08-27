@@ -1,10 +1,14 @@
 import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @SuppressWarnings("serial")
 public class PIsotropicRectangle extends GRectangle {
-	
+
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PIsotropicRectangle.class.getName());
+
 	private double scaleFactor;
 	private double aspectRatio;
 	private GPoint bottomLeft = new GPoint();
@@ -49,9 +53,8 @@ public class PIsotropicRectangle extends GRectangle {
 		this.scaleFactor = scaleFactor;
 		this.aspectRatio = aspectRatio;
 		init(scaleFactor, aspectRatio);
-		System.out.println("ctor: getSize()=" + getSize());
-		System.out.println("ctor: getLocation()=" + getLocation());
-		System.out.println();
+		LOGGER.log(Level.FINEST, "ctor: getLocation()={0}", getLocation());
+		LOGGER.log(Level.FINEST, "ctor: getSize()={0}", getSize());
 	}
 
 	private void init(double sf, double ar) {
@@ -72,9 +75,8 @@ public class PIsotropicRectangle extends GRectangle {
 		double dx = (newWidth - getWidth()) / 2;
 		double dy = (newHeight - getHeight()) / 2;
 		grow(dx, dy);
-		System.out.println("resize: getSize()=" + getSize());
-		System.out.println("resize: getLocation()=" + getLocation());
-		System.out.println();
+		LOGGER.log(Level.FINEST, "resize: getLocation()={0}", getLocation());
+		LOGGER.log(Level.FINEST, "resize: getSize()={0}", getSize());
 	}
 	
 	public void fitFrame(double width, double height) {
