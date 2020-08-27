@@ -1,12 +1,12 @@
 
-public class ModelParameters {
+public class PParameters {
 	private int rows;
 	private int columns;
 	private int numPolySides;
 	private int spiralDepth;
 	private double displacementPortion;
 
-	public ModelParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion) {
+	public PParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion) {
 		this.rows = rows;
 		this.columns = columns;
 		this.numPolySides = numPolySides;

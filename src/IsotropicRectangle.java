@@ -2,6 +2,7 @@ import acm.graphics.GDimension;
 import acm.graphics.GPoint;
 import acm.graphics.GRectangle;
 
+@SuppressWarnings("serial")
 public class IsotropicRectangle extends GRectangle {
 	
 	private double scaleFactor;
