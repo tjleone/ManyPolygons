@@ -1,3 +1,6 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import acm.graphics.GMath;
 
 /**
@@ -5,6 +8,8 @@ import acm.graphics.GMath;
  *
  */
 public class POddPolygon extends PPolygon {
+	
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygonRenderer.class.getName());
 
 	/**
 	 * For all calculations, we assume we are creating or working with a bounding
@@ -36,6 +41,7 @@ public class POddPolygon extends PPolygon {
 	 * the corresponding radii span the width of the bounding box.
 	 * 
 	 * Half of this angle is useful in calculations because half of 
+	 * e
 	 * the width angle sits inside a right triangle with the radius as a
 	 * hypotenuse and a leg that is one half the width of the bounding
 	 * box.
@@ -61,8 +67,8 @@ public class POddPolygon extends PPolygon {
 	 */
 	@Override
 	public double radius() {
-		System.out.println("POddPolygon.radius: n=" + getNumSides() + ", width=" + getWidth() + ", height=" + getHeight());
-		System.out.println("POddPolygon.radius: width/height=" + getWidth()/getHeight());
+		LOGGER.log(Level.FINEST, "POddPolygon.radius: n=" + getNumSides() + ", width=" + getWidth() + ", height=" + getHeight());
+		LOGGER.log(Level.FINEST, "POddPolygon.radius: width/height=" + getWidth()/getHeight());
 		return getWidth() / (2 * GMath.sinDegrees(halfWidthAngle(getNumSides())));
 	}
 
@@ -73,11 +79,11 @@ public class POddPolygon extends PPolygon {
 
 	@Override
 	public double side() {
-		System.out.println("POddPolygon.side: n=" + getNumSides() + ", width=" + getWidth() + ", height=" + getHeight());
-		System.out.println("POddPolygon.side: width/height=" + getWidth()/getHeight());
+		LOGGER.log(Level.FINEST, "POddPolygon.side: n=" + getNumSides() + ", width=" + getWidth() + ", height=" + getHeight());
+		LOGGER.log(Level.FINEST, "POddPolygon.side: width/height=" + getWidth()/getHeight());
 		double sideLength = sideFromRadius(getNumSides(), radius());
-		System.out.println("POddPolygon.side:sideLength=" + sideLength);
-		System.out.println();
+		LOGGER.log(Level.FINEST, "POddPolygon.side: radius()=" + radius());
+		LOGGER.log(Level.FINEST, "POddPolygon.side: sideLength=" + sideLength);
 		return sideFromRadius(getNumSides(), radius());
 	}
 

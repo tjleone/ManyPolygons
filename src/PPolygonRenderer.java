@@ -62,9 +62,9 @@ public class PPolygonRenderer extends PRenderer {
 	}
 
 	private void drawPolygon(GTurtle t, double sideLength) {
-		System.out.println("polygon.getNumSides()=" + polygon.getNumSides());
-		System.out.println("polygon.getExternalAngle()=" + polygon.getExternalAngle());
-		System.out.println("sideLength=" + sideLength);
+		LOGGER.log(Level.FINEST, "polygon.getNumSides()=" + polygon.getNumSides());
+		LOGGER.log(Level.FINEST, "polygon.getExternalAngle()=" + polygon.getExternalAngle());
+		LOGGER.log(Level.FINEST, "POddPolygon.side: sideLength=" + sideLength);
 		for(int i=0; i < polygon.getNumSides(); i++) {
 			t.forward(sideLength);
 			t.left(polygon.getExternalAngle());

@@ -34,7 +34,9 @@ public class PProgram extends GraphicsProgram {
 	
 	private void initParameters() {
 		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
+//		parameters = new PParameters(2, 2, 4, 10, 0.2);
 		parameters = new PParameters(2, 2, 7, 10, 0.2);
+//		parameters = new PParameters(2, 2, 8, 10, 0.2);
 	}
 	
 	private void initRenderingInfo() {

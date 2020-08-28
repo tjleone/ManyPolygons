@@ -1,6 +1,11 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import acm.graphics.GMath;
 
 public abstract class PPolygon {
+	
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygon.class.getName());
 
 	private int numSides = Integer.MIN_VALUE;
 	private double width = Double.MIN_VALUE;
@@ -25,6 +30,11 @@ public abstract class PPolygon {
 		assert width != Double.MIN_VALUE && width != 0;
 		assert height != Double.MIN_VALUE && height != 0;
 		double aspectRatio = PAspectCalculatorFactory.calculator(n).aspectRatio();
+		LOGGER.log(Level.FINEST, "POddPolygon.ctor: n=" + n);
+		LOGGER.log(Level.FINEST, "POddPolygon.ctor: width=" + width);
+		LOGGER.log(Level.FINEST, "POddPolygon.ctor: height=" + height);
+		LOGGER.log(Level.FINEST, "POddPolygon.ctor: width/height=" + width/height);
+		LOGGER.log(Level.FINEST, "POddPolygon.ctor: aspectRatio=" + aspectRatio);
 		assert width/height == aspectRatio;
 		this.width = width;
 		this.height = height;
