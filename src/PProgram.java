@@ -17,6 +17,7 @@ public class PProgram extends GraphicsProgram {
 	private PAspectCalculator aspectCalculator = null;
 	private PIsotropicRectangle renderingBounds = null;
 	private PPolygon polygon = null;
+	private PSpiral spiral = null;
 	private PRenderer renderer = null;
 
 	public void init() {
@@ -37,6 +38,7 @@ public class PProgram extends GraphicsProgram {
 //		parameters = new PParameters(2, 2, 4, 10, 0.2);
 		parameters = new PParameters(2, 2, 7, 10, 0.2);
 //		parameters = new PParameters(2, 2, 8, 10, 0.2);
+		spiral = new PSpiral(parameters);
 	}
 	
 	private void initRenderingInfo() {
@@ -46,7 +48,7 @@ public class PProgram extends GraphicsProgram {
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
 		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio());
 		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), renderingBounds.getWidth(), renderingBounds.getHeight());
-		renderer = new PPolygonRenderer(turtle, renderingBounds, polygon);
+		renderer = new PPolygonRenderer(turtle, renderingBounds, polygon, spiral);
 	}
 	
 	private void initTurtle() {

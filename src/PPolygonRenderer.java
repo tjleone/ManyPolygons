@@ -9,10 +9,16 @@ public class PPolygonRenderer extends PRenderer {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygonRenderer.class.getName());
 	private PPolygon polygon;
+	private PSpiral spiral;
 
 	public PPolygonRenderer(GTurtle turtle, PIsotropicRectangle bounds, PPolygon polygon) {
+		this(turtle, bounds, polygon, null);
+	}
+
+	public PPolygonRenderer(GTurtle turtle, PIsotropicRectangle bounds, PPolygon polygon, PSpiral spiral) {
 		super(turtle, bounds);
 		this.polygon = polygon;
+		this.spiral = spiral;
 	}
 	
 	public void drawPicture() {
@@ -34,8 +40,8 @@ public class PPolygonRenderer extends PRenderer {
 		drawBounds();
 		t.forward(polygon.getDeltaX());
 
-//		drawSpiral(t, polygon.getStartSideLength(), polygon.getSpiralDepth());
-		drawPolygon(t, polygon.side());		
+		drawSpiral(t, polygon.side(), spiral.getSpiralDepth());
+//		drawPolygon(t, polygon.side());		
 		t.penUp();
 
 		t.setLocation(pt);
@@ -51,14 +57,14 @@ public class PPolygonRenderer extends PRenderer {
 	}
 	
 	private void drawSpiral(GTurtle t, double sideLength, int spiralDepth) {
-//		LOGGER.log(Level.FINEST, "drawSpiral (on entry) sideLength={0}", sideLength);
-//		if (spiralDepth == 0) {
-//			return;
-//		}
-//		drawPolygon(t, sideLength);
-//		t.forward(polygon.calculateSpiralDisplacement(sideLength));
-//		t.left(polygon.getSpiralAngle());
-//		drawSpiral(t, polygon.calculateNextSideLength(sideLength), spiralDepth-1);
+		LOGGER.log(Level.FINEST, "drawSpiral (on entry) sideLength={0}", sideLength);
+		if (spiralDepth == 0) {
+			return;
+		}
+		drawPolygon(t, sideLength);
+		t.forward(spiral.calculateSpiralDisplacement(sideLength));
+		t.left(spiral.getSpiralAngle());
+		drawSpiral(t, spiral.calculateNextSideLength(sideLength), spiralDepth-1);
 	}
 
 	private void drawPolygon(GTurtle t, double sideLength) {
