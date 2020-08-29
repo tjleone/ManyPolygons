@@ -32,7 +32,7 @@ public class PSpiral {
 	}
 	
 	public double getExternalAngle() {
-		return 360 / parameters.getNumPolySides();
+		return 360.0 / parameters.getNumPolySides();
 	}
 	
 	public double getInternalAngle() {
