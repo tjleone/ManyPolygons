@@ -22,7 +22,6 @@ public class PSpiral {
 	}
 
 	public double getSpiralAngle() {
-//		return 9.597912330850274;
 		double q = getParameters().getDisplacementPortion();
 	    double angle = PMath.asinDegrees(q*GMath.sinDegrees(getInternalAngle())/getScaleFactor());
 	    if (getExternalAngle() > 90 && q > 0.5) {
