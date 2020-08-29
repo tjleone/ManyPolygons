@@ -1,6 +1,11 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import acm.graphics.GMath;
 
 public class PSpiral {
+	
+	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PSpiral.class.getName());
 
 	private PParameters parameters;
 	
@@ -20,20 +25,29 @@ public class PSpiral {
 //		return 9.597912330850274;
 		double q = getParameters().getDisplacementPortion();
 	    double angle = PMath.asinDegrees(q*GMath.sinDegrees(getInternalAngle())/getScaleFactor());
-	    if (getParameters().getNumPolySides() == 3 && q > 0.5) {
-	    	return 90 - angle;
+	    if (getExternalAngle() > 90 && q > 0.5) {
+	    	return 180 - angle;
 	    }
 	    return angle;
 	}
 	
+	public double getExternalAngle() {
+		return 360 / parameters.getNumPolySides();
+	}
+	
 	public double getInternalAngle() {
-		return 180 - 360 / parameters.getNumPolySides();
+		return 180 - getExternalAngle();
 	}
 	
 	public double getScaleFactor() {
 		double q = getParameters().getDisplacementPortion();
 		double p = 1 - q;
-//		return 0.9378255363311423;
+		LOGGER.log(Level.FINEST, "q=" + q);
+		LOGGER.log(Level.FINEST, "p=" + p);
+		LOGGER.log(Level.FINEST, "internal angle = " + getInternalAngle());
+		LOGGER.log(Level.FINEST, "GMath.cosDegrees(getInternalAngle()" + GMath.cosDegrees(getInternalAngle()));
+		double result = Math.sqrt(p*p + q*q - 2*p*q*GMath.cosDegrees(getInternalAngle()));
+		LOGGER.log(Level.FINEST, "getScaleFactor returns " + result);
 		return Math.sqrt(p*p + q*q - 2*p*q*GMath.cosDegrees(getInternalAngle()));
 	}
 	

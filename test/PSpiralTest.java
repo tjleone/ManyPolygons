@@ -11,7 +11,10 @@ import org.junit.jupiter.api.Test;
 
 class PSpiralTest {
 
-	static ArrayList<PSpiral> spirals = new ArrayList<>();
+	static final double EPSILON = 0.00000000000001; // doubles within EPSILON of each other are considered equal
+	static final double SIDE_LENGTH = 173.20508075688767;
+	static ArrayList<PSpiral> spirals0_2 = new ArrayList<>();
+	static ArrayList<PSpiral> spirals0_8 = new ArrayList<>();
 
 //	public ExpectedSpiralValues(
 //	int numSides, 
@@ -21,13 +24,16 @@ class PSpiralTest {
 //	double spiralDisplacement,
 //	double nextSideLength, 
 //	double spiralDepth)
-	static List<ExpectedSpiralValues> expectedValues = List.of(new ExpectedSpiralValues(3, 13.897886248013984,
-			59.99999999999999, 41.3165741804195, 1984.7840235184508, 7156.2405675175, 114.59155902616465));
+	static List<ExpectedSpiralValues> expectedValues0_2 = List.of(new ExpectedSpiralValues(3, 13.897886248013984,
+			59.99999999999999, 0.7211102550927979, 34.641016151377535, 124.89995996796793, 2));
+	static List<ExpectedSpiralValues> expectedValues0_8 = List.of(new ExpectedSpiralValues(3, 106.10211375198602,
+			59.99999999999999, 0.7211102550927979, 138.56406460551014, 124.89995996796793, 2));
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		for (int i = 0; i < 8; i++) {
-			spirals.add(new PSpiral(new PParameters(2, 2, i+3, 2, 0.2)));
+			spirals0_2.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.2)));
+			spirals0_8.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.8)));
 		}
 	}
 
@@ -45,40 +51,62 @@ class PSpiralTest {
 
 	@Test
 	final void testGetNumSides() {
-		for (int i = 0; i < expectedValues.size(); i++) {
-			assertEquals(i+3, expectedValues.get(i).getNumSides());
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(i + 3, expectedValues0_2.get(i).getNumSides());
 		}
 	}
-//
-//	@Test
-//	final void testGetSpiralAngle() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	final void testGetInternalAngle() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	final void testGetScaleFactor() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	final void testCalculateSpiralDisplacement() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	final void testCalculateNextSideLength() {
-//		fail("Not yet implemented");
-//	}
-//
-//	@Test
-//	final void testGetSpiralDepth() {
-//		fail("Not yet implemented");
-//	}
+
+	@Test
+	final void testGetSpiralAngle() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getSpiralAngle(), spirals0_2.get(i).getSpiralAngle());
+			assertEquals(expectedValues0_8.get(i).getSpiralAngle(), spirals0_8.get(i).getSpiralAngle());
+		}
+	}
+
+	@Test
+	final void testGetInternalAngle() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getInternalAngle(), spirals0_2.get(i).getInternalAngle(), EPSILON);
+			assertEquals(expectedValues0_8.get(i).getInternalAngle(), spirals0_8.get(i).getInternalAngle(), EPSILON);
+		}
+	}
+
+	@Test
+	final void testGetScaleFactor() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getScaleFactor(), spirals0_2.get(i).getScaleFactor(), EPSILON);
+			assertEquals(expectedValues0_8.get(i).getScaleFactor(), spirals0_8.get(i).getScaleFactor(), EPSILON);
+		}
+	}
+
+	@Test
+	final void testCalculateSpiralDisplacement() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getSpiralDisplacement(),
+					spirals0_2.get(i).calculateSpiralDisplacement(SIDE_LENGTH), EPSILON);
+			assertEquals(expectedValues0_8.get(i).getSpiralDisplacement(),
+					spirals0_8.get(i).calculateSpiralDisplacement(SIDE_LENGTH), EPSILON);
+		}
+	}
+
+	@Test
+	final void testCalculateNextSideLength() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getNextSideLength(),
+					spirals0_2.get(i).calculateNextSideLength(SIDE_LENGTH), EPSILON);
+			assertEquals(expectedValues0_8.get(i).getNextSideLength(),
+					spirals0_8.get(i).calculateNextSideLength(SIDE_LENGTH), EPSILON);
+		}
+	}
+
+	@Test
+	final void testGetSpiralDepth() {
+		for (int i = 0; i < expectedValues0_2.size(); i++) {
+			assertEquals(expectedValues0_2.get(i).getSpiralDepth(), spirals0_2.get(i).getSpiralDepth(), EPSILON);
+			assertEquals(expectedValues0_8.get(i).getSpiralDepth(), spirals0_8.get(i).getSpiralDepth(), EPSILON);
+		}
+	}
 
 }
 
@@ -107,7 +135,7 @@ class ExpectedSpiralValues {
 	public int getNumSides() {
 		return numSides;
 	}
-	
+
 	public double getSpiralAngle() {
 		return spiralAngle;
 	}
