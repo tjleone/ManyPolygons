@@ -12,18 +12,9 @@ import org.junit.jupiter.api.Test;
 class PSpiralTest {
 
 	static final double EPSILON = 0.00000000000005; // doubles within EPSILON of each other are considered equal
-	static final double SIDE_LENGTH = 173.20508075688767;
 	static ArrayList<PSpiral> spirals0_2 = new ArrayList<>();
 	static ArrayList<PSpiral> spirals0_8 = new ArrayList<>();
-
-//	public ExpectedSpiralValues(
-//	int numSides, 
-//	double spiralAngle, 
-//	double internalAngle, 
-//	double scaleFactor, 
-//	double spiralDisplacement,
-//	double nextSideLength, 
-//	double spiralDepth)
+	
 	static List<ExpectedSpiralValues> expectedValues0_2 = List.of(
 			new ExpectedSpiralValues(3, 13.897886248013984, 59.99999999999999, 0.7211102550927979, 34.641016151377535,
 					124.89995996796793, 2),
