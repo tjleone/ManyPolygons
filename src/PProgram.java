@@ -35,8 +35,10 @@ public class PProgram extends GraphicsProgram {
 	
 	private void initParameters() {
 		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
+		parameters = new PParameters(2, 2, 3, 10, 0.2);
+//		parameters = new PParameters(2, 2, 3, 10, 0.8);
 //		parameters = new PParameters(2, 2, 4, 10, 0.2);
-		parameters = new PParameters(2, 2, 7, 10, 0.2);
+//		parameters = new PParameters(2, 2, 7, 10, 0.2);
 //		parameters = new PParameters(2, 2, 8, 10, 0.2);
 		spiral = new PSpiral(parameters);
 	}
@@ -46,7 +48,7 @@ public class PProgram extends GraphicsProgram {
 		assert parameters != null;
 		aspectCalculator = PAspectCalculatorFactory.calculator(parameters.getNumPolySides());
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new PIsotropicRectangle(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio());
+		renderingBounds =  new PIsotropicGrid(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio(), 1, 1);
 		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), renderingBounds.getWidth(), renderingBounds.getHeight());
 		renderer = new PPolygonRenderer(turtle, renderingBounds, polygon, spiral);
 	}
