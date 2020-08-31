@@ -24,10 +24,14 @@ public class PRenderer {
 	}
 	
 	public void drawBounds() {
+		drawRectangle(bounds.getWidth(), bounds.getHeight());
+	}
+	
+	public void drawRectangle(double width, double height) {
 		for(int i=0; i < 2; i++) {
-			turtle.forward(bounds.getWidth());
+			turtle.forward(width);
 			turtle.left(90);
-			turtle.forward(bounds.getHeight());
+			turtle.forward(height);
 			turtle.left(90);
 		}
 	}

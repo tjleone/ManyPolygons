@@ -12,6 +12,7 @@ public class PIsotropicRectangle extends GRectangle {
 	private double scaleFactor;
 	private double aspectRatio;
 	private GPoint bottomLeft = new GPoint();
+	private GDimension newSize = new GDimension();
 
 	public PIsotropicRectangle() {
 		this(0,0,0,0,1,1);
@@ -58,6 +59,11 @@ public class PIsotropicRectangle extends GRectangle {
 	}
 
 	private void init(double sf, double ar) {
+		resize(recalculateSize(sf, ar));
+	}
+
+	public GDimension recalculateSize(double sf, double ar) {
+		
 		double h = 1;
 		
 		while (h*ar < getWidth() && h < getHeight()) {
@@ -68,10 +74,16 @@ public class PIsotropicRectangle extends GRectangle {
 			h--;
 		}
 		
-		resize(sf*h*ar, sf*h);
+		newSize.setSize(sf*h*ar, sf*h);
+		
+		return newSize;
 	}
 	
-	private void resize(double newWidth, double newHeight) {
+	public void resize(GDimension size) {
+		resize(size.getWidth(), size.getHeight());
+	}
+		
+		public void resize(double newWidth, double newHeight) {
 		double dx = (newWidth - getWidth()) / 2;
 		double dy = (newHeight - getHeight()) / 2;
 		grow(dx, dy);
@@ -88,6 +100,26 @@ public class PIsotropicRectangle extends GRectangle {
 	public GPoint getBottomLeft() {
 		bottomLeft.setLocation(getX(), getY()+getHeight());
 		return bottomLeft;
+	}
+
+	public double getScaleFactor() {
+		return scaleFactor;
+	}
+
+	public void setScaleFactor(double scaleFactor) {
+		this.scaleFactor = scaleFactor;
+	}
+
+	public double getAspectRatio() {
+		return aspectRatio;
+	}
+
+	public void setAspectRatio(double aspectRatio) {
+		this.aspectRatio = aspectRatio;
+	}
+
+	public void setBottomLeft(GPoint bottomLeft) {
+		this.bottomLeft = bottomLeft;
 	}
 
 }

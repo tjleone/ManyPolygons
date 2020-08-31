@@ -15,10 +15,11 @@ public class PProgram extends GraphicsProgram {
 	private GTurtle turtle;
 	private GRectangle programRectangle = null;
 	private PAspectCalculator aspectCalculator = null;
-	private PIsotropicRectangle renderingBounds = null;
+	private PIsotropicGrid renderingBounds = null;
 	private PPolygon polygon = null;
 	private PSpiral spiral = null;
-	private PRenderer renderer = null;
+	private PRenderer polygonRenderer = null;
+	private PGridRenderer gridRenderer = null;
 
 	public void init() {
 		initLogging();
@@ -35,9 +36,9 @@ public class PProgram extends GraphicsProgram {
 	
 	private void initParameters() {
 		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
-		parameters = new PParameters(2, 2, 3, 10, 0.2);
+//		parameters = new PParameters(2, 2, 3, 10, 0.2);
 //		parameters = new PParameters(2, 2, 3, 10, 0.8);
-//		parameters = new PParameters(2, 2, 4, 10, 0.2);
+		parameters = new PParameters(2, 2, 4, 10, 0.2);
 //		parameters = new PParameters(2, 2, 7, 10, 0.2);
 //		parameters = new PParameters(2, 2, 8, 10, 0.2);
 		spiral = new PSpiral(parameters);
@@ -48,9 +49,10 @@ public class PProgram extends GraphicsProgram {
 		assert parameters != null;
 		aspectCalculator = PAspectCalculatorFactory.calculator(parameters.getNumPolySides());
 		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new PIsotropicGrid(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio(), 1, 1);
+		renderingBounds =  new PIsotropicGrid(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio(), 2, 2);
 		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), renderingBounds.getWidth(), renderingBounds.getHeight());
-		renderer = new PPolygonRenderer(turtle, renderingBounds, polygon, spiral);
+		polygonRenderer = new PPolygonRenderer(turtle, renderingBounds, polygon, spiral);
+		gridRenderer = new PGridRenderer(turtle, renderingBounds, polygonRenderer);
 	}
 	
 	private void initTurtle() {
@@ -78,7 +80,7 @@ public class PProgram extends GraphicsProgram {
 	private void update() {
 		renderingBounds.fitFrame(getWidth(), getHeight());
 		polygon.setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
-		renderer.render();
+		polygonRenderer.render();
 	}
 
 	public void run() {

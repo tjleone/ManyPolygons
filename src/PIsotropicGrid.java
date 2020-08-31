@@ -6,6 +6,7 @@ public class PIsotropicGrid extends PIsotropicRectangle {
 	
 	private int rows;
 	private int cols;
+	PIsotropicRectangle cell = null;
 
 	public PIsotropicGrid() {
 		super(0,0,0,0,1,1);
@@ -60,10 +61,38 @@ public class PIsotropicGrid extends PIsotropicRectangle {
 		super(x, y, width, height, scaleFactor, aspectRatio);
 		init(rows, cols);
 	}
+
+//	private void init(double sf, double ar) {
+//		resize(recalculateSize(sf, ar));
+//	}
 	
 	private void init(int rows, int cols) {
 		this.rows = rows;
 		this.cols = cols;
+		cell = new PIsotropicRectangle(0, 0, getWidth()/cols, getHeight()/rows, getScaleFactor(), getAspectRatio());
+	}
+	
+	public GDimension getCellSize() {
+		assert cell != null;
+		return cell.getSize();
+	}
+	
+	public double getCellWidth() {
+		assert cell != null;
+		return cell.getWidth();
+	}
+	
+	public double getCellHeight() {
+		assert cell != null;
+		return cell.getHeight();
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public int getCols() {
+		return cols;
 	}
 
 }
