@@ -14,13 +14,9 @@ public class PProgram extends GraphicsProgram {
 	private PParameters parameters;
 	private GTurtle turtle;
 	private GRectangle programRectangle = null;
-	private PAspectCalculator aspectCalculator = null;
+	//	private PIsotropicGrid renderingBounds = null;
 	private PIsotropicGrid renderingBounds = null;
-	private PPolygon polygon = null;
-	private PSpiral spiral = null;
-	private PRenderer polygonRenderer = null;
-	private PGridRenderer gridRenderer = null;
-
+	
 	public void init() {
 		initLogging();
 		LOGGER.log(Level.FINEST, "Logging initialized in Main");
@@ -36,23 +32,19 @@ public class PProgram extends GraphicsProgram {
 	
 	private void initParameters() {
 		// int rows, int columns, int numPolySides, int polysInSpiral, double displacementPortion
-//		parameters = new PParameters(2, 2, 3, 10, 0.2);
-//		parameters = new PParameters(2, 2, 3, 10, 0.8);
-		parameters = new PParameters(2, 2, 4, 10, 0.2);
-//		parameters = new PParameters(2, 2, 7, 10, 0.2);
-//		parameters = new PParameters(2, 2, 8, 10, 0.2);
-		spiral = new PSpiral(parameters);
+//		parameters = new PParameters(2, 2, 3, 10, 0.2, 0.9);
+//		parameters = new PParameters(2, 2, 3, 10, 0.8, 0.9);
+//		parameters = new PParameters(2, 2, 4, 10, 0.2, 0.9);
+		parameters = new PParameters(2, 2, 7, 10, 0.2, 0.9);
+//		parameters = new PParameters(2, 2, 8, 10, 0.2, 0.9);
 	}
 	
 	private void initRenderingInfo() {
 		assert turtle != null;
 		assert parameters != null;
-		aspectCalculator = PAspectCalculatorFactory.calculator(parameters.getNumPolySides());
-		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
-		renderingBounds =  new PIsotropicGrid(getProgramRectangle(), 0.9, aspectCalculator.aspectRatio(), 2, 2);
-		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), renderingBounds.getWidth(), renderingBounds.getHeight());
-		polygonRenderer = new PPolygonRenderer(turtle, renderingBounds, polygon, spiral);
-		gridRenderer = new PGridRenderer(turtle, renderingBounds, polygonRenderer);
+//		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
+		renderingBounds =  new PIsotropicGrid(getSize(), parameters);
+		renderingBounds.getRenderer(turtle);
 	}
 	
 	private void initTurtle() {
@@ -79,8 +71,8 @@ public class PProgram extends GraphicsProgram {
 	
 	private void update() {
 		renderingBounds.fitFrame(getWidth(), getHeight());
-		polygon.setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
-		polygonRenderer.render();
+		renderingBounds.getPolygon().setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
+		renderingBounds.getRenderer(turtle).render();
 	}
 
 	public void run() {

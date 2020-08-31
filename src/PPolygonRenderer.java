@@ -11,14 +11,10 @@ public class PPolygonRenderer extends PRenderer {
 	private PPolygon polygon;
 	private PSpiral spiral;
 
-	public PPolygonRenderer(GTurtle turtle, PIsotropicRectangle bounds, PPolygon polygon) {
-		this(turtle, bounds, polygon, null);
-	}
-
-	public PPolygonRenderer(GTurtle turtle, PIsotropicRectangle bounds, PPolygon polygon, PSpiral spiral) {
+	public PPolygonRenderer(GTurtle turtle, PIsotropicPolygon bounds) {
 		super(turtle, bounds);
-		this.polygon = polygon;
-		this.spiral = spiral;
+		this.polygon = bounds.getPolygon();
+		this.spiral = bounds.getSpiral();
 	}
 	
 	public void drawPicture() {

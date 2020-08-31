@@ -55,8 +55,8 @@ class PSpiralTest {
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		for (int i = 0; i < 8; i++) {
-			spirals0_2.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.2)));
-			spirals0_8.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.8)));
+			spirals0_2.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.2, 0.9)));
+			spirals0_8.add(new PSpiral(new PParameters(1, 1, i + 3, 2, 0.8, 0.9)));
 		}
 	}
 

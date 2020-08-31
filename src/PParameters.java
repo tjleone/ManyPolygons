@@ -5,13 +5,15 @@ public class PParameters {
 	private int numPolySides;
 	private int spiralDepth;
 	private double displacementPortion;
+	private double scaleFactor;
 
-	public PParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion) {
+	public PParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion, double scaleFactor) {
 		this.rows = rows;
 		this.columns = columns;
 		this.numPolySides = numPolySides;
 		this.spiralDepth = spiralDepth;
 		this.displacementPortion = displacementPortion;
+		this.scaleFactor = scaleFactor;
 	}
 
 	public int getRows() {
@@ -53,4 +55,13 @@ public class PParameters {
 	public void setDisplacementPortion(double displacementPortion) {
 		this.displacementPortion = displacementPortion;
 	}
+
+	public double getScaleFactor() {
+		return scaleFactor;
+	}
+
+	public void setScaleFactor(double scaleFactor) {
+		this.scaleFactor = scaleFactor;
+	}
+
 }
