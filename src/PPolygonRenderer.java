@@ -8,11 +8,13 @@ import acm.graphics.GTurtle;
 public class PPolygonRenderer extends PRenderer {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygonRenderer.class.getName());
+	private PTurtleState turtleState;
 	private PPolygon polygon;
 	private PSpiral spiral;
 
 	public PPolygonRenderer(GTurtle turtle, PIsotropicPolygon bounds) {
 		super(turtle, bounds);
+		this.turtleState = new PTurtleState();
 		this.polygon = bounds.getPolygon();
 		this.spiral = bounds.getSpiral();
 	}
@@ -27,27 +29,16 @@ public class PPolygonRenderer extends PRenderer {
 		LOGGER.log(Level.FINEST, "draw (on entry) t.getLocation(): {0}", t.getLocation());
 		LOGGER.log(Level.FINEST, "draw (on entry) t.getDirection(): {0}", t.getDirection() % 360);
 		LOGGER.log(Level.FINEST, "draw (on entry) polygon.getExternalAngle(): {0}", polygon.getExternalAngle());
-		GPoint pt = t.getLocation();
-		double direction = t.getDirection();
-		boolean penStateDown = t.isPenDown();
-		
-		t.setColor(Color.RED);
+
+		turtleState.saveState(t);
 		t.penDown();
 		drawBounds();
 		t.forward(polygon.getDeltaX());
 
 		drawSpiral(t, polygon.side(), spiral.getSpiralDepth());
-//		drawPolygon(t, polygon.side());		
-		t.penUp();
+		
+		turtleState.restoreState(t);
 
-		t.setLocation(pt);
-		t.setDirection(direction);
-		
-		
-		if (penStateDown) {
-			t.penDown();
-		}
-		t.setColor(Color.BLACK);
 		LOGGER.log(Level.FINEST, "draw (on exit) t.getLocation(): {0}", t.getLocation());
 		LOGGER.log(Level.FINEST, "draw (on exit) t.getDirection(): {0}", t.getDirection() % 360);
 	}

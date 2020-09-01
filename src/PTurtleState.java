@@ -1,22 +1,23 @@
+import java.awt.Color;
+
 import acm.graphics.GPoint;
 import acm.graphics.GTurtle;
 
 public class PTurtleState {
 	
 	GTurtle turtle;
+	Color color;
 	GPoint location;
 	double direction;
 	boolean penIsDown;
 	boolean turtleIsVisible;
 	double speed;
 	int size;
-
-	public PTurtleState(GTurtle turtle) {
-		saveState(turtle);
-	}
 	
 	public void saveState(GTurtle turtle) {
+		assert turtle != null;
 		this.turtle = turtle;
+		this.color = turtle.getColor();
 		this.location = new GPoint(turtle.getLocation());
 		this.direction = turtle.getDirection();
 		this.penIsDown = turtle.isPenDown();
@@ -26,6 +27,8 @@ public class PTurtleState {
 	}
 	
 	public void restoreState(GTurtle turtle) {
+		assert turtle != null;
+		turtle.setColor(color);
 		turtle.setLocation(getLocation());
 		turtle.setDirection(getDirection());
 		if (penIsDown) {
