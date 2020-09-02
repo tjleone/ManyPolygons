@@ -43,7 +43,7 @@ public class PPolygonRenderer extends PRenderer {
 		LOGGER.log(Level.FINEST, "draw (on exit) t.getDirection(): {0}", t.getDirection() % 360);
 	}
 	
-	private void drawSpiral(GTurtle t, double sideLength, int spiralDepth) {
+	public void drawSpiral(GTurtle t, double sideLength, int spiralDepth) {
 		LOGGER.log(Level.FINEST, "drawSpiral (on entry) sideLength={0}", sideLength);
 		if (spiralDepth == 0) {
 			return;
@@ -62,6 +62,18 @@ public class PPolygonRenderer extends PRenderer {
 			t.forward(sideLength);
 			t.left(polygon.getExternalAngle());
 		}
+	}
+
+	public PTurtleState getTurtleState() {
+		return turtleState;
+	}
+
+	public PPolygon getPolygon() {
+		return polygon;
+	}
+
+	public PSpiral getSpiral() {
+		return spiral;
 	}
 
 }

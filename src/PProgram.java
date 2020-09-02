@@ -35,7 +35,7 @@ public class PProgram extends GraphicsProgram {
 //		parameters = new PParameters(2, 2, 3, 10, 0.2, 0.9);
 //		parameters = new PParameters(2, 2, 3, 10, 0.8, 0.9);
 //		parameters = new PParameters(2, 2, 4, 10, 0.2, 0.9);
-		parameters = new PParameters(2, 2, 7, 10, 0.2, 0.9);
+		parameters = new PParameters(2, 3, 7, 10, 0.2, 0.9);
 //		parameters = new PParameters(2, 2, 8, 10, 0.2, 0.9);
 	}
 	
