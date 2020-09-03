@@ -3,9 +3,12 @@ import java.awt.event.ComponentEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JMenu;
+
 import acm.graphics.GRectangle;
 import acm.graphics.GTurtle;
 import acm.program.GraphicsProgram;
+import acm.program.ProgramMenuBar;
 
 @SuppressWarnings("serial")
 public class PProgram extends GraphicsProgram {
@@ -16,6 +19,11 @@ public class PProgram extends GraphicsProgram {
 	private GRectangle programRectangle = null;
 	//	private PIsotropicGrid renderingBounds = null;
 	private PIsotropicGrid renderingBounds = null;
+	
+	protected ProgramMenuBar createMenuBar() {
+		print("createMenuBar");
+		return new PMenuBar(this);
+	}
 	
 	public void init() {
 		initLogging();
@@ -37,6 +45,16 @@ public class PProgram extends GraphicsProgram {
 //		parameters = new PParameters(2, 2, 4, 10, 0.2, 0.9);
 		parameters = new PParameters(2, 3, 7, 10, 0.2, 0.9);
 //		parameters = new PParameters(2, 2, 8, 10, 0.2, 0.9);
+	}
+	
+	public void updateRows(int rows) {
+		parameters.setRows(rows);
+		update();
+	}
+	
+	public void updateColumns(int cols) {
+		parameters.setColumns(cols);
+		update();
 	}
 	
 	private void initRenderingInfo() {
