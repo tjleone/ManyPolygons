@@ -57,6 +57,11 @@ public class PProgram extends GraphicsProgram {
 		update();
 	}
 	
+	public void updateShape(int numPolySides) {
+		parameters.setNumPolySides(numPolySides);
+		update();
+	}
+	
 	private void initRenderingInfo() {
 		assert turtle != null;
 		assert parameters != null;
@@ -88,9 +93,11 @@ public class PProgram extends GraphicsProgram {
 	}
 	
 	private void update() {
+		renderingBounds.getPolygon().setNumSides(parameters.getNumPolySides());
 		renderingBounds.fitFrame(getWidth(), getHeight());
 		renderingBounds.getPolygon().setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
 		renderingBounds.getRenderer(turtle).render();
+//		renderingBounds.update();
 	}
 
 	public void run() {

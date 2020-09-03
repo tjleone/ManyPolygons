@@ -1,27 +1,26 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JRadioButtonMenuItem;
 
 import acm.program.Program;
 import acm.program.ProgramMenuBar;
 
+@SuppressWarnings("serial")
 public class PMenuBar extends ProgramMenuBar {
-	
-	Map<String, Integer> shapes = Map.of("Triangle", 3, "Square", 4, "Pentagon", 5, "Hexagon", 6, "Heptagon", 7,
-			"Octagon", 8, "Nonagon", 9, "Decagon", 10, "Circle", 360);
+
+	List<String> shapesKeys = null;
+	List<Integer> shapesValues = null;
+	Map<String, Integer> shapesMap = null;
 
 	public PMenuBar(Program program) {
 		super(program);
 	}
-	
+
 //	see http://zetcode.com/javaswing/menusandtoolbars/
 //	public JRadioButtonMenuItem createProgramItem(String action) {
 //		JRadioButtonMenuItem item = new JRadioButtonMenuItem(action);
@@ -39,20 +38,28 @@ public class PMenuBar extends ProgramMenuBar {
 //		addEditMenu();
 		addRowsMenu();
 		addColumnsMenu();
+		addShapesMenu();
 	}
 
 	public void addRowsMenu() {
-		JMenu rowsMenu = new JMenu("Rows");
-		rowsMenu.setMnemonic('R');
-		addRowMenuItems(rowsMenu);
-		add(rowsMenu);
+		JMenu menu = new JMenu("Rows");
+		menu.setMnemonic('R');
+		addRowMenuItems(menu);
+		add(menu);
 	}
 
 	public void addColumnsMenu() {
-		JMenu colsMenu = new JMenu("Columns");
-		colsMenu.setMnemonic('C');
-		addColumnMenuItems(colsMenu);
-		add(colsMenu);
+		JMenu menu = new JMenu("Columns");
+		menu.setMnemonic('C');
+		addColumnMenuItems(menu);
+		add(menu);
+	}
+
+	public void addShapesMenu() {
+		JMenu menu = new JMenu("Shapes");
+		menu.setMnemonic('S');
+		addShapeMenuItems(menu);
+		add(menu);
 	}
 
 	/**
@@ -100,7 +107,7 @@ public class PMenuBar extends ProgramMenuBar {
 //			menu.add(colsItem);
 //		}
 //	}
-	
+
 	public void addColumnMenuItems(JMenu menu) {
 		JMenuItem colsItem = null;
 		for (int i = 1; i < 11; i++) {
@@ -113,4 +120,53 @@ public class PMenuBar extends ProgramMenuBar {
 			menu.add(colsItem);
 		}
 	}
+	
+	public void setupShapesMenuData() {
+		if (shapesMap == null) {
+			shapesMap = new HashMap<>();
+		} else {
+			shapesMap.clear();
+		}
+		shapesKeys = List.of("Triangle", "Square", "Pentagon", "Hexagon", "Heptagon", "Octagon", "Nonagon",
+				"Decagon", "Circle");
+		shapesValues = List.of(3, 4, 5, 6, 7, 8, 9, 10, 360);
+
+		for (int i = 0; i < shapesKeys.size(); i++) {
+			shapesMap.put(shapesKeys.get(i), shapesValues.get(i));
+		}
+		int numPolySides = shapesMap.get("Triangle");
+		System.out.println("numPolySides=" + numPolySides);
+	}
+
+	public void addShapeMenuItems(JMenu menu) {
+		setupShapesMenuData();
+		JMenuItem shapesItem = null;
+		for (int i = 0; i < shapesKeys.size(); i++) {
+			shapesItem = createProgramItem("" + shapesKeys.get(i));
+			shapesItem.addActionListener(new ShapesActionListener(shapesMap,((PProgram) getProgram())));
+			menu.add(shapesItem);
+		}
+	}
+}
+
+class ShapesActionListener implements ActionListener {
+	
+	Map<String, Integer> shapesMap;
+	PProgram program;
+
+	public ShapesActionListener(Map<String, Integer>shapesMap, PProgram program) {
+		this.shapesMap = shapesMap;
+		this.program = program;
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+//		int parseInt = Integer.parseInt(e.getActionCommand());
+		System.out.println("e.getActionCommand()=" + e.getActionCommand());
+		String shapeName = e.getActionCommand();
+		int numPolySides = shapesMap.get(shapeName);
+		System.out.println("numPolySides=" + numPolySides);
+		program.updateShape(numPolySides);
+	}
+	
 }

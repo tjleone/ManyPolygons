@@ -16,6 +16,12 @@ public class PIsotropicPolygon extends PIsotropicRectangle {
 		spiral = new PSpiral(parameters);
 	}
 	
+	public void update() {
+		super.update();
+		initPolygon(getWidth(), getHeight(), getParameters());
+		spiral = new PSpiral(getParameters());
+	}
+	
 	public PRenderer getRenderer(GTurtle turtle) {
 		return new PPolygonRenderer(turtle, this);
 
