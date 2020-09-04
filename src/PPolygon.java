@@ -43,10 +43,10 @@ public abstract class PPolygon {
 	public int getNumSides() {
 		return numSides;
 	}
-
-	public void setNumSides(int numSides) {
-		this.numSides = numSides;
-	}
+//
+//	public void setNumSides(int numSides) {
+//		this.numSides = numSides;
+//	}
 	
 	public void setSize(double width, double height) {
 		this.width = width;

@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.swing.JMenu;
 
+import acm.graphics.GDimension;
 import acm.graphics.GRectangle;
 import acm.graphics.GTurtle;
 import acm.program.GraphicsProgram;
@@ -93,11 +94,21 @@ public class PProgram extends GraphicsProgram {
 	}
 	
 	private void update() {
-		renderingBounds.getPolygon().setNumSides(parameters.getNumPolySides());
+		double scaleFactor = parameters.getScaleFactor();
+		int numPolySides = parameters.getNumPolySides();
+		double aspectRatio = PAspectCalculatorFactory.calculator(numPolySides).aspectRatio();
 		renderingBounds.fitFrame(getWidth(), getHeight());
-		renderingBounds.getPolygon().setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
+		GDimension newSize = renderingBounds.recalculateSize(scaleFactor, aspectRatio);
+		renderingBounds.resize(newSize);
+		renderingBounds.initPolygon(newSize.getWidth(), newSize.getHeight(), parameters);
+		
+		
+		
+//		renderingBounds.fitFrame(getWidth(), getHeight());
+//		renderingBounds.getPolygon().setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
+		
+		
 		renderingBounds.getRenderer(turtle).render();
-//		renderingBounds.update();
 	}
 
 	public void run() {
