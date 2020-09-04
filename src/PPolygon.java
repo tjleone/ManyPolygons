@@ -3,6 +3,7 @@ import java.util.logging.Logger;
 
 import acm.graphics.GMath;
 
+@SuppressWarnings("ucd")
 public abstract class PPolygon {
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygon.class.getName());
@@ -24,6 +25,7 @@ public abstract class PPolygon {
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
+	@SuppressWarnings("ucd")
 	public PPolygon(int n, double width, double height) {
 		assert n > 2;
 		this.numSides = n;
@@ -48,6 +50,7 @@ public abstract class PPolygon {
 //		this.numSides = numSides;
 //	}
 	
+	@SuppressWarnings("ucd")
 	public void setSize(double width, double height) {
 		this.width = width;
 		this.height = height;
@@ -72,30 +75,36 @@ public abstract class PPolygon {
 
 	public abstract double radius();
 
+	@SuppressWarnings("ucd")
 	public double radiusFromSide(int n, double side) {
 		return side / (2 * GMath.sinDegrees(180.0 / n));
 	}
 
+	@SuppressWarnings("ucd")
 	public double radiusFromApothem(int n, double apothem) {
 		return apothem / GMath.cosDegrees(180.0 / n);
 	}
 
 	public abstract double apothem();
 
+	@SuppressWarnings("ucd")
 	public double apothemFromSide(int n, double side) {
 		return side / (2 * PMath.tanDegrees(180.0 / n));
 	}
 
+	@SuppressWarnings("ucd")
 	public double apothemFromRadius(int n, double radius) {
 		return radius * GMath.cosDegrees(180.0 / n);
 	}
 
 	public abstract double side();
 
+	@SuppressWarnings("ucd")
 	public double sideFromApothem(int n, double apothem) {
 		return 2 * apothem * PMath.tanDegrees(180.0 / n);
 	}
 
+	@SuppressWarnings("ucd")
 	public double sideFromRadius(int n, double d) {
 		return 2 * d * GMath.sinDegrees(180.0 / n);
 	}

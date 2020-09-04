@@ -1,15 +1,15 @@
 import java.awt.Dimension;
 
-import acm.graphics.GDimension;
-import acm.graphics.GPoint;
-import acm.graphics.GRectangle;
 import acm.graphics.GTurtle;
 
+@SuppressWarnings({ "ucd", "serial" })
 public class PIsotropicPolygon extends PIsotropicRectangle {
 	
-	PPolygon polygon = null;
-	PSpiral spiral = null;
+	protected PPolygon polygon = null;
+	@SuppressWarnings("ucd")
+	private PSpiral spiral = null;
 
+	@SuppressWarnings("ucd")
 	public PIsotropicPolygon(Dimension size, PParameters parameters) {
 		super(size, parameters);
 		initPolygon(getWidth(), getHeight(), parameters);
@@ -27,6 +27,7 @@ public class PIsotropicPolygon extends PIsotropicRectangle {
 
 	}
 	
+	@SuppressWarnings("ucd")
 	public void initPolygon(Dimension size, PParameters parameters) {
 		initPolygon(size.getWidth(), size.getHeight(), parameters);
 	}

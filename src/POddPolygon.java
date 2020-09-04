@@ -7,6 +7,7 @@ import acm.graphics.GMath;
  * @author tj
  *
  */
+@SuppressWarnings("ucd")
 public class POddPolygon extends PPolygon {
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygonRenderer.class.getName());
@@ -26,6 +27,7 @@ public class POddPolygon extends PPolygon {
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
+	@SuppressWarnings("ucd")
 	public POddPolygon(int n, double width, double height) {
 		super(n, width, height);
 		assert n % 2 == 1;
@@ -73,6 +75,7 @@ public class POddPolygon extends PPolygon {
 	}
 
 	@Override
+	@SuppressWarnings("ucd")
 	public double apothem() {
 		return apothemFromRadius(getNumSides(), radius());
 	}

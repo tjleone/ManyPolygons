@@ -1,17 +1,17 @@
-import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import acm.graphics.GPoint;
 import acm.graphics.GTurtle;
 
 public class PPolygonRenderer extends PRenderer {
 
+	@SuppressWarnings("ucd")
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PPolygonRenderer.class.getName());
 	private PTurtleState turtleState;
 	private PPolygon polygon;
 	private PSpiral spiral;
 
+	@SuppressWarnings("ucd")
 	public PPolygonRenderer(GTurtle turtle, PIsotropicPolygon bounds) {
 		super(turtle, bounds);
 		this.turtleState = new PTurtleState();
@@ -43,6 +43,7 @@ public class PPolygonRenderer extends PRenderer {
 		LOGGER.log(Level.FINEST, "draw (on exit) t.getDirection(): {0}", t.getDirection() % 360);
 	}
 	
+	@SuppressWarnings("ucd")
 	public void drawSpiral(GTurtle t, double sideLength, int spiralDepth) {
 		LOGGER.log(Level.FINEST, "drawSpiral (on entry) sideLength={0}", sideLength);
 		if (spiralDepth == 0) {

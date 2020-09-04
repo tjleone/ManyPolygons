@@ -3,10 +3,7 @@ import java.awt.event.ComponentEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.JMenu;
-
 import acm.graphics.GDimension;
-import acm.graphics.GRectangle;
 import acm.graphics.GTurtle;
 import acm.program.GraphicsProgram;
 import acm.program.ProgramMenuBar;
@@ -14,11 +11,10 @@ import acm.program.ProgramMenuBar;
 @SuppressWarnings("serial")
 public class PProgram extends GraphicsProgram {
 	
+	@SuppressWarnings("ucd")
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private PParameters parameters;
 	private GTurtle turtle;
-	private GRectangle programRectangle = null;
-	//	private PIsotropicGrid renderingBounds = null;
 	private PIsotropicGrid renderingBounds = null;
 	
 	protected ProgramMenuBar createMenuBar() {
@@ -48,16 +44,19 @@ public class PProgram extends GraphicsProgram {
 //		parameters = new PParameters(2, 2, 8, 10, 0.2, 0.9);
 	}
 	
+	@SuppressWarnings("ucd")
 	public void updateRows(int rows) {
 		parameters.setRows(rows);
 		update();
 	}
 	
+	@SuppressWarnings("ucd")
 	public void updateColumns(int cols) {
 		parameters.setColumns(cols);
 		update();
 	}
 	
+	@SuppressWarnings("ucd")
 	public void updateShape(int numPolySides) {
 		parameters.setNumPolySides(numPolySides);
 		update();
@@ -87,12 +86,6 @@ public class PProgram extends GraphicsProgram {
 		});
 	}
 	
-	private GRectangle getProgramRectangle() {
-		programRectangle.setLocation(0, 0);
-		programRectangle.setSize(getWidth(), getHeight());
-		return programRectangle;
-	}
-	
 	private void update() {
 		double scaleFactor = parameters.getScaleFactor();
 		int numPolySides = parameters.getNumPolySides();
@@ -101,12 +94,6 @@ public class PProgram extends GraphicsProgram {
 		GDimension newSize = renderingBounds.recalculateSize(scaleFactor, aspectRatio);
 		renderingBounds.resize(newSize);
 		renderingBounds.initPolygon(newSize.getWidth(), newSize.getHeight(), parameters);
-		
-		
-		
-//		renderingBounds.fitFrame(getWidth(), getHeight());
-//		renderingBounds.getPolygon().setSize(renderingBounds.getWidth(), renderingBounds.getHeight());
-		
 		
 		renderingBounds.getRenderer(turtle).render();
 	}

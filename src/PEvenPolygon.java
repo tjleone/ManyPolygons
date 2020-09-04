@@ -1,4 +1,5 @@
 
+@SuppressWarnings("ucd")
 public class PEvenPolygon extends PPolygon {
 
 	/**
@@ -18,6 +19,7 @@ public class PEvenPolygon extends PPolygon {
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
+	@SuppressWarnings("ucd")
 	public PEvenPolygon(int n, double width, double height) {
 		super(n, width, height);
 		assert n % 2 == 0;

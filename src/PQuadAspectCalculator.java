@@ -1,6 +1,8 @@
 
+@SuppressWarnings("ucd")
 public class PQuadAspectCalculator extends PEvenAspectCalculator {
 
+	@SuppressWarnings("ucd")
 	public PQuadAspectCalculator(int numSidesInPolygon) {
 		super(numSidesInPolygon);
 		assert numSidesInPolygon % 4 == 0;

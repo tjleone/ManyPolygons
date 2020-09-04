@@ -1,7 +1,9 @@
 import acm.graphics.GMath;
 
+@SuppressWarnings("ucd")
 public class PEvenAspectCalculator extends PAspectCalculator {
 
+	@SuppressWarnings("ucd")
 	public PEvenAspectCalculator(int numSidesInPolygon) {
 		super(numSidesInPolygon);
 		assert numSidesInPolygon % 2 == 0;

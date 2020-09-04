@@ -1,7 +1,9 @@
 import acm.graphics.GMath;
 
+@SuppressWarnings("ucd")
 public class POddAspectCalculator extends PAspectCalculator {
 
+	@SuppressWarnings("ucd")
 	public POddAspectCalculator(int numSidesInPolygon) {
 		super(numSidesInPolygon);
 		assert numSidesInPolygon % 2 == 1;
@@ -48,6 +50,7 @@ public class POddAspectCalculator extends PAspectCalculator {
 	 * @param n number of sides in the polygon
 	 * @return half of width angle (central angle that spans width of polygon)
 	 */
+	@SuppressWarnings("ucd")
 	public double halfWidthAngle() {
 		return (int)(getNumPolygonSides() / 2) * 180.0 / getNumPolygonSides();
 	}

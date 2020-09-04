@@ -3,10 +3,12 @@ import java.util.logging.Logger;
 
 import acm.graphics.GTurtle;
 
+@SuppressWarnings("ucd")
 public class PGridRenderer extends PPolygonRenderer {
 
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PGridRenderer.class.getName());
 
+	@SuppressWarnings("ucd")
 	public PGridRenderer(GTurtle turtle, PIsotropicGrid bounds) {
 		super(turtle, bounds);
 		bounds.getPolygon().setSize(bounds.getWidth()/bounds.getParameters().getColumns(),

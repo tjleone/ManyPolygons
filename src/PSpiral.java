@@ -8,12 +8,14 @@ import acm.graphics.GMath;
  * @author tj
  *
  */
+@SuppressWarnings("ucd")
 public class PSpiral {
 	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PSpiral.class.getName());
 
 	private PParameters parameters;
 	
+	@SuppressWarnings("ucd")
 	public PSpiral(PParameters parameters) {
 		this.parameters = parameters;
 	}
@@ -150,10 +152,12 @@ public class PSpiral {
 		return Math.sqrt(p*p + q*q - 2*p*q*GMath.cosDegrees(getInternalAngle()));
 	}
 	
+	@SuppressWarnings("ucd")
 	public double calculateSpiralDisplacement(double sideLength) {
 		return getParameters().getDisplacementPortion() * sideLength;
 	}
 	
+	@SuppressWarnings("ucd")
 	public double calculateNextSideLength(double sideLength) {
 		return sideLength * getScaleFactor();
 	}

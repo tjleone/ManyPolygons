@@ -1,6 +1,8 @@
 
+@SuppressWarnings("ucd")
 public class PAspectCalculatorFactory {
 
+	@SuppressWarnings("ucd")
 	public static PAspectCalculator calculator(int n) {
 		if (n % 4 == 0) {
 			return new PQuadAspectCalculator(n);

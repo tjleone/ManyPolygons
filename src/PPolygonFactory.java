@@ -1,6 +1,8 @@
 
+@SuppressWarnings("ucd")
 public class PPolygonFactory {
 
+	@SuppressWarnings("ucd")
 	public static PPolygon polygon(int n, double width, double height) {
 		if (n % 4 == 0) {
 			return new PQuadPolygon(n, width, height);

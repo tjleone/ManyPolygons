@@ -1,4 +1,5 @@
 
+@SuppressWarnings("ucd")
 public class PParameters {
 	private int rows;
 	private int columns;
@@ -7,6 +8,7 @@ public class PParameters {
 	private double displacementPortion;
 	private double scaleFactor;
 
+	@SuppressWarnings("ucd")
 	public PParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion, double scaleFactor) {
 		this.rows = rows;
 		this.columns = columns;
