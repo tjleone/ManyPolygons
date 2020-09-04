@@ -89,7 +89,10 @@ public class PSpiral {
 	 * @return the spiral angle
 	 */
 	public double getSpiralAngle() {
-		double q = getParameters().getDisplacementPortion();
+		return getSpiralAngle(getParameters().getDisplacementPortion());
+	}
+	
+	public double getSpiralAngle(double q) {
 	    double angle = PMath.asinDegrees(q*GMath.sinDegrees(getInternalAngle())/getScaleFactor());
 	    if (getExternalAngle() > 90 && q > 0.5) {
 	    	return 180 - angle;
@@ -154,7 +157,11 @@ public class PSpiral {
 	
 	@SuppressWarnings("ucd")
 	public double calculateSpiralDisplacement(double sideLength) {
-		return getParameters().getDisplacementPortion() * sideLength;
+		return calculateSpiralDisplacement(getParameters().getDisplacementPortion(), sideLength);
+	}
+	
+	public double calculateSpiralDisplacement(double q, double sideLength) {
+		return q * sideLength;
 	}
 	
 	@SuppressWarnings("ucd")

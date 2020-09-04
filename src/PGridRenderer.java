@@ -28,7 +28,8 @@ public class PGridRenderer extends PPolygonRenderer {
 				getTurtleState().saveState(t);
 
 				setUpForSpiral();
-				drawSpiral(t, getPolygon().side(), getSpiral().getSpiralDepth());
+				double q = getSpiral().getParameters().getDisplacementPortion();
+				drawSpiral(t, q, getPolygon().side(), getSpiral().getSpiralDepth());
 				
 				getTurtleState().restoreState(t);
 				t.left(90);
