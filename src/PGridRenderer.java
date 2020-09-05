@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -23,13 +24,22 @@ public class PGridRenderer extends PPolygonRenderer {
 
 		t.penUp();
 		
+		double q = getSpiral().getDisplacementFactor();
+		double p = 1 - q;
+		double spiralDisplacementFactor = q;
 		for (int col = 0; col < getColumns(); col++) {
 			for (int row = 0; row < getRows(); row++) {
 				getTurtleState().saveState(t);
 
 				setUpForSpiral();
-				double q = getSpiral().getParameters().getDisplacementPortion();
-				drawSpiral(t, q, getPolygon().side(), getSpiral().getSpiralDepth());
+				
+				if ((row+col) % 2 == 0) {
+					t.setColor(Color.red);
+					getSpiral().setDisplacementFactor(spiralDisplacementFactor);
+				} else {
+					getSpiral().setDisplacementFactor(1-spiralDisplacementFactor);
+				}
+				drawSpiral(t, getPolygon().side(), getSpiral().getSpiralDepth());
 				
 				getTurtleState().restoreState(t);
 				t.left(90);

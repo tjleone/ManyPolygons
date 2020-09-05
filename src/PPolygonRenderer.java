@@ -35,8 +35,8 @@ public class PPolygonRenderer extends PRenderer {
 		drawBounds();
 		t.forward(polygon.getDeltaX());
 
-		double q = spiral.getParameters().getDisplacementPortion();
-		drawSpiral(t, q, polygon.side(), spiral.getSpiralDepth());
+		double q = spiral.getDisplacementFactor();
+		drawSpiral(t, polygon.side(), spiral.getSpiralDepth());
 		
 		turtleState.restoreState(t);
 
@@ -45,15 +45,15 @@ public class PPolygonRenderer extends PRenderer {
 	}
 	
 	@SuppressWarnings("ucd")
-	public void drawSpiral(GTurtle t, double q, double sideLength, int spiralDepth) {
+	public void drawSpiral(GTurtle t, double sideLength, int spiralDepth) {
 		LOGGER.log(Level.FINEST, "drawSpiral (on entry) sideLength={0}", sideLength);
 		if (spiralDepth == 0) {
 			return;
 		}
 		drawPolygon(t, sideLength);
-		t.forward(spiral.calculateSpiralDisplacement(q, sideLength));
+		t.forward(spiral.calculateSpiralDisplacement(sideLength));
 		t.left(spiral.getSpiralAngle());
-		drawSpiral(t, q, spiral.calculateNextSideLength(sideLength), spiralDepth-1);
+		drawSpiral(t, spiral.calculateNextSideLength(sideLength), spiralDepth-1);
 	}
 
 	private void drawPolygon(GTurtle t, double sideLength) {

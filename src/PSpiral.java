@@ -14,18 +14,22 @@ public class PSpiral {
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME + "." + PSpiral.class.getName());
 
 	private PParameters parameters;
+	private double displacementFactor;
+	private int depth;
 	
 	@SuppressWarnings("ucd")
 	public PSpiral(PParameters parameters) {
 		this.parameters = parameters;
-	}
-	
-	public PParameters getParameters() {
-		return parameters;
+		displacementFactor = parameters.getDisplacementPortion();
+		depth = parameters.getSpiralDepth();
 	}
 
-	public void setParameters(PParameters parameters) {
-		this.parameters = parameters;
+	public double getDisplacementFactor() {
+		return displacementFactor;
+	}
+
+	public void setDisplacementFactor(double displacementFactor) {
+		this.displacementFactor = displacementFactor;
 	}
 
 	/**
@@ -89,12 +93,8 @@ public class PSpiral {
 	 * @return the spiral angle
 	 */
 	public double getSpiralAngle() {
-		return getSpiralAngle(getParameters().getDisplacementPortion());
-	}
-	
-	public double getSpiralAngle(double q) {
-	    double angle = PMath.asinDegrees(q*GMath.sinDegrees(getInternalAngle())/getScaleFactor());
-	    if (getExternalAngle() > 90 && q > 0.5) {
+	    double angle = PMath.asinDegrees(displacementFactor*GMath.sinDegrees(getInternalAngle())/getScaleFactor());
+	    if (getExternalAngle() > 90 && displacementFactor > 0.5) {
 	    	return 180 - angle;
 	    }
 	    return angle;
@@ -144,7 +144,7 @@ public class PSpiral {
 	 * @return the scale factor
 	 */
 	public double getScaleFactor() {
-		double q = getParameters().getDisplacementPortion();
+		double q = displacementFactor;
 		double p = 1 - q;
 		LOGGER.log(Level.FINEST, "q=" + q);
 		LOGGER.log(Level.FINEST, "p=" + p);
@@ -157,11 +157,7 @@ public class PSpiral {
 	
 	@SuppressWarnings("ucd")
 	public double calculateSpiralDisplacement(double sideLength) {
-		return calculateSpiralDisplacement(getParameters().getDisplacementPortion(), sideLength);
-	}
-	
-	public double calculateSpiralDisplacement(double q, double sideLength) {
-		return q * sideLength;
+		return displacementFactor * sideLength;
 	}
 	
 	@SuppressWarnings("ucd")
@@ -170,7 +166,7 @@ public class PSpiral {
 	}
 	
 	public int getSpiralDepth() {
-		return getParameters().getSpiralDepth();
+		return depth;
 	}
 
 }
