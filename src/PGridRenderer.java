@@ -24,21 +24,21 @@ public class PGridRenderer extends PPolygonRenderer {
 
 		t.penUp();
 		
-		double q = getSpiral().getDisplacementFactor();
-		double p = 1 - q;
-		double spiralDisplacementFactor = q;
+		double spiralDisplacementFactor = getSpiral().getDisplacementFactor();
 		for (int col = 0; col < getColumns(); col++) {
 			for (int row = 0; row < getRows(); row++) {
 				getTurtleState().saveState(t);
 
 				setUpForSpiral();
 				
+				// switch direction of spiral depending on row and column
 				if ((row+col) % 2 == 0) {
 					t.setColor(Color.red);
 					getSpiral().setDisplacementFactor(spiralDisplacementFactor);
 				} else {
 					getSpiral().setDisplacementFactor(1-spiralDisplacementFactor);
 				}
+				
 				drawSpiral(t, getPolygon().side(), getSpiral().getSpiralDepth());
 				
 				getTurtleState().restoreState(t);

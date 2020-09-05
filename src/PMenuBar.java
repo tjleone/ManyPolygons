@@ -43,6 +43,7 @@ public class PMenuBar extends ProgramMenuBar {
 		addRowsMenu();
 		addColumnsMenu();
 		addShapesMenu();
+		addSpiralDepthMenu();
 	}
 
 	@SuppressWarnings("ucd")
@@ -66,6 +67,14 @@ public class PMenuBar extends ProgramMenuBar {
 		JMenu menu = new JMenu("Shapes");
 		menu.setMnemonic('S');
 		addShapeMenuItems(menu);
+		add(menu);
+	}
+
+	@SuppressWarnings("ucd")
+	public void addSpiralDepthMenu() {
+		JMenu menu = new JMenu("Spiral Depth");
+		menu.setMnemonic('D');
+		addSpiralDepthMenuItems(menu);
 		add(menu);
 	}
 
@@ -127,6 +136,20 @@ public class PMenuBar extends ProgramMenuBar {
 				}
 			});
 			menu.add(colsItem);
+		}
+	}
+
+	@SuppressWarnings("ucd")
+	public void addSpiralDepthMenuItems(JMenu menu) {
+		JMenuItem item = null;
+		for (int i = 1; i < 11; i++) {
+			item = createProgramItem("" + i);
+			item.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					((PProgram) getProgram()).updateSpiralDepth(Integer.parseInt(e.getActionCommand()));
+				}
+			});
+			menu.add(item);
 		}
 	}
 	

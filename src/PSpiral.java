@@ -169,4 +169,8 @@ public class PSpiral {
 		return depth;
 	}
 
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
 }
