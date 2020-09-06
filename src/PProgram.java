@@ -3,6 +3,7 @@ import java.awt.event.ComponentEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -24,6 +25,7 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 	private PParameters parameters;
 	private GTurtle turtle;
 	private PIsotropicGrid renderingBounds = null;
+	private JLabel displacementText;
 
 	protected ProgramMenuBar createMenuBar() {
 		print("createMenuBar");
@@ -32,9 +34,13 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 
 	private void addSlider() {
 		JPanel southPanel = getRegionPanel(SOUTH);
+		JLabel label = new JLabel("Spiral Slider");
 		JSlider spiralDisplacement = new JSlider(JSlider.HORIZONTAL, DISP_MIN, DISP_MAX, DISP_INIT);
 		spiralDisplacement.addChangeListener(this);
+		displacementText = new JLabel("" + (DISP_INIT / 100.0));
+		southPanel.add(label);
 		southPanel.add(spiralDisplacement);
+		southPanel.add(displacementText);
 	}
 
 	public void init() {
@@ -138,11 +144,12 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 		new PProgram().start(args);
 	}
 
+	// To do: add label "Spiral" and label to reflect spiral factor
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		JSlider source = (JSlider) e.getSource();
 		double displacement = (int) source.getValue() / 100.0;
-		System.out.println("displacement=" + displacement);
+		displacementText.setText("" + displacement);
 		parameters.setDisplacementPortion(displacement);
 		update();
 	}
