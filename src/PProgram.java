@@ -28,7 +28,6 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 	private JLabel displacementText;
 
 	protected ProgramMenuBar createMenuBar() {
-		print("createMenuBar");
 		return new PMenuBar(this);
 	}
 

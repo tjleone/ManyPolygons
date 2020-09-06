@@ -168,7 +168,6 @@ public class PMenuBar extends ProgramMenuBar {
 			shapesMap.put(shapesKeys.get(i), shapesValues.get(i));
 		}
 		int numPolySides = shapesMap.get("Triangle");
-		System.out.println("numPolySides=" + numPolySides);
 	}
 
 	@SuppressWarnings("ucd")
@@ -197,11 +196,8 @@ class ShapesActionListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		int parseInt = Integer.parseInt(e.getActionCommand());
-		System.out.println("e.getActionCommand()=" + e.getActionCommand());
 		String shapeName = e.getActionCommand();
 		int numPolySides = shapesMap.get(shapeName);
-		System.out.println("numPolySides=" + numPolySides);
 		program.updateShape(numPolySides);
 	}
 	
