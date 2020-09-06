@@ -35,12 +35,6 @@ public class PIsotropicRectangle extends GRectangle {
 	private void init(double sf, double ar) {
 		resize(recalculateSize(sf, ar));
 	}
-	
-	public void update() {
-		this.scaleFactor = parameters.getScaleFactor();
-		this.aspectRatio = PAspectCalculatorFactory.calculator(parameters.getNumPolySides()).aspectRatio();
-		init(scaleFactor, aspectRatio);
-	}
 
 	public GDimension recalculateSize(double sf, double ar) {
 

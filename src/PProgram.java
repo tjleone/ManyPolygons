@@ -140,14 +140,11 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 
 	@Override
 	public void stateChanged(ChangeEvent e) {
-        JSlider source = (JSlider)e.getSource();
-        System.out.println("stateChanged");
-        if (!source.getValueIsAdjusting()) {
-            double displacement = (int)source.getValue() / 100.0;
-            System.out.println("displacement=" + displacement);
-            parameters.setDisplacementPortion(displacement);
-            update();
-        }
+		JSlider source = (JSlider) e.getSource();
+		double displacement = (int) source.getValue() / 100.0;
+		System.out.println("displacement=" + displacement);
+		parameters.setDisplacementPortion(displacement);
+		update();
 	}
 
 }

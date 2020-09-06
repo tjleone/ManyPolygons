@@ -14,12 +14,6 @@ public class PIsotropicGrid extends PIsotropicPolygon {
 	public void initPolygon(double width, double height, PParameters parameters) {
 		polygon = PPolygonFactory.polygon(parameters.getNumPolySides(), width/parameters.getColumns(), height/parameters.getRows());
 	}
-	
-	public void update() {
-		super.update();
-		fitFrame(getWidth(), getHeight());
-		getPolygon().setSize(getWidth(), getHeight());
-	}
 
 	public GDimension recalculateSize(double sf, double ar) {
 
