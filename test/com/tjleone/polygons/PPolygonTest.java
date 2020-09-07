@@ -1,3 +1,5 @@
+package com.tjleone.polygons;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -154,5 +156,4 @@ class Expected {
 	public double getSide() {
 		return side;
 	}
-
 }

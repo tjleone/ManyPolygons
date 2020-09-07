@@ -1,3 +1,5 @@
+package com.tjleone.polygons;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
@@ -182,5 +184,4 @@ class ExpectedSpiralValues {
 	public double getSpiralDepth() {
 		return spiralDepth;
 	}
-
 }
