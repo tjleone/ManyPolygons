@@ -1,5 +1,6 @@
+package com.tjleone.polygons;
 /**
- *    PAspectCalculator is part of the ManyPolygons project
+ *    PAspectCalculatorFactory is part of the ManyPolygons project
  *    Copyright (C) 2020  TJ Leone
  *
  *    This program is free software: you can redistribute it and/or modify
@@ -16,22 +17,24 @@
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-public abstract class PAspectCalculator {
+
+public class PAspectCalculatorFactory {
+
 	
-	private int numPolygonSides; // number of sides in polygon
+	public static PAspectCalculator calculator(int n) {
+		if (n % 4 == 0) {
+			return new PQuadAspectCalculator(n);
+		}
+		if (n % 2 == 0) {
+			return new PEvenAspectCalculator(n);
+		}
+		
+		return new POddAspectCalculator(n);
+		
+	}
 	
-	public PAspectCalculator(int numSidesInPolygon) {
-		this.numPolygonSides = numSidesInPolygon;
-	}
-
-	public abstract double aspectRatio();
-
-	public int getNumPolygonSides() {
-		return numPolygonSides;
-	}
-
-	public void setNumPolygonSides(int numPolygonSides) {
-		this.numPolygonSides = numPolygonSides;
+	private PAspectCalculatorFactory() {
+		
 	}
 
 }

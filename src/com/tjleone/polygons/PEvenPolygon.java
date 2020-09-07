@@ -1,5 +1,6 @@
+package com.tjleone.polygons;
 /**
- *    PQuadPolygon is part of the ManyPolygons project
+ *    PEvenPolygon is part of the ManyPolygons project
  *    Copyright (C) 2020  TJ Leone
  *
  *    This program is free software: you can redistribute it and/or modify
@@ -16,7 +17,7 @@
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-public class PQuadPolygon extends PEvenPolygon {
+public class PEvenPolygon extends PPolygon {
 
 	/**
 	 * For all calculations, we assume we are creating or working with a bounding
@@ -28,27 +29,33 @@ public class PQuadPolygon extends PEvenPolygon {
 	 * the constructor.
 	 * 
 	 * This constructor should only be called directly for even values of n that 
-	 * are multiples of 4.
+	 * are not multiples of 4. The case where n % 4 == 0 is handles by the 
+	 * PQuadPolygon subclass.
 	 * 
 	 * @param n         number of sides in polygon
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
 	
-	public PQuadPolygon(int n, double width, double height) {
+	public PEvenPolygon(int n, double width, double height) {
 		super(n, width, height);
-		assert n % 4 == 0;
+		assert n % 2 == 0;
 	}
 
-	/**
-	 * For polygons with n % 4 == 0, the width and height of 
-	 * the bounding box are both twice the apothem.
-	 * 
-	 * So we use the apothem method inherited from EvenPolygon
-	 * and apply radiusFromApothem to that value to get the radius.
-	 */
 	@Override
 	public double radius() {
-		return radiusFromApothem(getNumSides(), apothem());
+		assert getNumSides() % 4 != 0;
+		return getWidth() / 2.0;
 	}
+
+	@Override
+	public double apothem() {
+		return getHeight() / 2.0;
+	}
+
+	@Override
+	public double side() {
+		return sideFromRadius(getNumSides(), radius());
+	}
+
 }
