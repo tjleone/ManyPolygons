@@ -1,0 +1,6 @@
+# ManyPolygons
+ManyPolygons is a Java program that uses the ACM/Stanford turtle library to draw a grid of spiraling polygons
+
+This program was developed for instructional use in a course on Java programming and computer graphics. It employs turtle geometry and trigonometry to explore the geometry of regular polygons. In addition to employing formulas for the radius, the side length, and the apothem, it includes code for finding the aspect ratio of this polygon's bounding rectangle. This aspect ratio is used to organize polygons in a grid pattern and resize the drawing area. The program also uses trig to calculate angles and line lengths for drawing a spiral of polygons. Menus allow users to change the number of rows and columns in a grid of polygons, the number of sides in the polygons, and the number of polygons in a concentric spiral of polygons. A slider allows users to change the starting point of concentric polygons in each spiral. 
+
+This work is based on a simpler, non-interactive program, a "chessboard of squares" that contains spiraling squares in a square grid. The "chessboard of squares" problem is proposed as an exercise in Chapter 1 of "Computer Graphics for Java Programmers" by Lee Ammeraal and Kang Zhang. Ammeraal and Zhang propose drawing the chessboard with cartesian coordinates rather than turtle graphics.
