@@ -15,7 +15,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-@SuppressWarnings("ucd")
+
 public class PQuadPolygon extends PEvenPolygon {
 
 	/**
@@ -34,7 +34,7 @@ public class PQuadPolygon extends PEvenPolygon {
 	 * @param width		width of bounding box
 	 * @param height	height of bounding box
 	 */
-	@SuppressWarnings("ucd")
+	
 	public PQuadPolygon(int n, double width, double height) {
 		super(n, width, height);
 		assert n % 4 == 0;

@@ -1,3 +1,4 @@
+
 /**
  *    PRenderer is part of the ManyPolygons project
  *    Copyright (C) 2020  TJ Leone
@@ -17,19 +18,16 @@
  */
 import acm.graphics.GTurtle;
 
-@SuppressWarnings("ucd")
 public class PRenderer {
 
 	private GTurtle turtle;
 	private PIsotropicRectangle bounds;
-	
-	@SuppressWarnings("ucd")
+
 	public PRenderer(GTurtle turtle, PIsotropicRectangle bounds) {
 		this.turtle = turtle;
 		this.bounds = bounds;
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public void render() {
 		turtle.erasePath();
 		turtle.penUp();
@@ -38,19 +36,17 @@ public class PRenderer {
 		drawPicture();
 		turtle.penUp();
 	}
-	
+
 	public void drawPicture() {
 		drawBounds();
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public void drawBounds() {
 		drawRectangle(bounds.getWidth(), bounds.getHeight());
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public void drawRectangle(double width, double height) {
-		for(int i=0; i < 2; i++) {
+		for (int i = 0; i < 2; i++) {
 			turtle.forward(width);
 			turtle.left(90);
 			turtle.forward(height);
@@ -73,5 +69,4 @@ public class PRenderer {
 	public void setBounds(PIsotropicRectangle bounds) {
 		this.bounds = bounds;
 	}
-
 }

@@ -16,31 +16,20 @@
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 import java.awt.Color;
-
 import acm.graphics.GPoint;
 import acm.graphics.GTurtle;
 
-@SuppressWarnings("ucd")
 public class PTurtleState {
-	
-	@SuppressWarnings("ucd")
+
 	private GTurtle turtle;
-	@SuppressWarnings("ucd")
 	private Color color;
-	@SuppressWarnings("ucd")
 	private GPoint location;
-	@SuppressWarnings("ucd")
 	private double direction;
-	@SuppressWarnings("ucd")
 	private boolean penIsDown;
-	@SuppressWarnings("ucd")
 	private boolean turtleIsVisible;
-	@SuppressWarnings("ucd")
 	private double speed;
-	@SuppressWarnings("ucd")
 	private int size;
-	
-	@SuppressWarnings("ucd")
+
 	public void saveState(GTurtle turtle) {
 		assert turtle != null;
 		this.turtle = turtle;
@@ -52,8 +41,7 @@ public class PTurtleState {
 		this.speed = turtle.getSpeed();
 		this.size = turtle.getTurtleSize();
 	}
-	
-	@SuppressWarnings("ucd")
+
 	public void restoreState(GTurtle turtle) {
 		assert turtle != null;
 		turtle.setColor(color);

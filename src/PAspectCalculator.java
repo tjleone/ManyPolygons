@@ -16,12 +16,10 @@
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-@SuppressWarnings("ucd")
 public abstract class PAspectCalculator {
 	
 	private int numPolygonSides; // number of sides in polygon
-
-	@SuppressWarnings("ucd")
+	
 	public PAspectCalculator(int numSidesInPolygon) {
 		this.numPolygonSides = numSidesInPolygon;
 	}

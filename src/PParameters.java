@@ -15,7 +15,7 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-@SuppressWarnings("ucd")
+
 public class PParameters {
 	private int rows;
 	private int columns;
@@ -24,7 +24,7 @@ public class PParameters {
 	private double displacementPortion;
 	private double scaleFactor;
 
-	@SuppressWarnings("ucd")
+	
 	public PParameters(int rows, int columns, int numPolySides, int spiralDepth, double displacementPortion, double scaleFactor) {
 		this.rows = rows;
 		this.columns = columns;

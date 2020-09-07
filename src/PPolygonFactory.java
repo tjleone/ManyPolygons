@@ -15,10 +15,10 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-@SuppressWarnings("ucd")
+
 public class PPolygonFactory {
 
-	@SuppressWarnings("ucd")
+	
 	public static PPolygon polygon(int n, double width, double height) {
 		if (n % 4 == 0) {
 			return new PQuadPolygon(n, width, height);

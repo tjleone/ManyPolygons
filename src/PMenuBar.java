@@ -27,17 +27,13 @@ import javax.swing.JMenuItem;
 import acm.program.Program;
 import acm.program.ProgramMenuBar;
 
-@SuppressWarnings({ "ucd", "serial" })
+@SuppressWarnings("serial")
 public class PMenuBar extends ProgramMenuBar {
-
-	@SuppressWarnings("ucd")
+	
 	private List<String> shapesKeys = null;
-	@SuppressWarnings("ucd")
 	private List<Integer> shapesValues = null;
-	@SuppressWarnings("ucd")
 	private Map<String, Integer> shapesMap = null;
-
-	@SuppressWarnings("ucd")
+	
 	public PMenuBar(Program program) {
 		super(program);
 	}
@@ -62,16 +58,14 @@ public class PMenuBar extends ProgramMenuBar {
 		addShapesMenu();
 		addSpiralDepthMenu();
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void addRowsMenu() {
 		JMenu menu = new JMenu("Rows");
 		menu.setMnemonic('R');
 		addRowMenuItems(menu);
 		add(menu);
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void addColumnsMenu() {
 		JMenu menu = new JMenu("Columns");
 		menu.setMnemonic('C');
@@ -79,7 +73,7 @@ public class PMenuBar extends ProgramMenuBar {
 		add(menu);
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void addShapesMenu() {
 		JMenu menu = new JMenu("Shapes");
 		menu.setMnemonic('S');
@@ -87,7 +81,7 @@ public class PMenuBar extends ProgramMenuBar {
 		add(menu);
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void addSpiralDepthMenu() {
 		JMenu menu = new JMenu("Spiral Depth");
 		menu.setMnemonic('D');
@@ -110,7 +104,7 @@ public class PMenuBar extends ProgramMenuBar {
 		menu.add(createStandardItem("Quit"));
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void addRowMenuItems(JMenu menu) {
 		JMenuItem rowsItem = null;
 		for (int i = 1; i < 11; i++) {
@@ -142,7 +136,7 @@ public class PMenuBar extends ProgramMenuBar {
 //		}
 //	}
 
-	@SuppressWarnings("ucd")
+	
 	public void addColumnMenuItems(JMenu menu) {
 		JMenuItem colsItem = null;
 		for (int i = 1; i < 11; i++) {
@@ -156,7 +150,7 @@ public class PMenuBar extends ProgramMenuBar {
 		}
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void addSpiralDepthMenuItems(JMenu menu) {
 		JMenuItem item = null;
 		for (int i = 1; i < 11; i++) {
@@ -170,7 +164,7 @@ public class PMenuBar extends ProgramMenuBar {
 		}
 	}
 	
-	@SuppressWarnings("ucd")
+	
 	public void setupShapesMenuData() {
 		if (shapesMap == null) {
 			shapesMap = new HashMap<>();
@@ -184,10 +178,8 @@ public class PMenuBar extends ProgramMenuBar {
 		for (int i = 0; i < shapesKeys.size(); i++) {
 			shapesMap.put(shapesKeys.get(i), shapesValues.get(i));
 		}
-		int numPolySides = shapesMap.get("Triangle");
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void addShapeMenuItems(JMenu menu) {
 		setupShapesMenuData();
 		JMenuItem shapesItem = null;
@@ -201,11 +193,8 @@ public class PMenuBar extends ProgramMenuBar {
 
 class ShapesActionListener implements ActionListener {
 	
-	@SuppressWarnings("ucd")
 	private Map<String, Integer> shapesMap;
-	@SuppressWarnings("ucd")
 	private PProgram program;
-
 	public ShapesActionListener(Map<String, Integer>shapesMap, PProgram program) {
 		this.shapesMap = shapesMap;
 		this.program = program;

@@ -23,7 +23,7 @@ import acm.graphics.GTurtle;
 @SuppressWarnings("serial")
 public class PIsotropicGrid extends PIsotropicPolygon {
 
-	@SuppressWarnings("ucd")
+	
 	public PIsotropicGrid(Dimension size, PParameters parameters) {
 		super(size, parameters);
 	}

@@ -33,8 +33,7 @@ import acm.program.ProgramMenuBar;
 
 @SuppressWarnings("serial")
 public class PProgram extends GraphicsProgram implements ChangeListener {
-
-	@SuppressWarnings("ucd")
+	
 	private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 	private final static int DISP_MIN = 0;
 	private final static int DISP_MAX = 100;
@@ -74,34 +73,24 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 	}
 
 	private void initParameters() {
-		// int rows, int columns, int numPolySides, int polysInSpiral, double
-		// displacementPortion
-//		parameters = new PParameters(2, 2, 3, 10, 0.2, 0.9);
-//		parameters = new PParameters(2, 2, 3, 10, 0.8, 0.9);
-//		parameters = new PParameters(2, 2, 4, 10, 0.2, 0.9);
 		parameters = new PParameters(8, 8, 4, 10, 0.8, 0.9);
-//		parameters = new PParameters(2, 2, 8, 10, 0.2, 0.9);
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void updateRows(int rows) {
 		parameters.setRows(rows);
 		update();
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void updateColumns(int cols) {
 		parameters.setColumns(cols);
 		update();
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void updateShape(int numPolySides) {
 		parameters.setNumPolySides(numPolySides);
 		update();
 	}
-
-	@SuppressWarnings("ucd")
+	
 	public void updateSpiralDepth(int spiralDepth) {
 		parameters.setSpiralDepth(spiralDepth);
 		update();
@@ -110,7 +99,6 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 	private void initRenderingInfo() {
 		assert turtle != null;
 		assert parameters != null;
-//		programRectangle = new GRectangle(0,0,getWidth(), getHeight());
 		renderingBounds = new PIsotropicGrid(getSize(), parameters);
 		renderingBounds.getRenderer(turtle);
 	}
@@ -146,7 +134,7 @@ public class PProgram extends GraphicsProgram implements ChangeListener {
 	}
 
 	public void run() {
-
+		// setup is handled by init()
 		finish();
 	}
 

@@ -21,12 +21,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
-@SuppressWarnings("ucd")
 public class LogUtil {
 	
 	private static FileHandler fileHandler;
-	
-	@SuppressWarnings("ucd")
+		
 	public static void setupLogging(String filename, Logger logger, Level level) {
 		try {
 			fileHandler = new FileHandler("log/" + filename + ".log", false);
@@ -45,7 +43,6 @@ public class LogUtil {
 		logger.addHandler(fileHandler);
 	}
 	
-	@SuppressWarnings("ucd")
 	public static void tearDownLogging() {
 		fileHandler.close();
 	}

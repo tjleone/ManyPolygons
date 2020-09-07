@@ -15,15 +15,15 @@
  *    You should have received a copy of the GNU General Public License
  *    along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-@SuppressWarnings("ucd")
+
 public class PMath {
 
-	@SuppressWarnings("ucd")
+	
 	public static double tanDegrees(double d) {
 		return Math.tan(Math.toRadians(d));
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public static double asinDegrees(double sine) {
 		return Math.toDegrees(Math.asin(sine));
 	}
@@ -60,7 +60,7 @@ public class PMath {
 	 * @throws IllegalArgumentException if {@code tolerance} is {@code < 0} or NaN
 	 * @since 13.0
 	 */
-	@SuppressWarnings("ucd")
+	
 	public static boolean fuzzyEquals(double a, double b, double tolerance) {
 		assert tolerance >= 0;
 		return Math.copySign(a - b, 1.0) <= tolerance
@@ -92,7 +92,7 @@ public class PMath {
 	 * @throws IllegalArgumentException if {@code tolerance} is {@code < 0} or NaN
 	 * @since 13.0
 	 */
-	@SuppressWarnings("ucd")
+	
 	public static int fuzzyCompare(double a, double b, double tolerance) {
 		if (fuzzyEquals(a, b, tolerance)) {
 			return 0;

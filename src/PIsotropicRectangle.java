@@ -36,7 +36,7 @@ public class PIsotropicRectangle extends GRectangle {
 	private GDimension newSize = new GDimension();
 	private PParameters parameters = null;
 	
-	@SuppressWarnings("ucd")
+	
 	public PIsotropicRectangle(Dimension size, PParameters parameters) {
 		super(0,0,size.getWidth(), size.getHeight());
 		assert parameters != null;
@@ -70,12 +70,12 @@ public class PIsotropicRectangle extends GRectangle {
 		return newSize;
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void resize(GDimension size) {
 		resize(size.getWidth(), size.getHeight());
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void resize(double newWidth, double newHeight) {
 		double dx = (newWidth - getWidth()) / 2;
 		double dy = (newHeight - getHeight()) / 2;
@@ -84,7 +84,7 @@ public class PIsotropicRectangle extends GRectangle {
 		LOGGER.log(Level.FINEST, "resize: getSize()={0}", getSize());
 	}
 
-	@SuppressWarnings("ucd")
+	
 	public void fitFrame(double width, double height) {
 		setLocation(0, 0);
 		setSize(width, height);
