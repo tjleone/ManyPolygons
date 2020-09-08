@@ -53,7 +53,6 @@ public class PPolygonRenderer extends PRenderer {
 		drawBounds();
 		t.forward(polygon.getDeltaX());
 
-		double q = spiral.getDisplacementFactor();
 		drawSpiral(t, polygon.side(), spiral.getSpiralDepth());
 
 		turtleState.restoreState(t);
